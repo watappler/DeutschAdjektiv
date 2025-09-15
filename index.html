@@ -41,12 +41,15 @@
     .caseList .case{display:grid;grid-template-columns:minmax(0,1fr) 3em;align-items:center;column-gap:16px;border-bottom:1px dashed var(--ring);padding:2px 0}
     .caseList .case:last-child{border-bottom:0}
     .case .label{font-size:12px;color:var(--muted);line-height:1.1;text-align:left}
-    .case .ending{font-weight:700;letter-spacing:.2px;white-space:nowrap;text-align:left;width:3em;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+    .case .ending{font-weight:700;letter-spacing:.2px;white-space:nowrap;text-align:left;width:3em;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}
     .footer{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-    .btn{border:1px solid var(--ring);background:#fff;border-radius:10px;padding:8px 12px;cursor:pointer}
+    .btn{border:1px solid var(--ring);background:#fff;border-radius:10px;padding:8px 12px;cursor:pointer;display:inline-flex;align-items:center;gap:0.4em;}
+    .btn svg{width:1em;height:1em;stroke-width:2;}
+    .btn.primary svg{stroke-width: 2.5;}
+    .btn.tiny svg{width:1.1em;height:1.1em;}
     .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
     .btn.tiny{padding:4px 8px;font-size:12px}
-    .stat{margin-left:auto;color:var(--muted);font-size:12px}
+    .stat{margin-left:auto;color:var(--muted);font-size:14px; white-space:nowrap;}
     details.ref{border:1px dashed var(--ring);border-radius:12px;padding:10px;background:#fbfbff}
     details.ref>summary{list-style:none;cursor:pointer;font-weight:600;color:#1e3a8a}
     details.ref>summary::-webkit-details-marker{display:none}
@@ -160,7 +163,7 @@
   <div class="wrap">
     <div class="card">
       <h1>Adjektivdeklination Trainer</h1>
-      <div class="subtitle">形容詞活用練習</div>
+      <div class="subtitle">形容詞格変化練習</div>
       <div class="row controls">
         <div class="seg" id="levelSeg" role="tablist" aria-label="level">
           <button data-level="All" class="active" aria-selected="true">ALL</button>
@@ -169,9 +172,18 @@
         </div>
         <div class="actions">
           <span class="hint-pill" id="preHint" hidden></span>
-          <button class="btn tiny" id="preHintBtn">ヒント</button>
-          <button class="btn" id="again">やり直す</button>
-          <button class="btn primary" id="next">次の問題</button>
+          <button class="btn tiny" id="preHintBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5C17.7 10.2 18 9 18 7.5a6 6 0 0 0-12 0c0 1.5.3 2.7 1.5 3.9.8.8 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
+            <span>Tipp</span>
+          </button>
+          <button class="btn" id="again">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+            <span>Nochmal</span>
+          </button>
+          <button class="btn primary" id="next">
+            <span>Weiter</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </button>
         </div>
       </div>
     </div>
@@ -183,7 +195,7 @@
       <div class="choices" id="choices"></div>
       <div class="explain" id="exp" hidden></div>
       <div class="footer">
-        <span class="stat" id="stat">0 問目 / 正答 0</span>
+        <span class="stat" id="stat">Siegesserie: 0 / Wiederholungen: 0</span>
       </div>
     </div>
 
@@ -407,7 +419,7 @@
   const DETERMINER={definite:{masculine:{Nominativ:'der',Akkusativ:'den',Dativ:'dem',Genitiv:'des'},neuter:{Nominativ:'das',Akkusativ:'das',Dativ:'dem',Genitiv:'des'},feminine:{Nominativ:'die',Akkusativ:'die',Dativ:'der',Genitiv:'der'},plural:{Nominativ:'die',Akkusativ:'die',Dativ:'den',Genitiv:'der'}},indefinite:{masculine:{Nominativ:'ein',Akkusativ:'einen',Dativ:'einem',Genitiv:'eines'},neuter:{Nominativ:'ein',Akkusativ:'ein',Dativ:'einem',Genitiv:'eines'},feminine:{Nominativ:'eine',Akkusativ:'eine',Dativ:'einer',Genitiv:'einer'},plural:{Nominativ:'meine',Akkusativ:'meine',Dativ:'meinen',Genitiv:'meiner'}},none:{masculine:{Nominativ:'',Akkusativ:'',Dativ:'',Genitiv:''},neuter:{Nominativ:'',Akkusativ:'',Dativ:'',Genitiv:''},feminine:{Nominativ:'',Akkusativ:'',Dativ:'',Genitiv:''},plural:{Nominativ:'',Akkusativ:'',Dativ:'',Genitiv:''}}};
   const EXAMPLE_NOUNS={default:{masculine:{base:'Wein',gen:'Weins'},neuter:{base:'Brot',gen:'Brotes'},feminine:{base:'Milch',gen:'Milch'},plural:{base:'Freunde',datpl:'Freunden',genpl:'Freunde'}},indefinite:{masculine:{base:'Vater',gen:'Vaters'},neuter:{base:'Kind',gen:'Kindes'},feminine:{base:'Mutter',gen:'Mutter'},plural:{base:'Freunde',datpl:'Freunden',genpl:'Freunde'}}};
   const ADJ_STEM='gut';
-  let state={level:'All',pool:[],order:[],idx:0,correct:0,total:0,streak:0,filters:{cases:{Nominativ:true,Akkusativ:true,Dativ:true,Genitiv:true},articles:{definite:true,indefinite:true,none:true},genders:{masculine:true,neuter:true,feminine:true,plural:true}}};
+  let state={level:'All',pool:[],order:[],idx:0,correct:0,total:0,streak:0,retries:0,filters:{cases:{Nominativ:true,Akkusativ:true,Dativ:true,Genitiv:true},articles:{definite:true,indefinite:true,none:true},genders:{masculine:true,neuter:true,feminine:true,plural:true}}};
   let currentArticle='definite';
   let currentGender='masculine';
   let EX_GLOBAL=null;
@@ -489,6 +501,22 @@
     let pool=ITEMS.map(validateItem).filter(Boolean).filter(it=>allowed.includes(it.kase));
     pool=pool.filter(it=>state.filters.cases[it.kase]&&state.filters.articles[it.article]&&state.filters.genders[it.gender]);
     
+    // If pool is empty after filtering, it means no questions match.
+    // In this case, we revert to a default question set internally.
+    if (pool.length === 0) {
+        // This internal state will be used to build a fallback question pool
+        const fallbackFilters = {
+            cases: { Nominativ: true, Akkusativ: false, Dativ: false, Genitiv: false },
+            articles: { definite: true, indefinite: false, none: false },
+            genders: { masculine: true, neuter: false, feminine: false, plural: false }
+        };
+        pool = ITEMS.filter(it => 
+            fallbackFilters.cases[it.kase] && 
+            fallbackFilters.articles[it.article] && 
+            fallbackFilters.genders[it.gender]
+        );
+    }
+    
     state.pool=pool;
     state.order=shuffle([...Array(pool.length).keys()]);
     state.idx=0;
@@ -496,17 +524,62 @@
     state.correct=0;
     /* streak is preserved by not resetting it here */
 }
-  function updateStat(){document.getElementById('stat').textContent=`${state.total} 問目 / 正答 ${state.correct}`}
-  function colorKeyForStreak(s){if(s>=30)return'gold';if(s>=20)return'silver';if(s>=10)return'black';if(s>=9)return'red';if(s>=8)return'orange';if(s>=7)return'yellow';if(s>=6)return'lime';if(s>=5)return'green';if(s>=4)return'sky';if(s>=3)return'indigo';if(s>=2)return'purple';return'accent'}
-  const STREAK_BADGES={2:'Toll! すてき！',3:'Super! すごい！',4:'Spitze! 最高！',5:'Genial! 天才的だ！',7:'Unglaublich! 信じられない！',10:'Wahnsinn! 半端ない！',20:'Unfassbar! 理解を超える！',30:'Der absolute Hammer! 究極にすごい！'};
-  function buildStreakBadge(s){const msg=STREAK_BADGES[s];if(!msg)return'';const tone=colorKeyForStreak(s);return `<span class="streak-badge tone-${tone}" title="${s}連続正解">${msg}</span>`}
+  function updateStat(){document.getElementById('stat').textContent=`Siegesserie: ${state.streak} / Wiederholungen: ${state.retries}`}
+  function colorKeyForStreak(s){if(s>=100)return'gold';if(s>=70)return'silver';if(s>=50)return'black';if(s>=40)return'red';if(s>=30)return'orange';if(s>=20)return'yellow';if(s>=10)return'lime';if(s>=5)return'green';if(s>=4)return'sky';if(s>=3)return'indigo';if(s>=2)return'purple';return'accent'}
+  const STREAK_BADGES={
+    2: 'Gut! いいね！', 3: 'Prima! すてき！', 4: 'Toll! すごい！', 5: 'Super! 最高！', 6: 'Klasse! 素晴らしい！',
+    7: 'Spitze! 抜群だ！', 8: 'Stark! さすが！', 9: 'Bravo! ブラボー！', 10: 'Genial! 天才的だ！', 11: 'Großartig! 偉大だ！',
+    12: 'Wunderbar! 見事だ！', 13: 'Perfekt! 完璧だ！', 14: 'Sehr gut! 非常に良い！', 15: 'Brillant! 輝かしい！', 16: 'Fantastisch! 素晴らしい！',
+    17: 'Ausgezeichnet! 秀逸だ！', 18: 'Hervorragend! 優秀だ！', 19: 'Meisterhaft! 達人級だ！', 20: 'Wahnsinn! 半端ない！', 21: 'Eindrucksvoll! 印象的だ！',
+    22: 'Beeindruckend! 感銘深い！', 23: 'Erstaunlich! 驚くべき！', 24: 'Imposant! 圧倒的だ！', 25: 'Phänomenal! 驚異的だ！', 26: 'Sensationell! 感動的だ！',
+    27: 'Spektakulär! 圧巻だ！', 28: 'Unglaublich! 信じられない！', 29: 'Überwältigend! 圧倒的だ！', 30: 'Unfassbar! 理解を超える！', 31: 'Außerordentlich! 並外れている！',
+    32: 'Bemerkenswert! 注目すべき！', 33: 'Verblüffend! 驚愕的だ！', 34: 'Atemberaubend! 息を呑む！', 35: 'Umwerfend! 圧倒的だ！', 36: 'Weltklasse! 世界レベル！',
+    37: 'Außergewöhnlich! 異次元だ！', 38: 'Unvergleichlich! 比類ない！', 39: 'Überragend! 抜群だ！', 40: 'Unwiderstehlich! 圧倒的だ！', 41: 'Unschlagbar! 無敵だ！',
+    42: 'Unaufhaltsam! 誰にも止められない！', 43: 'Grenzenlos! 限界知らず！', 44: 'Unüberwindlich! 不屈だ！', 45: 'Unstoppbar! 止まらない！', 46: 'Unbesiegbar! 無敗だ！',
+    47: 'Unübertrefflich! 無比だ！', 48: 'Beispiellos! 前例がない！', 49: 'Einzigartig! 唯一無二だ！', 50: 'Legendär! 伝説的だ！', 60: 'Galaktisch! 銀河級だ！',
+    70: 'Göttlich! 神業だ！', 80: 'Kosmisch! 宇宙レベル！', 90: 'Nicht von dieser Welt! この世のものとは思えない！', 100: 'Sprachmeister! 言語の達人！'
+  };
+  function buildStreakBadge(s){
+    let lastApplicableStreak = 0;
+    // Find the highest milestone that has been achieved
+    for (const key in STREAK_BADGES) {
+        const streakMilestone = parseInt(key, 10);
+        if (s >= streakMilestone && streakMilestone > lastApplicableStreak) {
+            lastApplicableStreak = streakMilestone;
+        }
+    }
+    if (lastApplicableStreak === 0) return ''; // No milestone achieved yet
+
+    const msg = STREAK_BADGES[lastApplicableStreak];
+    const tone = colorKeyForStreak(lastApplicableStreak); // Color is based on the milestone
+    return `<span class="streak-badge tone-${tone}" title="${s}連続正解">${msg}</span>`;
+  }
   function triggerPulse(streak){const card=document.getElementById('quiz');if(!card)return;card.classList.remove('pulse');void card.offsetWidth;card.classList.add('pulse');clearTimeout(card._pulseTimer);card._pulseTimer=setTimeout(()=>{card.classList.remove('pulse')},900)}
   function buildRightCaseList(tbl){if(!tbl)return'';const rows=CASE_ORDER.map(cs=>({jp:CASE_JP_NUM[cs],end:tbl[cs]}));return `<div class="caseList">${rows.map(r=>`<div class="case"><div class="label">${r.jp}</div><div class="ending">${r.end}</div></div>`).join('')}</div>`}
   function endClassFrom(end){const e=end.replace('-','');return['e','en','em','er','es'].includes(e)?e:'e'}
   function buildGermanHint(it){const end=MINI_TABLE[it.article][it.gender][it.kase];return `${ARTICLE_DE[it.article]} + ${GENDER_DE[it.gender]} + ${CASE_DE[it.kase]} → Adjektivendung ${end}.`}
   function buildFootnotes(it){const notes=[];if(it.kase==='Dativ'&&it.gender==='plural')notes.push('※ 複数与格は名詞に -n（すでに -n/-s なら不要）');if(it.kase==='Genitiv'&&(it.gender==='masculine'||it.gender==='neuter'))notes.push('※ 男性・中性の単数属格は名詞に -s/-es');return notes.length?`<div class="footnotes">${notes.join('<br>')}</div>`:''}
-  function render(){try{if(state.idx>=state.order.length){buildPool()}if(!state.pool||!state.pool.length){showError('出題範囲に一致する問題がありません。上の「出題範囲」を確認してください。');updateStat();return}const ord=state.order[state.idx];if(typeof ord==='undefined'){showError('内部エラー：問題の読み込みに失敗しました。');return}const it=state.pool[ord];if(!it){showError('内部エラー：問題データが見つかりません。');return}const qEl=document.getElementById('q');const jaEl=document.getElementById('q-ja');const chEl=document.getElementById('choices');const expEl=document.getElementById('exp');expEl.hidden=true;expEl.innerHTML='';const shown=formatQuestionHTMLFull(it.sentence,it.adj);qEl.innerHTML=shown;fillAllBlanks();if(!qEl.textContent||qEl.textContent.trim()===''){qEl.textContent=it.sentence}if(jaEl){jaEl.textContent=it.jp||'';jaEl.hidden=!it.jp;}const preHintBtn=document.getElementById('preHintBtn');const preHint=document.getElementById('preHint');if(preHint){preHint.hidden=true;preHint.style.display='none';preHint.textContent=`${ARTICLE_HEAD[it.article]}・${GENDER_JP_SHORT[it.gender]}・${CASE_JP_NUM[it.kase]}`}if(preHintBtn){preHintBtn.disabled=false;preHintBtn.onclick=()=>{if(preHint){preHint.hidden=false;preHint.style.display='inline-block'}preHintBtn.disabled=true}}const opts=shuffle(it.choices.map(full=>({val:full,text:full})));chEl.innerHTML='';opts.forEach(o=>{const b=document.createElement('button');b.textContent=o.text;b.dataset.val=o.val;b.addEventListener('click',()=>grade(it,o));chEl.appendChild(b)});document.getElementById('next').onclick=()=>{state.idx++;state.total++;render();updateStat();fitChoiceText();scaleChoices()};document.getElementById('again').onclick=()=>{render();fitChoiceText();scaleChoices()};updateStat();fitChoiceText();requestAnimationFrame(scaleChoices)}catch(err){console.error(err);showError('実行時エラー：'+(err&&err.message?err.message:'原因不明'))}}
-  function grade(it,picked){const buttons=Array.from(document.getElementById('choices').children);buttons.forEach(btn=>btn.disabled=true);const correctFull=it.correct;const isCorrect=picked.val===correctFull;buttons.forEach(btn=>{const v=btn.dataset.val;if(v===correctFull)btn.classList.add('correct');if(v===picked.val)btn.classList.add(isCorrect?'correct':'wrong')});if(isCorrect){state.streak=(state.streak||0)+1;triggerPulse(state.streak);state.correct++}else{state.streak=0}const exp=document.getElementById('exp');const tbl=(MINI_TABLE[it.article]&&MINI_TABLE[it.article][it.gender])?MINI_TABLE[it.article][it.gender]:null;const solved=it.sentence;const streakHtml=isCorrect?buildStreakBadge(state.streak):'';const mark=isCorrect?`<span class="badge good">✔ 正解</span>${streakHtml}`:`<span class="badge bad">✘ 不正解</span>`;const isMixedPoint=it.article==='indefinite';const declKind=it.article==='definite'?'weak':(it.article==='indefinite'?'mixed':'strong');const declLabel=declKind==='weak'?'弱変化':(declKind==='mixed'?'混合変化':'強変化');const declCls=declKind;let hintJPText=`<strong>${ARTICLE_HEAD[it.article]}</strong> (類) ＋ <strong>${GENDER_JP_SHORT[it.gender]}名詞</strong> ＋ <strong>${CASE_JP_NUM[it.kase]}</strong> の組み合わせです。`;const btnsHtml=`     <div class="de-line">       <span class="de">${buildGermanHint(it)}</span>       ${isMixedPoint?'<button class="btn tiny" id="mixBtn">混合変化とは</button>':''}       ${it.article==='definite'?'<button class="btn tiny" id="weakBtn">弱変化とは</button>':''}       ${it.article==='none'?'<button class="btn tiny" id="strongBtn">強変化とは</button>':''}     </div>`;const rightHtml=`     <aside class="right">       <h3>${ARTICLE_HEAD[it.article]}・${GENDER_JP_SHORT[it.gender]}</h3>       <div class="sub-de">${ARTICLE_DE[it.article]} ・<br>${GENDER_DE[it.gender]}</div>       ${buildRightCaseList(tbl)||'<p>（参照表なし）</p>'}     </aside>`;const mixInit=isMixedPoint?`<div id="mixBox" class="example mix-wide" hidden><h3 class="mix-title">形容詞の混合変化</h3><div class="mix-subtitle">(Gemischte Deklination)</div><p>不定冠詞（類）を伴う名詞に形容詞が加わると、形容詞は混合変化と呼ばれる語尾変化をします。</p><p><strong>混合変化と呼ばれる理由</strong><br>その名の通り、強変化と弱変化の混合形態です。不定冠詞（類）の格変化が明確な場合は形容詞の語尾変化は少なく、逆に不定冠詞（類）だけでは名詞の性や格を明らかにできない場合は（特に男性と中性の1格）、形容詞の語尾が強変化することで格変化の補完をします。</p></div>`:'';const weakInit=it.article==='definite'?`<div id="weakBox" class="example mix-wide" hidden><h3 class="mix-title">形容詞の弱変化</h3><div class="mix-subtitle">(Schwache Deklination)</div><p>定冠詞（der, die, das）やder類（dieser, jeder, welcher, solcher, mancher など）の後に続く形容詞の語尾変化ルールです。</p><p><strong>弱変化と呼ばれる理由</strong><br>先行する冠詞が格・性・数を完全に示すため、形容詞は語尾での区別を最小限にとどめます（原則 -en、単数主格と女性・中性の対格のみ -e）。そのため「弱い」変化と呼ばれます。</p></div>`:'';const strongInit=it.article==='none'?`<div id="strongBox" class="example mix-wide" hidden><h3 class="mix-title">形容詞の強変化</h3><div class="mix-subtitle">(Starke Deklination)</div><p>冠詞類を用いない名詞に形容詞が加わると、形容詞は強変化と呼ばれる語尾変化をします。</p><p><strong>強変化と呼ばれる理由</strong><br>形容詞が語尾変化をすることで冠詞類の格変化の代わりをし、語尾変化が顕著であることから強変化と呼ばれます。</p></div>`:'';exp.innerHTML=`     <div class="result-full">       <h3>正解・和訳</h3>       <p class="result-line">${mark}<span class="filler"></span></p>       <p>正しい文：<strong>${solved}</strong></p>       <p>和訳：${it.jp||''}</p>     </div>     <div class="cols">       <div class="left" style="min-width:0">         <h3>解説 <span class="decl-tag ${declCls}">${declLabel}</span></h3>         <p>${hintJPText}</p>         ${btnsHtml}       </div>       ${rightHtml}       ${weakInit}${strongInit}${mixInit}     </div>`;exp.hidden=false;const nhtml=buildFootnotes(it);if(nhtml){const tmp=document.createElement('div');tmp.innerHTML=nhtml;const node=tmp.firstElementChild;if(node)exp.appendChild(node)}const expBox=document.getElementById('exp');function ensureBox(id,html){let el=document.getElementById(id);if(!el){el=document.createElement('div');el.id=id;el.className='example mix-wide';el.hidden=true;el.innerHTML=html;const cols=expBox.querySelector('.cols');if(cols)cols.appendChild(el)}return el}const mixBtn=document.getElementById('mixBtn');if(mixBtn){mixBtn.onclick=()=>{const bx=ensureBox('mixBox','<h3 class="mix-title">形容詞の混合変化</h3><div class="mix-subtitle">(Gemischte Deklination)</div><p>不定冠詞（類）を伴う名詞に形容詞が加わると、形容詞は混合変化と呼ばれる語尾変化をします。</p><p><strong>混合変化と呼ばれる理由</strong><br>その名の通り、強変化と弱変化の混合形態です。不定冠詞（類）の格変化が明確な場合は形容詞の語尾変化は少なく、逆に不定冠詞（類）だけでは名詞の性や格を明らかにできない場合は（特に男性と中性の1格）、形容詞の語尾が強変化することで格変化の補完をします。</p>');if(bx)bx.hidden=!bx.hidden}}const weakBtn=document.getElementById('weakBtn');if(weakBtn){weakBtn.onclick=()=>{const wx=ensureBox('weakBox','<h3 class="mix-title">形容詞の弱変化</h3><div class="mix-subtitle">(Schwache Deklination)</div><p>定冠詞（der, die, das）やder類（dieser, jeder, welcher, solcher, mancher など）の後に続く形容詞の語尾変化ルールです。</p><p><strong>弱変化と呼ばれる理由</strong><br>先行する冠詞が格・性・数を完全に示すため、形容詞は語尾での区別を最小限にとどめます（原則 -en、単数主格と女性・中性の対格のみ -e）。そのため「弱い」変化と呼ばれます。</p>');if(wx)wx.hidden=!wx.hidden}}const strongBtn=document.getElementById('strongBtn');if(strongBtn){strongBtn.onclick=()=>{const sx=ensureBox('strongBox','<h3 class="mix-title">形容詞の強変化</h3><div class="mix-subtitle">(Starke Deklination)</div><p>冠詞類を用いない名詞に形容詞が加わると、形容詞は強変化と呼ばれる語尾変化をします。</p><p><strong>強変化と呼ばれる理由</strong><br>形容詞が語尾変化をすることで冠詞類の格変化の代わりをし、語尾変化が顕著であることから強変化と呼ばれます。</p>');if(sx)sx.hidden=!sx.hidden}}currentArticle=it.article;currentGender=it.gender;mountRef(currentArticle)}
+  function render(){try{if(state.idx>=state.order.length){buildPool()}if(!state.pool||!state.pool.length){showError('出題範囲に一致する問題がありません。上の「出題範囲」を確認してください。');updateStat();return}const ord=state.order[state.idx];if(typeof ord==='undefined'){showError('内部エラー：問題の読み込みに失敗しました。');return}const it=state.pool[ord];if(!it){showError('内部エラー：問題データが見つかりません。');return}const qEl=document.getElementById('q');const jaEl=document.getElementById('q-ja');const chEl=document.getElementById('choices');const expEl=document.getElementById('exp');expEl.hidden=true;expEl.innerHTML='';const shown=formatQuestionHTMLFull(it.sentence,it.adj);qEl.innerHTML=shown;fillAllBlanks();if(!qEl.textContent||qEl.textContent.trim()===''){qEl.textContent=it.sentence}if(jaEl){jaEl.textContent=it.jp||'';jaEl.hidden=!it.jp;}const preHintBtn=document.getElementById('preHintBtn');const preHint=document.getElementById('preHint');if(preHint){preHint.hidden=true;preHint.style.display='none';preHint.textContent=`${ARTICLE_HEAD[it.article]}・${GENDER_JP_SHORT[it.gender]}・${CASE_JP_NUM[it.kase]}`}if(preHintBtn){preHintBtn.disabled=false;preHintBtn.onclick=()=>{if(preHint){preHint.hidden=false;preHint.style.display='inline-block'}preHintBtn.disabled=true}}const opts=shuffle(it.choices.map(full=>({val:full,text:full})));chEl.innerHTML='';opts.forEach(o=>{const b=document.createElement('button');b.textContent=o.text;b.dataset.val=o.val;b.addEventListener('click',()=>grade(it,o));chEl.appendChild(b)});document.getElementById('next').onclick=()=>{state.idx++;state.total++;render();updateStat();fitChoiceText();scaleChoices()};document.getElementById('again').onclick=()=>{state.retries++; render();fitChoiceText();scaleChoices()};updateStat();fitChoiceText();requestAnimationFrame(scaleChoices)}catch(err){console.error(err);showError('実行時エラー：'+(err&&err.message?err.message:'原因不明'))}}
+  function grade(it,picked){
+    const buttons=Array.from(document.getElementById('choices').children);
+    buttons.forEach(btn=>btn.disabled=true);
+    const correctFull=it.correct;
+    const isCorrect=picked.val===correctFull;
+    buttons.forEach(btn=>{const v=btn.dataset.val;if(v===correctFull)btn.classList.add('correct');if(v===picked.val)btn.classList.add(isCorrect?'correct':'wrong')});
+    
+    if(isCorrect){
+        // Only increment correct answers count if it was right on the first try for this question instance
+        if (!document.querySelector('.choices button.wrong')) {
+            state.correct++;
+        }
+        state.streak++;
+        triggerPulse(state.streak);
+    } else {
+        state.streak = 0; // Reset streak only on incorrect answer
+    }
+    updateStat(); // Update stats right after grading
+
+    const exp=document.getElementById('exp');const tbl=(MINI_TABLE[it.article]&&MINI_TABLE[it.article][it.gender])?MINI_TABLE[it.article][it.gender]:null;const solved=it.sentence;const streakHtml=isCorrect?buildStreakBadge(state.streak):'';const mark=isCorrect?`<span class="badge good">✔ 正解</span>${streakHtml}`:`<span class="badge bad">✘ 不正解</span>`;const isMixedPoint=it.article==='indefinite';const declKind=it.article==='definite'?'weak':(it.article==='indefinite'?'mixed':'strong');const declLabel=declKind==='weak'?'弱変化':(declKind==='mixed'?'混合変化':'強変化');const declCls=declKind;let hintJPText=`<strong>${ARTICLE_HEAD[it.article]}</strong> (類) ＋ <strong>${GENDER_JP_SHORT[it.gender]}名詞</strong> ＋ <strong>${CASE_JP_NUM[it.kase]}</strong> の組み合わせです。`;const btnsHtml=`     <div class="de-line">       <span class="de">${buildGermanHint(it)}</span>       ${isMixedPoint?'<button class="btn tiny" id="mixBtn">混合変化とは</button>':''}       ${it.article==='definite'?'<button class="btn tiny" id="weakBtn">弱変化とは</button>':''}       ${it.article==='none'?'<button class="btn tiny" id="strongBtn">強変化とは</button>':''}     </div>`;const rightHtml=`     <aside class="right">       <h3>${ARTICLE_HEAD[it.article]}・${GENDER_JP_SHORT[it.gender]}</h3>       <div class="sub-de">${ARTICLE_DE[it.article]} ・<br>${GENDER_DE[it.gender]}</div>       ${buildRightCaseList(tbl)||'<p>（参照表なし）</p>'}     </aside>`;const mixInit=isMixedPoint?`<div id="mixBox" class="example mix-wide" hidden><h3 class="mix-title">形容詞の混合変化</h3><div class="mix-subtitle">(Gemischte Deklination)</div><p>不定冠詞（類）を伴う名詞に形容詞が加わると、形容詞は混合変化と呼ばれる語尾変化をします。</p><p><strong>混合変化と呼ばれる理由</strong><br>その名の通り、強変化と弱変化の混合形態です。不定冠詞（類）の格変化が明確な場合は形容詞の語尾変化は少なく、逆に不定冠詞（類）だけでは名詞の性や格を明らかにできない場合は（特に男性と中性の1格）、形容詞の語尾が強変化することで格変化の補完をします。</p></div>`:'';const weakInit=it.article==='definite'?`<div id="weakBox" class="example mix-wide" hidden><h3 class="mix-title">形容詞の弱変化</h3><div class="mix-subtitle">(Schwache Deklination)</div><p>定冠詞（der, die, das）やder類（dieser, jeder, welcher, solcher, mancher など）の後に続く形容詞の語尾変化ルールです。</p><p><strong>弱変化と呼ばれる理由</strong><br>先行する冠詞が格・性・数を完全に示すため、形容詞は語尾での区別を最小限にとどめます（原則 -en、単数主格と女性・中性の対格のみ -e）。そのため「弱い」変化と呼ばれます。</p></div>`:'';const strongInit=it.article==='none'?`<div id="strongBox" class="example mix-wide" hidden><h3 class="mix-title">形容詞の強変化</h3><div class="mix-subtitle">(Starke Deklination)</div><p>冠詞類を用いない名詞に形容詞が加わると、形容詞は強変化と呼ばれる語尾変化をします。</p><p><strong>強変化と呼ばれる理由</strong><br>形容詞が語尾変化をすることで冠詞類の格変化の代わりをし、語尾変化が顕著であることから強変化と呼ばれます。</p></div>`:'';exp.innerHTML=`     <div class="result-full">       <h3>正解・和訳</h3>       <p class="result-line">${mark}<span class="filler"></span></p>       <p>正しい文：<strong>${solved}</strong></p>       <p>和訳：${it.jp||''}</p>     </div>     <div class="cols">       <div class="left" style="min-width:0">         <h3>解説 <span class="decl-tag ${declCls}">${declLabel}</span></h3>         <p>${hintJPText}</p>         ${btnsHtml}       </div>       ${rightHtml}       ${weakInit}${strongInit}${mixInit}     </div>`;exp.hidden=false;const nhtml=buildFootnotes(it);if(nhtml){const tmp=document.createElement('div');tmp.innerHTML=nhtml;const node=tmp.firstElementChild;if(node)exp.appendChild(node)}const expBox=document.getElementById('exp');function ensureBox(id,html){let el=document.getElementById(id);if(!el){el=document.createElement('div');el.id=id;el.className='example mix-wide';el.hidden=true;el.innerHTML=html;const cols=expBox.querySelector('.cols');if(cols)cols.appendChild(el)}return el}const mixBtn=document.getElementById('mixBtn');if(mixBtn){mixBtn.onclick=()=>{const bx=ensureBox('mixBox','<h3 class="mix-title">形容詞の混合変化</h3><div class="mix-subtitle">(Gemischte Deklination)</div><p>不定冠詞（類）を伴う名詞に形容詞が加わると、形容詞は混合変化と呼ばれる語尾変化をします。</p><p><strong>混合変化と呼ばれる理由</strong><br>その名の通り、強変化と弱変化の混合形態です。不定冠詞（類）の格変化が明確な場合は形容詞の語尾変化は少なく、逆に不定冠詞（類）だけでは名詞の性や格を明らかにできない場合は（特に男性と中性の1格）、形容詞の語尾が強変化することで格変化の補完をします。</p>');if(bx)bx.hidden=!bx.hidden}}const weakBtn=document.getElementById('weakBtn');if(weakBtn){weakBtn.onclick=()=>{const wx=ensureBox('weakBox','<h3 class="mix-title">形容詞の弱変化</h3><div class="mix-subtitle">(Schwache Deklination)</div><p>定冠詞（der, die, das）やder類（dieser, jeder, welcher, solcher, mancher など）の後に続く形容詞の語尾変化ルールです。</p><p><strong>弱変化と呼ばれる理由</strong><br>先行する冠詞が格・性・数を完全に示すため、形容詞は語尾での区別を最小限にとどめます（原則 -en、単数主格と女性・中性の対格のみ -e）。そのため「弱い」変化と呼ばれます。</p>');if(wx)wx.hidden=!wx.hidden}}const strongBtn=document.getElementById('strongBtn');if(strongBtn){strongBtn.onclick=()=>{const sx=ensureBox('strongBox','<h3 class="mix-title">形容詞の強変化</h3><div class="mix-subtitle">(Starke Deklination)</div><p>冠詞類を用いない名詞に形容詞が加わると、形容詞は強変化と呼ばれる語尾変化をします。</p><p><strong>強変化と呼ばれる理由</strong><br>形容詞が語尾変化をすることで冠詞類の格変化の代わりをし、語尾変化が顕著であることから強変化と呼ばれます。</p>');if(sx)sx.hidden=!sx.hidden}}currentArticle=it.article;currentGender=it.gender;mountRef(currentArticle)}
   function computeGlobalExampleLayout(){try{const measure=document.createElement('div');measure.style.cssText='position:absolute;visibility:hidden;left:-9999px;top:-9999px';document.body.appendChild(measure);const artKeys=['definite','indefinite','none'];const genders=['masculine','neuter','feminine','plural'];const cases=['Nominativ','Akkusativ','Dativ','Genitiv'];let maxDet=0,maxAdj=0,maxTable=0,maxTablePlural=0;function makeCell(article,gender,kase){const line=buildExampleLine(article,gender,kase);const wrap=document.createElement('div');wrap.className='ex-cell';wrap.innerHTML=line.text;return wrap}artKeys.forEach(a=>{genders.forEach(g=>{cases.forEach(k=>{const cell=makeCell(a,g,k);measure.appendChild(cell);const det=cell.querySelector('.ex-det');const adj=cell.querySelector('.ex-adj');const wDet=det?det.getBoundingClientRect().width:0;const wAdj=adj?adj.getBoundingClientRect().width:0;if(wDet>maxDet)maxDet=wDet;if(wAdj>maxAdj)maxAdj=wAdj;measure.removeChild(cell)})})});const abbrs=['Kasus','Nom.','Akk.','Dat.','Gen.'];let maxCaseCol=0;abbrs.forEach(txt=>{const t=document.createElement('table');t.className='ex-table';const tr=document.createElement('tr');const td1=document.createElement('td');td1.textContent=txt;tr.appendChild(td1);const td2=document.createElement('td');td2.textContent='X';tr.appendChild(td2);t.appendChild(tr);measure.appendChild(t);const w=td1.getBoundingClientRect().width;if(w>maxCaseCol)maxCaseCol=w;measure.removeChild(t)});function makeTable(article,gender){const table=document.createElement('table');table.className='ex-table';const thead=document.createElement('thead');thead.innerHTML='<tr><th>Kasus</th><th>Beispiel</th></tr>';table.appendChild(thead);const tbody=document.createElement('tbody');cases.forEach(k=>{const tr=document.createElement('tr');const td1=document.createElement('td');td1.textContent={Nominativ:'Nom.',Akkusativ:'Akk.',Dativ:'Dat.',Genitiv:'Gen.'}[k];tr.appendChild(td1);const td2=document.createElement('td');td2.className='ex-cell';const inner=makeCell(article,gender,k);td2.appendChild(inner);tr.appendChild(td2);tbody.appendChild(tr)});table.appendChild(tbody);return table}artKeys.forEach(a=>{genders.forEach(g=>{const t=makeTable(a,g);measure.appendChild(t);const w=t.getBoundingClientRect().width;if(w>maxTable)maxTable=w;if(g==='plural'&&w>maxTablePlural)maxTablePlural=w;measure.removeChild(t)})});EX_GLOBAL={det:Math.ceil(maxDet),adj:Math.ceil(maxAdj),table:Math.ceil(maxTablePlural||maxTable),caseCol:Math.ceil(maxCaseCol)};const ev=document.getElementById('exampleView');if(ev){ev.style.setProperty('--det-w',EX_GLOBAL.det+'px');ev.style.setProperty('--adj-w',EX_GLOBAL.adj+'px');ev.style.minWidth=(EX_GLOBAL.table+16)+'px';const tEl=ev.querySelector('table.ex-table');if(tEl){tEl.style.width=(EX_GLOBAL.table+16)+'px'}}document.body.removeChild(measure)}catch(_e){}}
   function buildExampleLine(article,gender,kase){const end=MINI_TABLE[article][gender][kase];const cls=endClassFrom(end);const adj=ADJ_STEM+`<span class="end ${cls}">${end.replace('-','')}</span>`;const set=(article==='indefinite')?EXAMPLE_NOUNS.indefinite:EXAMPLE_NOUNS.default;let det='';if(article==='definite')det=DETERMINER.definite[gender][kase];else if(article==='indefinite')det=DETERMINER.indefinite[gender][kase];const n=set[gender];let noun='';if(gender==='plural'){noun=(kase==='Dativ')?n.datpl:(kase==='Genitiv'?n.genpl:n.base)}else if(gender==='masculine'||gender==='neuter'){noun=(kase==='Genitiv')?n.gen:n.base}else{noun=n.base}return{kase,text:`<div class="ex-row"><span class="ex-det">${det||''}</span><span class="ex-adj">${adj}</span><span class="ex-noun">${noun||''}</span></div>`}}
   function alignExampleColumns(){const ev=document.getElementById('exampleView');if(!ev)return;if(EX_GLOBAL){ev.style.setProperty('--det-w',EX_GLOBAL.det+'px');ev.style.setProperty('--adj-w',EX_GLOBAL.adj+'px');ev.style.minWidth=(EX_GLOBAL.table+16)+'px'}}
