@@ -134,17 +134,17 @@
     @media (max-width:480px){.ex-cell .ex-row{gap:4px}}
     .pulse{animation:pulseFlash .9s ease-out 1}
     @keyframes pulseFlash{0%{box-shadow:0 0 0 0 rgba(37,99,235,.35);transform:translateZ(0)}40%{box-shadow:0 0 0 10px rgba(0,0,0,0);transform:scale(1.01)}100%{box-shadow:0 0 0 0 rgba(0,0,0,0);transform:none}}
-    /* ご褒美（連続正解）バッジ：背景にも色を付与 */
     .streak-badge{
-        padding: 4px 18px; /* 左右の余白を広げました */
-        border-radius: 999px;
+        padding: 8px 18px;
+        border-radius: 20px;
         font-weight: 700;
         font-size: 14px;
         border: 1px solid transparent;
         flex: 0 0 auto;
-        white-space: nowrap;
+        white-space: normal;
+        line-height: 1.4;
+        text-align: center;
     }
-    /* パステルで上品めのトーン */
     .streak-badge.tone-accent{background:#e8f0ff;border-color:#bfdbfe;color:#1e3a8a}
     .streak-badge.tone-purple{background:#f3e8ff;border-color:#e9d5ff;color:#6b21a8}
     .streak-badge.tone-indigo{background:#eef2ff;border-color:#c7d2fe;color:#3730a3}
@@ -544,17 +544,20 @@
   };
   function buildStreakBadge(s){
     let lastApplicableStreak = 0;
-    // Find the highest milestone that has been achieved
     for (const key in STREAK_BADGES) {
         const streakMilestone = parseInt(key, 10);
         if (s >= streakMilestone && streakMilestone > lastApplicableStreak) {
             lastApplicableStreak = streakMilestone;
         }
     }
-    if (lastApplicableStreak === 0) return ''; // No milestone achieved yet
+    if (lastApplicableStreak === 0) return '';
 
-    const msg = STREAK_BADGES[lastApplicableStreak];
-    const tone = colorKeyForStreak(lastApplicableStreak); // Color is based on the milestone
+    let msg = STREAK_BADGES[lastApplicableStreak];
+    const CHAR_THRESHOLD = 20; // Character limit before adding a line break
+    if (msg.length > CHAR_THRESHOLD && msg.includes('! ')) {
+        msg = msg.replace('! ', '!<br>');
+    }
+    const tone = colorKeyForStreak(lastApplicableStreak);
     return `<span class="streak-badge tone-${tone}" title="${s}連続正解">${msg}</span>`;
   }
   function triggerPulse(streak){const card=document.getElementById('quiz');if(!card)return;card.classList.remove('pulse');void card.offsetWidth;card.classList.add('pulse');clearTimeout(card._pulseTimer);card._pulseTimer=setTimeout(()=>{card.classList.remove('pulse')},900)}
