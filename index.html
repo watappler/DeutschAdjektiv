@@ -84,7 +84,6 @@
     .ref-table.hl-feminine th:nth-child(4){background:#fff1f2;color:#9f1239;box-shadow:inset 0 0 0 2px #fb7185;border-color:#fb7185}
     .ref-table.hl-plural th:nth-child(5){background:#f5f3ff;color:#4c1d95;box-shadow:inset 0 0 0 2px #8b5cf6;border-color:#8b5cf6}
 
-    /* MODIFIED: More prominent flash animations for TH and TD */
     @keyframes flash-th-masculine { 50% { background-color: #c7d2fe; border-color: #818cf8; filter: brightness(1.1); } }
     @keyframes flash-th-neuter { 50% { background-color: #fde68a; border-color: #f59e0b; filter: brightness(1.1); } }
     @keyframes flash-th-feminine { 50% { background-color: #fbcfe8; border-color: #f472b6; filter: brightness(1.1); } }
@@ -145,7 +144,6 @@
         line-height: 1.4;
         text-align: center;
     }
-    .streak-badge.tone-accent{background:#e8f0ff;border-color:#bfdbfe;color:#1e3a8a}
     .streak-badge.tone-purple{background:#f3e8ff;border-color:#e9d5ff;color:#6b21a8}
     .streak-badge.tone-indigo{background:#eef2ff;border-color:#c7d2fe;color:#3730a3}
     .streak-badge.tone-sky{background:#e0f2fe;border-color:#bae6fd;color:#075985}
@@ -154,13 +152,80 @@
     .streak-badge.tone-yellow{background:#fef9c3;border-color:#fde68a;color:#7c2d12}
     .streak-badge.tone-orange{background:#ffedd5;border-color:#fed7aa;color:#9a3412}
     .streak-badge.tone-red{background:#fee2e2;border-color:#fecaca;color:#7f1d1d}
-    .streak-badge.tone-black{background:#e5e7eb;border-color:#cbd5e1;color:#111827}
+    .streak-badge.tone-pink{background:#fff1f2; border-color:#f472b6; color:#be185d; }
     .streak-badge.tone-silver{background:#f1f5f9;border-color:#cbd5e1;color:#334155}
-    .streak-badge.tone-gold{background:#fef3c7;border-color:#fcd34d;color:#92400e}
+    .streak-badge.tone-gold { background: linear-gradient(145deg, #fefce8, #fef9c3); border-color:#facc15; color:#a16207; }
+
+    #fullscreen-reward {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000;
+      display: flex; align-items: center; justify-content: center;
+      color: white; text-align: center; transition: opacity 0.5s ease;
+      opacity: 0; pointer-events: none; overflow: hidden;
+    }
+    #fullscreen-reward.visible { opacity: 1; }
+    #fullscreen-reward-content h1 { font-weight: bold; font-size: clamp(2rem, 12vw, 4.5rem); }
+    #fullscreen-reward-content h1.gold { animation: textGlowGold 1.5s ease-in-out infinite alternate; }
+    #fullscreen-reward-content h1.silver { animation: textGlowSilver 1.5s ease-in-out infinite alternate; }
+    #fullscreen-reward-content h1.black { animation: textGlowBlack 1.5s ease-in-out infinite alternate; }
+    #fullscreen-reward-content h1.epic { animation: textGlowEpic 1.5s ease-in-out infinite alternate; }
+    #fullscreen-reward-content h1.legendary { animation: textGlowLegendary 1.5s ease-in-out infinite alternate; }
+    #fullscreen-reward-content h1.mythic { animation: textGlowMythic 1.5s ease-in-out infinite alternate; }
+
+    @keyframes textGlowGold {
+      from { text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #facc15, 0 0 40px #facc15, 0 0 50px #facc15, 0 0 60px #facc15, 0 0 70px #facc15; }
+      to { text-shadow: 0 0 20px #fff, 0 0 30px #fef08a, 0 0 40px #fef08a, 0 0 50px #fef08a, 0 0 60px #fef08a, 0 0 70px #fef08a, 0 0 80px #fef08a; }
+    }
+    @keyframes textGlowSilver {
+      from { text-shadow: 0 0 10px #fff, 0 0 20px #e0e0e0, 0 0 30px #c0c0c0, 0 0 40px #c0c0c0, 0 0 50px #c0c0c0, 0 0 60px #c0c0c0, 0 0 70px #c0c0c0; }
+      to { text-shadow: 0 0 20px #fff, 0 0 30px #dcdcdc, 0 0 40px #dcdcdc, 0 0 50px #dcdcdc, 0 0 60px #dcdcdc, 0 0 70px #dcdcdc, 0 0 80px #dcdcdc; }
+    }
+    @keyframes textGlowBlack {
+      from { text-shadow: 0 0 10px #fff, 0 0 20px #e0e0e0, 0 0 30px #b0b0b0, 0 0 40px #b0b0b0; }
+      to { text-shadow: 0 0 20px #fff, 0 0 30px #c0c0c0, 0 0 40px #c0c0c0, 0 0 50px #c0c0c0; }
+    }
+    @keyframes textGlowEpic {
+      from { text-shadow: 0 0 10px #fff, 0 0 20px #e9d5ff, 0 0 30px #c084fc, 0 0 40px #c084fc; }
+      to { text-shadow: 0 0 20px #fff, 0 0 30px #d8b4fe, 0 0 40px #d8b4fe, 0 0 50px #d8b4fe; }
+    }
+    @keyframes textGlowLegendary {
+      from { text-shadow: 0 0 10px #fff, 0 0 20px #fbcfe8, 0 0 30px #f472b6, 0 0 40px #f472b6; }
+      to { text-shadow: 0 0 20px #fff, 0 0 30px #f9a8d4, 0 0 40px #f9a8d4, 0 0 50px #f9a8d4; }
+    }
+    @keyframes textGlowMythic {
+      from { text-shadow: 0 0 10px #fff, 0 0 20px #bae6fd, 0 0 30px #7dd3fc, 0 0 40px #7dd3fc; }
+      to { text-shadow: 0 0 20px #fff, 0 0 30px #a5f3fc, 0 0 40px #a5f3fc, 0 0 50px #a5f3fc; }
+    }
+    
+    .particle { position: absolute; }
+    .petal { top: -20px; width: 15px; height: 15px; background-color: #ffb7c5; border-radius: 50% 0; animation: fall-and-sway 7s linear forwards; }
+    .confetti { top: -20px; width: 8px; height: 15px; animation: fall-and-spin 7s linear forwards; }
+    
+    @keyframes fall-and-sway {
+      0% { transform: translateY(-10vh) translateX(0) rotate(var(--r-start)); opacity: 1; }
+      100% { transform: translateY(110vh) translateX(calc(var(--sway) * 2)) rotate(calc(var(--r-start) + 360deg)); opacity: 0; }
+    }
+    @keyframes fall-and-spin {
+      0% { transform: translateY(0) rotateX(0) rotateY(0); opacity: 1; }
+      100% { transform: translateY(110vh) rotateX(var(--rx)) rotateY(var(--ry)); opacity: 0; }
+    }
+
+    #achievements { margin-bottom: 20px; }
+    #achievements h2 { font-size: 16px; margin: 0 0 10px; color: var(--muted); border-bottom: 1px solid var(--ring); padding-bottom: 8px; }
+    #trophy-case { display: flex; gap: 10px; flex-wrap: wrap; }
+    .trophy-badge {
+      background: linear-gradient(145deg, #fefce8, #fef9c3); border: 2px solid #facc15; border-radius: 12px;
+      padding: 8px 12px; display: inline-flex; align-items: center; gap: 8px;
+      color: #a16207; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.1), inset 0 1px 1px #fffbeb;
+    }
+    .trophy-badge svg { width: 24px; height: 24px; fill: #f59e0b; }
   </style>
 </head>
 <body>
   <div class="wrap">
+    <div class="card" id="achievements" hidden>
+      <h2>Sammlung</h2>
+      <div id="trophy-case"></div>
+    </div>
     <div class="card">
       <h1>Adjektivdeklination Trainer</h1>
       <div class="subtitle">形容詞格変化練習</div>
@@ -196,6 +261,21 @@
       <div class="explain" id="exp" hidden></div>
       <div class="footer">
         <span class="stat" id="stat">Siegesserie: 0 / Wiederholungen: 0</span>
+      </div>
+    </div>
+    
+    <div class="card" id="test-controls" style="margin-top:20px;" hidden>
+      <h3 style="font-size:14px; color:var(--muted); margin:0 0 10px;">ご褒美動作テスト用（暫定）</h3>
+      <div class="row" style="flex-wrap: wrap; gap: 8px;">
+        <button class="btn tiny" id="test-streak-20">連続20回</button>
+        <button class="btn tiny" id="test-streak-30">連続30回</button>
+        <button class="btn tiny" id="test-streak-40">連続40回</button>
+        <button class="btn tiny" id="test-streak-50">連続50回</button>
+        <button class="btn tiny" id="test-streak-60">連続60回</button>
+        <button class="btn tiny" id="test-streak-70">連続70回</button>
+        <button class="btn tiny" id="test-streak-80">連続80回</button>
+        <button class="btn tiny" id="test-streak-90">連続90回</button>
+        <button class="btn tiny" id="test-streak-100">連続100回</button>
       </div>
     </div>
 
@@ -252,6 +332,7 @@
       </details>
     </div>
   </div>
+  <div id="fullscreen-reward" hidden></div>
 
 <script>
   const MINI_TABLE={definite:{masculine:{Nominativ:"-e",Akkusativ:"-en",Dativ:"-en",Genitiv:"-en"},feminine:{Nominativ:"-e",Akkusativ:"-e",Dativ:"-en",Genitiv:"-en"},neuter:{Nominativ:"-e",Akkusativ:"-e",Dativ:"-en",Genitiv:"-en"},plural:{Nominativ:"-en",Akkusativ:"-en",Dativ:"-en",Genitiv:"-en"}},indefinite:{masculine:{Nominativ:"-er",Akkusativ:"-en",Dativ:"-en",Genitiv:"-en"},feminine:{Nominativ:"-e",Akkusativ:"-e",Dativ:"-en",Genitiv:"-en"},neuter:{Nominativ:"-es",Akkusativ:"-es",Dativ:"-en",Genitiv:"-en"},plural:{Nominativ:"-en",Akkusativ:"-en",Dativ:"-en",Genitiv:"-en"}},none:{masculine:{Nominativ:"-er",Akkusativ:"-en",Dativ:"-em",Genitiv:"-en"},feminine:{Nominativ:"-e",Akkusativ:"-e",Dativ:"-er",Genitiv:"-er"},neuter:{Nominativ:"-es",Akkusativ:"-es",Dativ:"-em",Genitiv:"-en"},plural:{Nominativ:"-e",Akkusativ:"-e",Dativ:"-en",Genitiv:"-er"}}};
@@ -267,156 +348,9 @@
   const ARTICLE_DE_SHORT = {definite:"Best. Art.", indefinite:"Unbest. Art.", none:"Nullart."};
   const GENDER_DE_SHORT = {masculine:"Mask.", feminine:"Fem.", neuter:"Neut.", plural:"Plur."};
   const CASE_JP_NUM={Nominativ:"1格",Akkusativ:"4格",Dativ:"3格",Genitiv:"2格"};
-  const LEVEL_CASES={"All":["Nominativ","Akkusativ","Dativ","Genitiv"],"A1+A2":["Nominativ","Akkusativ","Dativ"],"B1":["Genitiv"]};
+  const LEVEL_CASES={"All":["Nominativ","Akkusativ","Dativ","Genitiv"],"A1+A2":["Akkusativ","Dativ"],"B1":["Genitiv"]};
 
-  // ### START OF REPLACEMENT ###
-  const ITEMS = [
-    {"sentence":"Der kluge Mann liest eine Zeitung.","adj":"kluge","correct":"kluge","choices":["kluge","kluger","klugen"],"kase":"Nominativ","gender":"masculine","article":"definite","level":"A1","jp":"その賢い男性は新聞を読んでいます。"},
-    {"sentence":"Der alte Stuhl steht in der Ecke.","adj":"alte","correct":"alte","choices":["alte","alten","altes"],"kase":"Nominativ","gender":"masculine","article":"definite","level":"A1","jp":"その古い椅子は隅に置いてあります。"},
-    {"sentence":"Der neue Computer funktioniert gut.","adj":"neue","correct":"neue","choices":["neue","neuer","neuen"],"kase":"Nominativ","gender":"masculine","article":"definite","level":"A1","jp":"その新しいコンピューターは正常に動作します。"},
-    {"sentence":"Ich sehe den großen Hund im Park.","adj":"großen","correct":"großen","choices":["großen","großer","große"],"kase":"Akkusativ","gender":"masculine","article":"definite","level":"A1","jp":"私は公園でその大きな犬を見かけます。"},
-    {"sentence":"Er isst den leckeren Kuchen allein.","adj":"leckeren","correct":"leckeren","choices":["leckeren","leckerer","leckere"],"kase":"Akkusativ","gender":"masculine","article":"definite","level":"A1","jp":"彼はその美味しいケーキを一人で食べます。"},
-    {"sentence":"Sie kauft den warmen Mantel für den Winter.","adj":"warmen","correct":"warmen","choices":["warmen","warmer","warmes"],"kase":"Akkusativ","gender":"masculine","article":"definite","level":"A1","jp":"彼女は冬のためにその暖かいコートを買います。"},
-    {"sentence":"Wir helfen dem netten Nachbarn gern.","adj":"netten","correct":"netten","choices":["netten","netter","nette"],"kase":"Dativ","gender":"masculine","article":"definite","level":"A2","jp":"私たちはその親切な隣人を喜んで手伝います。"},
-    {"sentence":"Ich danke dem guten Mann für seine Hilfe.","adj":"guten","correct":"guten","choices":["guten","guter","gute"],"kase":"Dativ","gender":"masculine","article":"definite","level":"A2","jp":"私はその親切な男性の助けに感謝します。"},
-    {"sentence":"Sie spricht mit dem jungen Arzt.","adj":"jungen","correct":"jungen","choices":["jungen","junger","junge"],"kase":"Dativ","gender":"masculine","article":"definite","level":"A2","jp":"彼女は若い医者と話しています。"},
-    {"sentence":"Das ist das Auto des reichen Vaters.","adj":"reichen","correct":"reichen","choices":["reichen","reicher","reiche"],"kase":"Genitiv","gender":"masculine","article":"definite","level":"B1","jp":"それはその裕福な父親の車です。"},
-    {"sentence":"Die Meinung des bekannten Experten ist wichtig.","adj":"bekannten","correct":"bekannten","choices":["bekannten","bekannter","bekanntes"],"kase":"Genitiv","gender":"masculine","article":"definite","level":"B1","jp":"その著名な専門家の意見は重要です。"},
-    {"sentence":"Wir besuchen das Haus des berühmten Künstlers.","adj":"berühmten","correct":"berühmten","choices":["berühmten","berühmter","berühmte"],"kase":"Genitiv","gender":"masculine","article":"definite","level":"B1","jp":"私たちはその有名な芸術家の家を訪れます。"},
-    {"sentence":"Die junge Frau trinkt einen Tee.","adj":"junge","correct":"junge","choices":["junge","jungen","junger"],"kase":"Nominativ","gender":"feminine","article":"definite","level":"A1","jp":"その若い女性はお茶を飲んでいます。"},
-    {"sentence":"Die neue Lampe ist sehr hell.","adj":"neue","correct":"neue","choices":["neue","neuen","neuer"],"kase":"Nominativ","gender":"feminine","article":"definite","level":"A1","jp":"その新しいランプはとても明るいです。"},
-    {"sentence":"Die kleine Katze schläft auf dem Sofa.","adj":"kleine","correct":"kleine","choices":["kleine","kleinen","kleiner"],"kase":"Nominativ","gender":"feminine","article":"definite","level":"A1","jp":"その小さな猫はソファの上で眠っています。"},
-    {"sentence":"Er kennt die elegante Dame nicht.","adj":"elegante","correct":"elegante","choices":["elegante","eleganten","eleganter"],"kase":"Akkusativ","gender":"feminine","article":"definite","level":"A1","jp":"彼はその上品なご婦人を知りません。"},
-    {"sentence":"Wir öffnen die schwere Tür.","adj":"schwere","correct":"schwere","choices":["schwere","schweren","schwerer"],"kase":"Akkusativ","gender":"feminine","article":"definite","level":"A1","jp":"私たちはその重いドアを開けます。"},
-    {"sentence":"Du liest die spannende Geschichte.","adj":"spannende","correct":"spannende","choices":["spannende","spannenden","spannender"],"kase":"Akkusativ","gender":"feminine","article":"definite","level":"A1","jp":"君はそのわくわくする物語を読んでいますね。"},
-    {"sentence":"Er gibt der fleißigen Studentin ein Buch.","adj":"fleißigen","correct":"fleißigen","choices":["fleißigen","fleißige","fleißiger"],"kase":"Dativ","gender":"feminine","article":"definite","level":"A2","jp":"彼はその勤勉な女子学生に本を渡します。"},
-    {"sentence":"Ich danke der freundlichen Verkäuferin.","adj":"freundlichen","correct":"freundlichen","choices":["freundlichen","freundliche","freundlicher"],"kase":"Dativ","gender":"feminine","article":"definite","level":"A2","jp":"私はその親切な女性店員にお礼を言います。"},
-    {"sentence":"Das Auto gehört der erfahrenen Ärztin.","adj":"erfahrenen","correct":"erfahrenen","choices":["erfahrenen","erfahrene","erfahrener"],"kase":"Dativ","gender":"feminine","article":"definite","level":"A2","jp":"その車は経験豊富な女医のものです。"},
-    {"sentence":"Der Preis der langen Reise ist hoch.","adj":"langen","correct":"langen","choices":["langen","lange","langer"],"kase":"Genitiv","gender":"feminine","article":"definite","level":"B1","jp":"その長い旅の価格は高いです。"},
-    {"sentence":"Die Tasche der jungen Kollegin ist modern.","adj":"jungen","correct":"jungen","choices":["jungen","junge","junger"],"kase":"Genitiv","gender":"feminine","article":"definite","level":"B1","jp":"その若い同僚（女性）のカバンはモダンです。"},
-    {"sentence":"Das Ende der nächsten Woche naht.","adj":"nächsten","correct":"nächsten","choices":["nächsten","nächste","nächster"],"kase":"Genitiv","gender":"feminine","article":"definite","level":"B1","jp":"来週の終わりが近づいています。"},
-    {"sentence":"Das kleine Kind spielt im Garten.","adj":"kleine","correct":"kleine","choices":["kleine","kleinen","kleines"],"kase":"Nominativ","gender":"neuter","article":"definite","level":"A1","jp":"その小さな子供は庭で遊んでいます。"},
-    {"sentence":"Das große Hotel hat einen Pool.","adj":"große","correct":"große","choices":["große","großen","großes"],"kase":"Nominativ","gender":"neuter","article":"definite","level":"A1","jp":"その大きなホテルにはプールがあります。"},
-    {"sentence":"Das rote Fahrrad gehört mir.","adj":"rote","correct":"rote","choices":["rote","roten","rotes"],"kase":"Nominativ","gender":"neuter","article":"definite","level":"A1","jp":"その赤い自転車は私のものです。"},
-    {"sentence":"Sie malt das schöne Bild fertig.","adj":"schöne","correct":"schöne","choices":["schöne","schönen","schönes"],"kase":"Akkusativ","gender":"neuter","article":"definite","level":"A1","jp":"彼女はその美しい絵を完成させます。"},
-    {"sentence":"Er liest das interessante Buch.","adj":"interessante","correct":"interessante","choices":["interessante","interessanten","interessantes"],"kase":"Akkusativ","gender":"neuter","article":"definite","level":"A1","jp":"彼はその面白い本を読んでいます。"},
-    {"sentence":"Wir besuchen das neue Museum.","adj":"neue","correct":"neue","choices":["neue","neuen","neues"],"kase":"Akkusativ","gender":"neuter","article":"definite","level":"A1","jp":"私たちはその新しい美術館を訪れます。"},
-    {"sentence":"Ich spiele mit dem glücklichen Mädchen.","adj":"glücklichen","correct":"glücklichen","choices":["glücklichen","glückliche","glückliches"],"kase":"Dativ","gender":"neuter","article":"definite","level":"A2","jp":"私はその幸せそうな女の子と遊びます。"},
-    {"sentence":"Er wohnt in dem gelben Haus.","adj":"gelben","correct":"gelben","choices":["gelben","gelbe","gelbes"],"kase":"Dativ","gender":"neuter","article":"definite","level":"A2","jp":"彼はその黄色い家に住んでいます。"},
-    {"sentence":"Sie sitzt an dem offenen Fenster.","adj":"offenen","correct":"offenen","choices":["offenen","offene","offenes"],"kase":"Dativ","gender":"neuter","article":"definite","level":"A2","jp":"彼女は開いている窓のそばに座っています。"},
-    {"sentence":"Der Titel des kurzen Gedichts ist unbekannt.","adj":"kurzen","correct":"kurzen","choices":["kurzen","kurze","kurzes"],"kase":"Genitiv","gender":"neuter","article":"definite","level":"B1","jp":"その短い詩のタイトルは不明です。"},
-    {"sentence":"Die Qualität des neuen Produkts ist schlecht.","adj":"neuen","correct":"neuen","choices":["neuen","neue","neues"],"kase":"Genitiv","gender":"neuter","article":"definite","level":"B1","jp":"その新製品の品質は悪いです。"},
-    {"sentence":"Die Lösung des schwierigen Problems ist einfach.","adj":"schwierigen","correct":"schwierigen","choices":["schwierigen","schwierige","schwieriges"],"kase":"Genitiv","gender":"neuter","article":"definite","level":"B1","jp":"その難しい問題の解決策は簡単です。"},
-    {"sentence":"Die netten Leute warten auf den Bus.","adj":"netten","correct":"netten","choices":["netten","nette","netter"],"kase":"Nominativ","gender":"plural","article":"definite","level":"A1","jp":"その親切な人々はバスを待っています。"},
-    {"sentence":"Die bunten Blumen blühen im Frühling.","adj":"bunten","correct":"bunten","choices":["bunten","bunte","bunter"],"kase":"Nominativ","gender":"plural","article":"definite","level":"A1","jp":"その色とりどりの花は春に咲きます。"},
-    {"sentence":"Die neuen Schuhe passen perfekt.","adj":"neuen","correct":"neuen","choices":["neuen","neue","neues"],"kase":"Nominativ","gender":"plural","article":"definite","level":"A1","jp":"その新しい靴は完璧にフィットします。"},
-    {"sentence":"Ich habe die verlorenen Schlüssel gefunden.","adj":"verlorenen","correct":"verlorenen","choices":["verlorenen","verlorene","verlorener"],"kase":"Akkusativ","gender":"plural","article":"definite","level":"A1","jp":"私はなくした鍵を見つけました。"},
-    {"sentence":"Sie besucht die alten Eltern am Wochenende.","adj":"alten","correct":"alten","choices":["alten","alte","alter"],"kase":"Akkusativ","gender":"plural","article":"definite","level":"A1","jp":"彼女は週末に年老いた両親を訪ねます。"},
-    {"sentence":"Der Lehrer korrigiert die häufigen Fehler.","adj":"häufigen","correct":"häufigen","choices":["häufigen","häufige","häufiger"],"kase":"Akkusativ","gender":"plural","article":"definite","level":"A1","jp":"先生はよくある間違いを訂正します。"},
-    {"sentence":"Er hilft den armen Kindern bei den Hausaufgaben.","adj":"armen","correct":"armen","choices":["armen","arme","armer"],"kase":"Dativ","gender":"plural","article":"definite","level":"A2","jp":"彼は貧しい子供たちの宿題を手伝います。"},
-    {"sentence":"Wir gratulieren den glücklichen Gewinnern.","adj":"glücklichen","correct":"glücklichen","choices":["glücklichen","glückliche","glücklicher"],"kase":"Dativ","gender":"plural","article":"definite","level":"A2","jp":"私たちは幸運な勝者たちを祝福します。"},
-    {"sentence":"Das Konzert gefällt den ausländischen Gästen.","adj":"ausländischen","correct":"ausländischen","choices":["ausländischen","ausländische","ausländischer"],"kase":"Dativ","gender":"plural","article":"definite","level":"A2","jp":"そのコンサートは外国人客に気に入られています。"},
-    {"sentence":"Die Entscheidung der beiden Richter war einstimmig.","adj":"beiden","correct":"beiden","choices":["beiden","beide","beider"],"kase":"Genitiv","gender":"plural","article":"definite","level":"B1","jp":"その両裁判官の決定は満場一致でした。"},
-    {"sentence":"Die Zukunft der jungen Schüler ist ungewiss.","adj":"jungen","correct":"jungen","choices":["jungen","junge","junger"],"kase":"Genitiv","gender":"plural","article":"definite","level":"B1","jp":"その若い生徒たちの未来は不確かです。"},
-    {"sentence":"Das ist ein Problem der modernen Städte.","adj":"modernen","correct":"modernen","choices":["modernen","moderne","moderner"],"kase":"Genitiv","gender":"plural","article":"definite","level":"B1","jp":"それは現代の都市が抱える問題です。"},
-    {"sentence":"Ein älterer Mann fragt nach dem Weg.","adj":"älterer","correct":"älterer","choices":["älterer","ältere","älteren"],"kase":"Nominativ","gender":"masculine","article":"indefinite","level":"A1","jp":"一人の年配の男性が道を尋ねています。"},
-    {"sentence":"Mein jüngerer Bruder studiert in Berlin.","adj":"jüngerer","correct":"jüngerer","choices":["jüngerer","jüngere","jüngeren"],"kase":"Nominativ","gender":"masculine","article":"indefinite","level":"A1","jp":"私の弟はベルリンで勉強しています。"},
-    {"sentence":"Kein normaler Mensch würde das tun.","adj":"normaler","correct":"normaler","choices":["normaler","normale","normalen"],"kase":"Nominativ","gender":"masculine","article":"indefinite","level":"A1","jp":"普通の人間なら誰もそんなことはしないでしょう。"},
-    {"sentence":"Ich habe einen lustigen Film gesehen.","adj":"lustigen","correct":"lustigen","choices":["lustigen","lustiger","lustiges"],"kase":"Akkusativ","gender":"masculine","article":"indefinite","level":"A1","jp":"私は面白い映画を一本見ました。"},
-    {"sentence":"Sie schreibt einen langen Brief an ihre Oma.","adj":"langen","correct":"langen","choices":["langen","langer","lange"],"kase":"Akkusativ","gender":"masculine","article":"indefinite","level":"A1","jp":"彼女は祖母に長い手紙を書いています。"},
-    {"sentence":"Er braucht einen guten Rat.","adj":"guten","correct":"guten","choices":["guten","guter","gutes"],"kase":"Akkusativ","gender":"masculine","article":"indefinite","level":"A1","jp":"彼は良いアドバイスを必要としています。"},
-    {"sentence":"Sie hilft einem alten Mann über die Straße.","adj":"alten","correct":"alten","choices":["alten","alter","alte"],"kase":"Dativ","gender":"masculine","article":"indefinite","level":"A2","jp":"彼女は一人の年老いた男性が道を渡るのを手伝っています。"},
-    {"sentence":"Das Paket kommt von meinem lieben Onkel.","adj":"lieben","correct":"lieben","choices":["lieben","lieber","liebes"],"kase":"Dativ","gender":"masculine","article":"indefinite","level":"A2","jp":"その小包は私の親愛なる叔父から来ました。"},
-    {"sentence":"Ich spreche mit einem jungen Franzosen.","adj":"jungen","correct":"jungen","choices":["jungen","junger","junge"],"kase":"Dativ","gender":"masculine","article":"indefinite","level":"A2","jp":"私は一人のフランス人男性と話します。"},
-    {"sentence":"Der Hund eines neuen Nachbarn bellt immer.","adj":"neuen","correct":"neuen","choices":["neuen","neuer","neues"],"kase":"Genitiv","gender":"masculine","article":"indefinite","level":"B1","jp":"ある新しい隣人の犬がいつも吠えています。"},
-    {"sentence":"Das ist das Fahrrad meines ältesten Sohnes.","adj":"ältesten","correct":"ältesten","choices":["ältesten","ältester","ältestes"],"kase":"Genitiv","gender":"masculine","article":"indefinite","level":"B1","jp":"これは私の長男の自転車です。"},
-    {"sentence":"Trotz eines großen Fehlers hat er gewonnen.","adj":"großen","correct":"großen","choices":["großen","großer","großes"],"kase":"Genitiv","gender":"masculine","article":"indefinite","level":"B1","jp":"大きなミスがあったにもかかわらず、彼は勝ちました。"},
-    {"sentence":"Eine fremde Frau wartet vor der Tür.","adj":"fremde","correct":"fremde","choices":["fremde","fremden","fremder"],"kase":"Nominativ","gender":"feminine","article":"indefinite","level":"A1","jp":"一人の見知らぬ女性がドアの前で待っています。"},
-    {"sentence":"Meine liebe Tante kommt zu Besuch.","adj":"liebe","correct":"liebe","choices":["liebe","lieben","lieber"],"kase":"Nominativ","gender":"feminine","article":"indefinite","level":"A1","jp":"私の大好きな叔母が訪ねてきます。"},
-    {"sentence":"Keine einzige Idee ist schlecht.","adj":"einzige","correct":"einzige","choices":["einzige","einzigen","einziger"],"kase":"Nominativ","gender":"feminine","article":"indefinite","level":"A1","jp":"一つとして悪いアイデアはありません。"},
-    {"sentence":"Er sucht eine billige Wohnung.","adj":"billige","correct":"billige","choices":["billige","billigen","billiger"],"kase":"Akkusativ","gender":"feminine","article":"indefinite","level":"A1","jp":"彼は安いアパートを探しています。"},
-    {"sentence":"Ich trinke eine heiße Tasse Kaffee.","adj":"heiße","correct":"heiße","choices":["heiße","heißen","heißer"],"kase":"Akkusativ","gender":"feminine","article":"indefinite","level":"A1","jp":"私は熱いコーヒーを一杯飲みます。"},
-    {"sentence":"Sie hat eine schöne Stimme.","adj":"schöne","correct":"schöne","choices":["schöne","schönen","schöner"],"kase":"Akkusativ","gender":"feminine","article":"indefinite","level":"A1","jp":"彼女は美しい声をしています。"},
-    {"sentence":"Er schenkt seiner neuen Freundin Blumen.","adj":"neuen","correct":"neuen","choices":["neuen","neue","neuer"],"kase":"Dativ","gender":"feminine","article":"indefinite","level":"A2","jp":"彼は新しいガールフレンドに花を贈ります。"},
-    {"sentence":"Wir fahren mit einer alten Straßenbahn.","adj":"alten","correct":"alten","choices":["alten","alte","alter"],"kase":"Dativ","gender":"feminine","article":"indefinite","level":"A2","jp":"私たちは古い路面電車に乗ります。"},
-    {"sentence":"Nach einer kurzen Pause geht es weiter.","adj":"kurzen","correct":"kurzen","choices":["kurzen","kurze","kurzer"],"kase":"Dativ","gender":"feminine","article":"indefinite","level":"A2","jp":"短い休憩の後、続きます。"},
-    {"sentence":"Die Bluse meiner jüngeren Schwester ist blau.","adj":"jüngeren","correct":"jüngeren","choices":["jüngeren","jüngere","jüngerer"],"kase":"Genitiv","gender":"feminine","article":"indefinite","level":"B1","jp":"私の妹のブラウスは青色です。"},
-    {"sentence":"Die Dauer einer schriftlichen Prüfung beträgt 90 Minuten.","adj":"schriftlichen","correct":"schriftlichen","choices":["schriftlichen","schriftliche","schriftlicher"],"kase":"Genitiv","gender":"feminine","article":"indefinite","level":"B1","jp":"ある筆記試験の時間は90分です。"},
-    {"sentence":"Die Blätter einer seltenen Pflanze sind grün.","adj":"seltenen","correct":"seltenen","choices":["seltenen","seltene","seltener"],"kase":"Genitiv","gender":"feminine","article":"indefinite","level":"B1","jp":"ある珍しい植物の葉は緑色です。"},
-    {"sentence":"Ein kleines Mädchen liest ein Märchen.","adj":"kleines","correct":"kleines","choices":["kleines","kleiner","kleinen"],"kase":"Nominativ","gender":"neuter","article":"indefinite","level":"A1","jp":"一人の小さな女の子がメルヘンを読んでいます。"},
-    {"sentence":"Ein schnelles Auto steht vor dem Haus.","adj":"schnelles","correct":"schnelles","choices":["schnelles","schneller","schnellen"],"kase":"Nominativ","gender":"neuter","article":"indefinite","level":"A1","jp":"一台の速い車が家の前に停まっています。"},
-    {"sentence":"Unser neues Haus hat einen Garten.","adj":"neues","correct":"neues","choices":["neues","neuer","neuen"],"kase":"Nominativ","gender":"neuter","article":"indefinite","level":"A1","jp":"私たちの新しい家には庭があります。"},
-    {"sentence":"Er kauft ein neues Fahrrad.","adj":"neues","correct":"neues","choices":["neues","neuer","neuen"],"kase":"Akkusativ","gender":"neuter","article":"indefinite","level":"A1","jp":"彼は新しい自転車を買います。"},
-    {"sentence":"Sie möchte ein kaltes Glas Wasser.","adj":"kaltes","correct":"kaltes","choices":["kaltes","kalter","kalten"],"kase":"Akkusativ","gender":"neuter","article":"indefinite","level":"A1","jp":"彼女は冷たい水を一杯欲しがっています。"},
-    {"sentence":"Ich habe kein großes Problem damit.","adj":"großes","correct":"großes","choices":["großes","großer","großen"],"kase":"Akkusativ","gender":"neuter","article":"indefinite","level":"A1","jp":"私はそれについて大きな問題はありません。"},
-    {"sentence":"Wir übernachten in einem günstigen Hotel.","adj":"günstigen","correct":"günstigen","choices":["günstigen","günstiges","günstiger"],"kase":"Dativ","gender":"neuter","article":"indefinite","level":"A2","jp":"私たちは安いホテルに泊まります。"},
-    {"sentence":"Das Kind spielt mit einem bunten Spielzeug.","adj":"bunten","correct":"bunten","choices":["bunten","buntes","bunter"],"kase":"Dativ","gender":"neuter","article":"indefinite","level":"A2","jp":"その子供はカラフルなおもちゃで遊んでいます。"},
-    {"sentence":"Er kommt aus einem fernen Land.","adj":"fernen","correct":"fernen","choices":["fernen","fernes","ferner"],"kase":"Dativ","gender":"neuter","article":"indefinite","level":"A2","jp":"彼は遠い国から来ました。"},
-    {"sentence":"Der Anfang eines neuen Buches ist oft schwer.","adj":"neuen","correct":"neuen","choices":["neuen","neues","neuer"],"kase":"Genitiv","gender":"neuter","article":"indefinite","level":"B1","jp":"新しい本の冒頭はしばしば難しいです。"},
-    {"sentence":"Die Geschichte eines langen Lebens kann faszinieren.","adj":"langen","correct":"langen","choices":["langen","langes","langer"],"kase":"Genitiv","gender":"neuter","article":"indefinite","level":"B1","jp":"ある長い人生の物語は魅力的でありえます。"},
-    {"sentence":"Das Ergebnis eines wichtigen Experiments war positiv.","adj":"wichtigen","correct":"wichtigen","choices":["wichtigen","wichtiges","wichtiger"],"kase":"Genitiv","gender":"neuter","article":"indefinite","level":"B1","jp":"ある重要な実験の結果は良好でした。"},
-    {"sentence":"Meine guten Freunde kommen heute Abend.","adj":"guten","correct":"guten","choices":["guten","gute","guter"],"kase":"Nominativ","gender":"plural","article":"indefinite","level":"A1","jp":"私の親しい友人たちが今晩来ます。"},
-    {"sentence":"Keine dunklen Wolken sind am Himmel.","adj":"dunklen","correct":"dunklen","choices":["dunklen","dunkle","dunkler"],"kase":"Nominativ","gender":"plural","article":"indefinite","level":"A1","jp":"空には暗い雲が一つもありません。"},
-    {"sentence":"Seine schönen Augen sind blau.","adj":"schönen","correct":"schönen","choices":["schönen","schöne","schöner"],"kase":"Nominativ","gender":"plural","article":"indefinite","level":"A1","jp":"彼の美しい目は青色です。"},
-    {"sentence":"Ich habe keine offenen Fragen mehr.","adj":"offenen","correct":"offenen","choices":["offenen","offene","offener"],"kase":"Akkusativ","gender":"plural","article":"indefinite","level":"A1","jp":"私にはもう未解決の質問はありません。"},
-    {"sentence":"Wir haben unsere warmen Jacken vergessen.","adj":"warmen","correct":"warmen","choices":["warmen","warme","warmer"],"kase":"Akkusativ","gender":"plural","article":"indefinite","level":"A1","jp":"私たちは暖かいジャケットを忘れました。"},
-    {"sentence":"Sie verkauft ihre alten Sachen auf dem Flohmarkt.","adj":"alten","correct":"alten","choices":["alten","alte","alter"],"kase":"Akkusativ","gender":"plural","article":"indefinite","level":"A1","jp":"彼女は蚤の市で古いものを売ります。"},
-    {"sentence":"Ich helfe meinen lieben Großeltern im Garten.","adj":"lieben","correct":"lieben","choices":["lieben","liebe","lieber"],"kase":"Dativ","gender":"plural","article":"indefinite","level":"A2","jp":"私は大好きな祖父母の庭仕事を手伝います。"},
-    {"sentence":"Mit keinen passenden Worten kann ich das beschreiben.","adj":"passenden","correct":"passenden","choices":["passenden","passende","passender"],"kase":"Dativ","gender":"plural","article":"indefinite","level":"A2","jp":"どんな適切な言葉でもそれを表現することはできません。"},
-    {"sentence":"Er spielt mit seinen kleinen Hunden.","adj":"kleinen","correct":"kleinen","choices":["kleinen","kleine","kleiner"],"kase":"Dativ","gender":"plural","article":"indefinite","level":"A2","jp":"彼は彼の小さな犬たちと遊んでいます。"},
-    {"sentence":"Die Bücher meiner kleinen Kinder sind überall.","adj":"kleinen","correct":"kleinen","choices":["kleinen","kleine","kleiner"],"kase":"Genitiv","gender":"plural","article":"indefinite","level":"B1","jp":"私の小さい子供たちの本が至る所にあります。"},
-    {"sentence":"Die Leistung seiner besten Mitarbeiter ist exzellent.","adj":"besten","correct":"besten","choices":["besten","beste","bester"],"kase":"Genitiv","gender":"plural","article":"indefinite","level":"B1","jp":"彼の最高の従業員たちの業績は素晴らしいです。"},
-    {"sentence":"Trotz keiner klaren Beweise wurde er verurteilt.","adj":"klaren","correct":"klaren","choices":["klaren","klare","klarer"],"kase":"Genitiv","gender":"plural","article":"indefinite","level":"B1","jp":"明確な証拠がないにもかかわらず、彼は有罪判決を受けました。"},
-    {"sentence":"Guter Wein kommt aus Italien.","adj":"Guter","correct":"Guter","choices":["Guter","Gute","Guten"],"kase":"Nominativ","gender":"masculine","article":"none","level":"A1","jp":"良いワインはイタリア産です。"},
-    {"sentence":"Frischer Fisch riecht nicht.","adj":"Frischer","correct":"Frischer","choices":["Frischer","Frische","Frischen"],"kase":"Nominativ","gender":"masculine","article":"none","level":"A1","jp":"新鮮な魚は匂いません。"},
-    {"sentence":"Starker Kaffee macht mich wach.","adj":"Starker","correct":"Starker","choices":["Starker","Starke","Starken"],"kase":"Nominativ","gender":"masculine","article":"none","level":"A1","jp":"濃いコーヒーは私を目覚めさせます。"},
-    {"sentence":"Ich brauche frischen Wind.","adj":"frischen","correct":"frischen","choices":["frischen","frischer","frisches"],"kase":"Akkusativ","gender":"masculine","article":"none","level":"A1","jp":"私は新鮮な風を必要としています。"},
-    {"sentence":"Er hat großen Hunger.","adj":"großen","correct":"großen","choices":["großen","großer","großes"],"kase":"Akkusativ","gender":"masculine","article":"none","level":"A1","jp":"彼はとてもお腹が空いています。"},
-    {"sentence":"Wir suchen neuen Mitarbeiter.","adj":"neuen","correct":"neuen","choices":["neuen","neuer","neues"],"kase":"Akkusativ","gender":"masculine","article":"none","level":"A1","jp":"私たちは新しい従業員を探しています。"},
-    {"sentence":"Sie spricht mit nettem Herrn.","adj":"nettem","correct":"nettem","choices":["nettem","netter","netten"],"kase":"Dativ","gender":"masculine","article":"none","level":"A2","jp":"彼女は親切な紳士と話しています。"},
-    {"sentence":"Aus gutem Grund hat er abgesagt.","adj":"gutem","correct":"gutem","choices":["gutem","guter","guten"],"kase":"Dativ","gender":"masculine","article":"none","level":"A2","jp":"正当な理由があって彼はキャンセルしました。"},
-    {"sentence":"Er handelt mit starkem Willen.","adj":"starkem","correct":"starkem","choices":["starkem","starker","starken"],"kase":"Dativ","gender":"masculine","article":"none","level":"A2","jp":"彼は強い意志をもって行動します。"},
-    {"sentence":"Der Rat guten Freundes ist wertvoll.","adj":"guten","correct":"guten","choices":["guten","guter","gutem"],"kase":"Genitiv","gender":"masculine","article":"none","level":"B1","jp":"良き友人のアドバイスは貴重です。"},
-    {"sentence":"Die Blätter alten Baumes fallen herab.","adj":"alten","correct":"alten","choices":["alten","alter","altem"],"kase":"Genitiv","gender":"masculine","article":"none","level":"B1","jp":"古い木の葉が落ちてきます。"},
-    {"sentence":"Ich mag den Geschmack roten Weines.","adj":"roten","correct":"roten","choices":["roten","roter","rotem"],"kase":"Genitiv","gender":"masculine","article":"none","level":"B1","jp":"私は赤ワインの味を好みます。"},
-    {"sentence":"Frische Luft tut gut.","adj":"Frische","correct":"Frische","choices":["Frische","Frischer","Frischen"],"kase":"Nominativ","gender":"feminine","article":"none","level":"A1","jp":"新鮮な空気は気持ちがいいです。"},
-    {"sentence":"Laute Musik stört die Nachbarn.","adj":"Laute","correct":"Laute","choices":["Laute","Lauter","Lauten"],"kase":"Nominativ","gender":"feminine","article":"none","level":"A1","jp":"大きな音楽は隣人の迷惑になります。"},
-    {"sentence":"Deutsche Schokolade schmeckt gut.","adj":"Deutsche","correct":"Deutsche","choices":["Deutsche","Deutscher","Deutschen"],"kase":"Nominativ","gender":"feminine","article":"none","level":"A1","jp":"ドイツのチョコレートは美味しいです。"},
-    {"sentence":"Ich möchte heiße Schokolade trinken.","adj":"heiße","correct":"heiße","choices":["heiße","heißer","heißen"],"kase":"Akkusativ","gender":"feminine","article":"none","level":"A1","jp":"私はホットチョコレートが飲みたいです。"},
-    {"sentence":"Er hat große Geduld.","adj":"große","correct":"große","choices":["große","großer","großen"],"kase":"Akkusativ","gender":"feminine","article":"none","level":"A1","jp":"彼は大変な忍耐力を持っています。"},
-    {"sentence":"Sie braucht neue Brille.","adj":"neue","correct":"neue","choices":["neue","neuer","neuen"],"kase":"Akkusativ","gender":"feminine","article":"none","level":"A1","jp":"彼女は新しいメガネが必要です。"},
-    {"sentence":"Mit großer Freude hat sie das Geschenk angenommen.","adj":"großer","correct":"großer","choices":["großer","große","großen"],"kase":"Dativ","gender":"feminine","article":"none","level":"A2","jp":"大喜びで彼女はそのプレゼントを受け取りました。"},
-    {"sentence":"Das Bild hängt an weißer Wand.","adj":"weißer","correct":"weißer","choices":["weißer","weiße","weißen"],"kase":"Dativ","gender":"feminine","article":"none","level":"A2","jp":"その絵は白い壁にかかっています。"},
-    {"sentence":"Trotz schlechter Laune lächelt sie.","adj":"schlechter","correct":"schlechter","choices":["schlechter","schlechte","schlechten"],"kase":"Dativ","gender":"feminine","article":"none","level":"A2","jp":"機嫌が悪いにもかかわらず、彼女は微笑んでいます。"},
-    {"sentence":"Der Anfang langer Freundschaft.","adj":"langer","correct":"langer","choices":["langer","lange","langen"],"kase":"Genitiv","gender":"feminine","article":"none","level":"B1","jp":"長い友情の始まり。"},
-    {"sentence":"Der Klang lauter Musik erfüllt den Raum.","adj":"lauter","correct":"lauter","choices":["lauter","laute","lauten"],"kase":"Genitiv","gender":"feminine","article":"none","level":"B1","jp":"大きな音楽の音が部屋を満たします。"},
-    {"sentence":"Die Werke moderner Kunst sind teuer.","adj":"moderner","correct":"moderner","choices":["moderner","moderne","modernen"],"kase":"Genitiv","gender":"feminine","article":"none","level":"B1","jp":"現代美術の作品は高価です。"},
-    {"sentence":"Kaltes Bier schmeckt im Sommer gut.","adj":"Kaltes","correct":"Kaltes","choices":["Kaltes","Kalter","Kalten"],"kase":"Nominativ","gender":"neuter","article":"none","level":"A1","jp":"冷たいビールは夏に美味しいです。"},
-    {"sentence":"Schnelles Handeln ist jetzt nötig.","adj":"Schnelles","correct":"Schnelles","choices":["Schnelles","Schneller","Schnellen"],"kase":"Nominativ","gender":"neuter","article":"none","level":"A1","jp":"迅速な行動が今、必要です。"},
-    {"sentence":"Frisches Gemüse ist gesund.","adj":"Frisches","correct":"Frisches","choices":["Frisches","Frischer","Frischen"],"kase":"Nominativ","gender":"neuter","article":"none","level":"A1","jp":"新鮮な野菜は健康的です。"},
-    {"sentence":"Ich trinke gern kaltes Wasser.","adj":"kaltes","correct":"kaltes","choices":["kaltes","kalter","kalten"],"kase":"Akkusativ","gender":"neuter","article":"none","level":"A1","jp":"私は冷たい水を飲むのが好きです。"},
-    {"sentence":"Er hat großes Talent.","adj":"großes","correct":"großes","choices":["großes","großer","großen"],"kase":"Akkusativ","gender":"neuter","article":"none","level":"A1","jp":"彼は素晴らしい才能を持っています。"},
-    {"sentence":"Wir essen leckeres Eis.","adj":"leckeres","correct":"leckeres","choices":["leckeres","leckerer","leckeren"],"kase":"Akkusativ","gender":"neuter","article":"none","level":"A1","jp":"私たちは美味しいアイスクリームを食べます。"},
-    {"sentence":"Bei schlechtem Wetter bleiben wir zu Hause.","adj":"schlechtem","correct":"schlechtem","choices":["schlechtem","schlechter","schlechtes"],"kase":"Dativ","gender":"neuter","article":"none","level":"A2","jp":"悪天候の場合は、私たちは家にいます。"},
-    {"sentence":"Er arbeitet mit großem Interesse.","adj":"großem","correct":"großem","choices":["großem","großer","großes"],"kase":"Dativ","gender":"neuter","article":"none","level":"A2","jp":"彼は大きな関心を持って働いています。"},
-    {"sentence":"Seit kurzem wohnt sie hier.","adj":"kurzem","correct":"kurzem","choices":["kurzem","kurzer","kurzes"],"kase":"Dativ","gender":"neuter","article":"none","level":"A2","jp":"最近、彼女はここに住んでいます。"},
-    {"sentence":"Die Farbe roten Kleides gefällt mir.","adj":"roten","correct":"roten","choices":["roten","rotes","rotem"],"kase":"Genitiv","gender":"neuter","article":"none","level":"B1","jp":"赤いドレスの色が私は好きです。"},
-    {"sentence":"Der Geschmack guten Essens ist unvergesslich.","adj":"guten","correct":"guten","choices":["guten","gutes","gutem"],"kase":"Genitiv","gender":"neuter","article":"none","level":"B1","jp":"美味しい食事の味は忘れられないものです。"},
-    {"sentence":"Der Wert alten Goldes steigt.","adj":"alten","correct":"alten","choices":["alten","altes","altem"],"kase":"Genitiv","gender":"neuter","article":"none","level":"B1","jp":"古い金の価値が上がっています。"},
-    {"sentence":"Nette Menschen wohnen nebenan.","adj":"Nette","correct":"Nette","choices":["Nette","Netten","Netter"],"kase":"Nominativ","gender":"plural","article":"none","level":"A1","jp":"親切な人々が隣に住んでいます。"},
-    {"sentence":"Kleine Kinder machen viel Lärm.","adj":"Kleine","correct":"Kleine","choices":["Kleine","Kleinen","Kleiner"],"kase":"Nominativ","gender":"plural","article":"none","level":"A1","jp":"小さな子供たちはたくさん騒音を立てます。"},
-    {"sentence":"Alte Bäume stehen im Park.","adj":"Alte","correct":"Alte","choices":["Alte","Alten","Alter"],"kase":"Nominativ","gender":"plural","article":"none","level":"A1","jp":"古い木々が公園に立っています。"},
-    {"sentence":"Ich habe gute Nachrichten für dich.","adj":"gute","correct":"gute","choices":["gute","guten","guter"],"kase":"Akkusativ","gender":"plural","article":"none","level":"A1","jp":"私はあなたに良い知らせがあります。"},
-    {"sentence":"Sie isst frische Erdbeeren.","adj":"frische","correct":"frische","choices":["frische","frischen","frischer"],"kase":"Akkusativ","gender":"plural","article":"none","level":"A1","jp":"彼女は新鮮なイチゴを食べます。"},
-    {"sentence":"Er schreibt lustige Gedichte.","adj":"lustige","correct":"lustige","choices":["lustige","lustigen","lustiger"],"kase":"Akkusativ","gender":"plural","article":"none","level":"A1","jp":"彼は面白い詩を書きます。"},
-    {"sentence":"Sie hilft obdachlosen Menschen.","adj":"obdachlosen","correct":"obdachlosen","choices":["obdachlosen","obdachlose","obdachloser"],"kase":"Dativ","gender":"plural","article":"none","level":"A2","jp":"彼女はホームレスの人々を助けています。"},
-    {"sentence":"Wir spielen mit anderen Kindern.","adj":"anderen","correct":"anderen","choices":["anderen","andere","anderer"],"kase":"Dativ","gender":"plural","article":"none","level":"A2","jp":"私たちは他の子供たちと遊びます。"},
-    {"sentence":"Von guten Freunden lernt man viel.","adj":"guten","correct":"guten","choices":["guten","gute","guter"],"kase":"Dativ","gender":"plural","article":"none","level":"A2","jp":"良い友人たちからは多くのことを学びます。"},
-    {"sentence":"Die Meinung vieler Experten ist geteilt.","adj":"vieler","correct":"vieler","choices":["vieler","viele","vielen"],"kase":"Genitiv","gender":"plural","article":"none","level":"B1","jp":"多くの専門家の意見は分かれています。"},
-    {"sentence":"Der Anführer mutiger Krieger ritt voran.","adj":"mutiger","correct":"mutiger","choices":["mutiger","mutige","mutigen"],"kase":"Genitiv","gender":"plural","article":"none","level":"B1","jp":"勇敢な戦士たちのリーダーが先頭で馬を走らせました。"},
-    {"sentence":"Die Stimmen fröhlicher Kinder sind zu hören.","adj":"fröhlicher","correct":"fröhlicher","choices":["fröhlicher","fröhliche","fröhlichen"],"kase":"Genitiv","gender":"plural","article":"none","level":"B1","jp":"陽気な子供たちの声が聞こえます。"}
-  ];
-  // ### END OF REPLACEMENT ###
+  const ITEMS=[{"sentence":"Der kluge Mann liest eine Zeitung.","adj":"kluge","correct":"kluge","choices":["kluge","kluger","klugen"],"kase":"Nominativ","gender":"masculine","article":"definite","level":"A1","jp":"その賢い男性は新聞を読んでいます。"},{"sentence":"Der alte Stuhl steht in der Ecke.","adj":"alte","correct":"alte","choices":["alte","alten","altes"],"kase":"Nominativ","gender":"masculine","article":"definite","level":"A1","jp":"その古い椅子は隅に置いてあります。"},{"sentence":"Der neue Computer funktioniert gut.","adj":"neue","correct":"neue","choices":["neue","neuer","neuen"],"kase":"Nominativ","gender":"masculine","article":"definite","level":"A1","jp":"その新しいコンピューターは正常に動作します。"},{"sentence":"Ich sehe den großen Hund im Park.","adj":"großen","correct":"großen","choices":["großen","großer","große"],"kase":"Akkusativ","gender":"masculine","article":"definite","level":"A1","jp":"私は公園でその大きな犬を見かけます。"},{"sentence":"Er isst den leckeren Kuchen allein.","adj":"leckeren","correct":"leckeren","choices":["leckeren","leckerer","leckere"],"kase":"Akkusativ","gender":"masculine","article":"definite","level":"A1","jp":"彼はその美味しいケーキを一人で食べます。"},{"sentence":"Sie kauft den warmen Mantel für den Winter.","adj":"warmen","correct":"warmen","choices":["warmen","warmer","warmes"],"kase":"Akkusativ","gender":"masculine","article":"definite","level":"A1","jp":"彼女は冬のためにその暖かいコートを買います。"},{"sentence":"Wir helfen dem netten Nachbarn gern.","adj":"netten","correct":"netten","choices":["netten","netter","nette"],"kase":"Dativ","gender":"masculine","article":"definite","level":"A2","jp":"私たちはその親切な隣人を喜んで手伝います。"},{"sentence":"Ich danke dem guten Mann für seine Hilfe.","adj":"guten","correct":"guten","choices":["guten","guter","gute"],"kase":"Dativ","gender":"masculine","article":"definite","level":"A2","jp":"私はその親切な男性の助けに感謝します。"},{"sentence":"Sie spricht mit dem jungen Arzt.","adj":"jungen","correct":"jungen","choices":["jungen","junger","junge"],"kase":"Dativ","gender":"masculine","article":"definite","level":"A2","jp":"彼女は若い医者と話しています。"},{"sentence":"Das ist das Auto des reichen Vaters.","adj":"reichen","correct":"reichen","choices":["reichen","reicher","reiche"],"kase":"Genitiv","gender":"masculine","article":"definite","level":"B1","jp":"それはその裕福な父親の車です。"},{"sentence":"Die Meinung des bekannten Experten ist wichtig.","adj":"bekannten","correct":"bekannten","choices":["bekannten","bekannter","bekanntes"],"kase":"Genitiv","gender":"masculine","article":"definite","level":"B1","jp":"その著名な専門家の意見は重要です。"},{"sentence":"Wir besuchen das Haus des berühmten Künstlers.","adj":"berühmten","correct":"berühmten","choices":["berühmten","berühmter","berühmte"],"kase":"Genitiv","gender":"masculine","article":"definite","level":"B1","jp":"私たちはその有名な芸術家の家を訪れます。"},{"sentence":"Die junge Frau trinkt einen Tee.","adj":"junge","correct":"junge","choices":["junge","jungen","junger"],"kase":"Nominativ","gender":"feminine","article":"definite","level":"A1","jp":"その若い女性はお茶を飲んでいます。"},{"sentence":"Die neue Lampe ist sehr hell.","adj":"neue","correct":"neue","choices":["neue","neuen","neuer"],"kase":"Nominativ","gender":"feminine","article":"definite","level":"A1","jp":"その新しいランプはとても明るいです。"},{"sentence":"Die kleine Katze schläft auf dem Sofa.","adj":"kleine","correct":"kleine","choices":["kleine","kleinen","kleiner"],"kase":"Nominativ","gender":"feminine","article":"definite","level":"A1","jp":"その小さな猫はソファの上で眠っています。"},{"sentence":"Er kennt die elegante Dame nicht.","adj":"elegante","correct":"elegante","choices":["elegante","eleganten","eleganter"],"kase":"Akkusativ","gender":"feminine","article":"definite","level":"A1","jp":"彼はその上品なご婦人を知りません。"},{"sentence":"Wir öffnen die schwere Tür.","adj":"schwere","correct":"schwere","choices":["schwere","schweren","schwerer"],"kase":"Akkusativ","gender":"feminine","article":"definite","level":"A1","jp":"私たちはその重いドアを開けます。"},{"sentence":"Du liest die spannende Geschichte.","adj":"spannende","correct":"spannende","choices":["spannende","spannenden","spannender"],"kase":"Akkusativ","gender":"feminine","article":"definite","level":"A1","jp":"君はそのわくわくする物語を読んでいますね。"},{"sentence":"Er gibt der fleißigen Studentin ein Buch.","adj":"fleißigen","correct":"fleißigen","choices":["fleißigen","fleißige","fleißiger"],"kase":"Dativ","gender":"feminine","article":"definite","level":"A2","jp":"彼はその勤勉な女子学生に本を渡します。"},{"sentence":"Ich danke der freundlichen Verkäuferin.","adj":"freundlichen","correct":"freundlichen","choices":["freundlichen","freundliche","freundlicher"],"kase":"Dativ","gender":"feminine","article":"definite","level":"A2","jp":"私はその親切な女性店員にお礼を言います。"},{"sentence":"Das Auto gehört der erfahrenen Ärztin.","adj":"erfahrenen","correct":"erfahrenen","choices":["erfahrenen","erfahrene","erfahrener"],"kase":"Dativ","gender":"feminine","article":"definite","level":"A2","jp":"その車は経験豊富な女医のものです。"},{"sentence":"Der Preis der langen Reise ist hoch.","adj":"langen","correct":"langen","choices":["langen","lange","langer"],"kase":"Genitiv","gender":"feminine","article":"definite","level":"B1","jp":"その長い旅の価格は高いです。"},{"sentence":"Die Tasche der jungen Kollegin ist modern.","adj":"jungen","correct":"jungen","choices":["jungen","junge","junger"],"kase":"Genitiv","gender":"feminine","article":"definite","level":"B1","jp":"その若い同僚（女性）のカバンはモダンです。"},{"sentence":"Das Ende der nächsten Woche naht.","adj":"nächsten","correct":"nächsten","choices":["nächsten","nächste","nächster"],"kase":"Genitiv","gender":"feminine","article":"definite","level":"B1","jp":"来週の終わりが近づいています。"},{"sentence":"Das kleine Kind spielt im Garten.","adj":"kleine","correct":"kleine","choices":["kleine","kleinen","kleines"],"kase":"Nominativ","gender":"neuter","article":"definite","level":"A1","jp":"その小さな子供は庭で遊んでいます。"},{"sentence":"Das große Hotel hat einen Pool.","adj":"große","correct":"große","choices":["große","großen","großes"],"kase":"Nominativ","gender":"neuter","article":"definite","level":"A1","jp":"その大きなホテルにはプールがあります。"},{"sentence":"Das rote Fahrrad gehört mir.","adj":"rote","correct":"rote","choices":["rote","roten","rotes"],"kase":"Nominativ","gender":"neuter","article":"definite","level":"A1","jp":"その赤い自転車は私のものです。"},{"sentence":"Sie malt das schöne Bild fertig.","adj":"schöne","correct":"schöne","choices":["schöne","schönen","schönes"],"kase":"Akkusativ","gender":"neuter","article":"definite","level":"A1","jp":"彼女はその美しい絵を完成させます。"},{"sentence":"Er liest das interessante Buch.","adj":"interessante","correct":"interessante","choices":["interessante","interessanten","interessantes"],"kase":"Akkusativ","gender":"neuter","article":"definite","level":"A1","jp":"彼はその面白い本を読んでいます。"},{"sentence":"Wir besuchen das neue Museum.","adj":"neue","correct":"neue","choices":["neue","neuen","neues"],"kase":"Akkusativ","gender":"neuter","article":"definite","level":"A1","jp":"私たちはその新しい美術館を訪れます。"},{"sentence":"Ich spiele mit dem glücklichen Mädchen.","adj":"glücklichen","correct":"glücklichen","choices":["glücklichen","glückliche","glückliches"],"kase":"Dativ","gender":"neuter","article":"definite","level":"A2","jp":"私はその幸せそうな女の子と遊びます。"},{"sentence":"Er wohnt in dem gelben Haus.","adj":"gelben","correct":"gelben","choices":["gelben","gelbe","gelbes"],"kase":"Dativ","gender":"neuter","article":"definite","level":"A2","jp":"彼はその黄色い家に住んでいます。"},{"sentence":"Sie sitzt an dem offenen Fenster.","adj":"offenen","correct":"offenen","choices":["offenen","offene","offenes"],"kase":"Dativ","gender":"neuter","article":"definite","level":"A2","jp":"彼女は開いている窓のそばに座っています。"},{"sentence":"Der Titel des kurzen Gedichts ist unbekannt.","adj":"kurzen","correct":"kurzen","choices":["kurzen","kurze","kurzes"],"kase":"Genitiv","gender":"neuter","article":"definite","level":"B1","jp":"その短い詩のタイトルは不明です。"},{"sentence":"Die Qualität des neuen Produkts ist schlecht.","adj":"neuen","correct":"neuen","choices":["neuen","neue","neues"],"kase":"Genitiv","gender":"neuter","article":"definite","level":"B1","jp":"その新製品の品質は悪いです。"},{"sentence":"Die Lösung des schwierigen Problems ist einfach.","adj":"schwierigen","correct":"schwierigen","choices":["schwierigen","schwierige","schwieriges"],"kase":"Genitiv","gender":"neuter","article":"definite","level":"B1","jp":"その難しい問題の解決策は簡単です。"},{"sentence":"Die netten Leute warten auf den Bus.","adj":"netten","correct":"netten","choices":["netten","nette","netter"],"kase":"Nominativ","gender":"plural","article":"definite","level":"A1","jp":"その親切な人々はバスを待っています。"},{"sentence":"Die bunten Blumen blühen im Frühling.","adj":"bunten","correct":"bunten","choices":["bunten","bunte","bunter"],"kase":"Nominativ","gender":"plural","article":"definite","level":"A1","jp":"その色とりどりの花は春に咲きます。"},{"sentence":"Die neuen Schuhe passen perfekt.","adj":"neuen","correct":"neuen","choices":["neuen","neue","neues"],"kase":"Nominativ","gender":"plural","article":"definite","level":"A1","jp":"その新しい靴は完璧にフィットします。"},{"sentence":"Ich habe die verlorenen Schlüssel gefunden.","adj":"verlorenen","correct":"verlorenen","choices":["verlorenen","verlorene","verlorener"],"kase":"Akkusativ","gender":"plural","article":"definite","level":"A1","jp":"私はなくした鍵を見つけました。"},{"sentence":"Sie besucht die alten Eltern am Wochenende.","adj":"alten","correct":"alten","choices":["alten","alte","alter"],"kase":"Akkusativ","gender":"plural","article":"definite","level":"A1","jp":"彼女は週末に年老いた両親を訪ねます。"},{"sentence":"Der Lehrer korrigiert die häufigen Fehler.","adj":"häufigen","correct":"häufigen","choices":["häufigen","häufige","häufiger"],"kase":"Akkusativ","gender":"plural","article":"definite","level":"A1","jp":"先生はよくある間違いを訂正します。"},{"sentence":"Er hilft den armen Kindern bei den Hausaufgaben.","adj":"armen","correct":"armen","choices":["armen","arme","armer"],"kase":"Dativ","gender":"plural","article":"definite","level":"A2","jp":"彼は貧しい子供たちの宿題を手伝います。"},{"sentence":"Wir gratulieren den glücklichen Gewinnern.","adj":"glücklichen","correct":"glücklichen","choices":["glücklichen","glückliche","glücklicher"],"kase":"Dativ","gender":"plural","article":"definite","level":"A2","jp":"私たちは幸運な勝者たちを祝福します。"},{"sentence":"Das Konzert gefällt den ausländischen Gästen.","adj":"ausländischen","correct":"ausländischen","choices":["ausländischen","ausländische","ausländischer"],"kase":"Dativ","gender":"plural","article":"definite","level":"A2","jp":"そのコンサートは外国人客に気に入られています。"},{"sentence":"Die Entscheidung der beiden Richter war einstimmig.","adj":"beiden","correct":"beiden","choices":["beiden","beide","beider"],"kase":"Genitiv","gender":"plural","article":"definite","level":"B1","jp":"その両裁判官の決定は満場一致でした。"},{"sentence":"Die Zukunft der jungen Schüler ist ungewiss.","adj":"jungen","correct":"jungen","choices":["jungen","junge","junger"],"kase":"Genitiv","gender":"plural","article":"definite","level":"B1","jp":"その若い生徒たちの未来は不確かです。"},{"sentence":"Das ist ein Problem der modernen Städte.","adj":"modernen","correct":"modernen","choices":["modernen","moderne","moderner"],"kase":"Genitiv","gender":"plural","article":"definite","level":"B1","jp":"それは現代の都市が抱える問題です。"},{"sentence":"Ein älterer Mann fragt nach dem Weg.","adj":"älterer","correct":"älterer","choices":["älterer","ältere","älteren"],"kase":"Nominativ","gender":"masculine","article":"indefinite","level":"A1","jp":"一人の年配の男性が道を尋ねています。"},{"sentence":"Mein jüngerer Bruder studiert in Berlin.","adj":"jüngerer","correct":"jüngerer","choices":["jüngerer","jüngere","jüngeren"],"kase":"Nominativ","gender":"masculine","article":"indefinite","level":"A1","jp":"私の弟はベルリンで勉強しています。"},{"sentence":"Kein normaler Mensch würde das tun.","adj":"normaler","correct":"normaler","choices":["normaler","normale","normalen"],"kase":"Nominativ","gender":"masculine","article":"indefinite","level":"A1","jp":"普通の人間なら誰もそんなことはしないでしょう。"},{"sentence":"Ich habe einen lustigen Film gesehen.","adj":"lustigen","correct":"lustigen","choices":["lustigen","lustiger","lustiges"],"kase":"Akkusativ","gender":"masculine","article":"indefinite","level":"A1","jp":"私は面白い映画を一本見ました。"},{"sentence":"Sie schreibt einen langen Brief an ihre Oma.","adj":"langen","correct":"langen","choices":["langen","langer","lange"],"kase":"Akkusativ","gender":"masculine","article":"indefinite","level":"A1","jp":"彼女は祖母に長い手紙を書いています。"},{"sentence":"Er braucht einen guten Rat.","adj":"guten","correct":"guten","choices":["guten","guter","gutes"],"kase":"Akkusativ","gender":"masculine","article":"indefinite","level":"A1","jp":"彼は良いアドバイスを必要としています。"},{"sentence":"Sie hilft einem alten Mann über die Straße.","adj":"alten","correct":"alten","choices":["alten","alter","alte"],"kase":"Dativ","gender":"masculine","article":"indefinite","level":"A2","jp":"彼女は一人の年老いた男性が道を渡るのを手伝っています。"},{"sentence":"Das Paket kommt von meinem lieben Onkel.","adj":"lieben","correct":"lieben","choices":["lieben","lieber","liebes"],"kase":"Dativ","gender":"masculine","article":"indefinite","level":"A2","jp":"その小包は私の親愛なる叔父から来ました。"},{"sentence":"Ich spreche mit einem jungen Franzosen.","adj":"jungen","correct":"jungen","choices":["jungen","junger","junge"],"kase":"Dativ","gender":"masculine","article":"indefinite","level":"A2","jp":"私は一人のフランス人男性と話します。"},{"sentence":"Der Hund eines neuen Nachbarn bellt immer.","adj":"neuen","correct":"neuen","choices":["neuen","neuer","neues"],"kase":"Genitiv","gender":"masculine","article":"indefinite","level":"B1","jp":"ある新しい隣人の犬がいつも吠えています。"},{"sentence":"Das ist das Fahrrad meines ältesten Sohnes.","adj":"ältesten","correct":"ältesten","choices":["ältesten","ältester","ältestes"],"kase":"Genitiv","gender":"masculine","article":"indefinite","level":"B1","jp":"これは私の長男の自転車です。"},{"sentence":"Trotz eines großen Fehlers hat er gewonnen.","adj":"großen","correct":"großen","choices":["großen","großer","großes"],"kase":"Genitiv","gender":"masculine","article":"indefinite","level":"B1","jp":"大きなミスがあったにもかかわらず、彼は勝ちました。"},{"sentence":"Eine fremde Frau wartet vor der Tür.","adj":"fremde","correct":"fremde","choices":["fremde","fremden","fremder"],"kase":"Nominativ","gender":"feminine","article":"indefinite","level":"A1","jp":"一人の見知らぬ女性がドアの前で待っています。"},{"sentence":"Meine liebe Tante kommt zu Besuch.","adj":"liebe","correct":"liebe","choices":["liebe","lieben","lieber"],"kase":"Nominativ","gender":"feminine","article":"indefinite","level":"A1","jp":"私の大好きな叔母が訪ねてきます。"},{"sentence":"Keine einzige Idee ist schlecht.","adj":"einzige","correct":"einzige","choices":["einzige","einzigen","einziger"],"kase":"Nominativ","gender":"feminine","article":"indefinite","level":"A1","jp":"一つとして悪いアイデアはありません。"},{"sentence":"Er sucht eine billige Wohnung.","adj":"billige","correct":"billige","choices":["billige","billigen","billiger"],"kase":"Akkusativ","gender":"feminine","article":"indefinite","level":"A1","jp":"彼は安いアパートを探しています。"},{"sentence":"Ich trinke eine heiße Tasse Kaffee.","adj":"heiße","correct":"heiße","choices":["heiße","heißen","heißer"],"kase":"Akkusativ","gender":"feminine","article":"indefinite","level":"A1","jp":"私は熱いコーヒーを一杯飲みます。"},{"sentence":"Sie hat eine schöne Stimme.","adj":"schöne","correct":"schöne","choices":["schöne","schönen","schöner"],"kase":"Akkusativ","gender":"feminine","article":"indefinite","level":"A1","jp":"彼女は美しい声をしています。"},{"sentence":"Er schenkt seiner neuen Freundin Blumen.","adj":"neuen","correct":"neuen","choices":["neuen","neue","neuer"],"kase":"Dativ","gender":"feminine","article":"indefinite","level":"A2","jp":"彼は新しいガールフレンドに花を贈ります。"},{"sentence":"Wir fahren mit einer alten Straßenbahn.","adj":"alten","correct":"alten","choices":["alten","alte","alter"],"kase":"Dativ","gender":"feminine","article":"indefinite","level":"A2","jp":"私たちは古い路面電車に乗ります。"},{"sentence":"Nach einer kurzen Pause geht es weiter.","adj":"kurzen","correct":"kurzen","choices":["kurzen","kurze","kurzer"],"kase":"Dativ","gender":"feminine","article":"indefinite","level":"A2","jp":"短い休憩の後、続きます。"},{"sentence":"Die Bluse meiner jüngeren Schwester ist blau.","adj":"jüngeren","correct":"jüngeren","choices":["jüngeren","jüngere","jüngerer"],"kase":"Genitiv","gender":"feminine","article":"indefinite","level":"B1","jp":"私の妹のブラウスは青色です。"},{"sentence":"Die Dauer einer schriftlichen Prüfung beträgt 90 Minuten.","adj":"schriftlichen","correct":"schriftlichen","choices":["schriftlichen","schriftliche","schriftlicher"],"kase":"Genitiv","gender":"feminine","article":"indefinite","level":"B1","jp":"ある筆記試験の時間は90分です。"},{"sentence":"Die Blätter einer seltenen Pflanze sind grün.","adj":"seltenen","correct":"seltenen","choices":["seltenen","seltene","seltener"],"kase":"Genitiv","gender":"feminine","article":"indefinite","level":"B1","jp":"ある珍しい植物の葉は緑色です。"},{"sentence":"Ein kleines Mädchen liest ein Märchen.","adj":"kleines","correct":"kleines","choices":["kleines","kleiner","kleinen"],"kase":"Nominativ","gender":"neuter","article":"indefinite","level":"A1","jp":"一人の小さな女の子がメルヘンを読んでいます。"},{"sentence":"Ein schnelles Auto steht vor dem Haus.","adj":"schnelles","correct":"schnelles","choices":["schnelles","schneller","schnellen"],"kase":"Nominativ","gender":"neuter","article":"indefinite","level":"A1","jp":"一台の速い車が家の前に停まっています。"},{"sentence":"Unser neues Haus hat einen Garten.","adj":"neues","correct":"neues","choices":["neues","neuer","neuen"],"kase":"Nominativ","gender":"neuter","article":"indefinite","level":"A1","jp":"私たちの新しい家には庭があります。"},{"sentence":"Er kauft ein neues Fahrrad.","adj":"neues","correct":"neues","choices":["neues","neuer","neuen"],"kase":"Akkusativ","gender":"neuter","article":"indefinite","level":"A1","jp":"彼は新しい自転車を買います。"},{"sentence":"Sie möchte ein kaltes Glas Wasser.","adj":"kaltes","correct":"kaltes","choices":["kaltes","kalter","kalten"],"kase":"Akkusativ","gender":"neuter","article":"indefinite","level":"A1","jp":"彼女は冷たい水を一杯欲しがっています。"},{"sentence":"Ich habe kein großes Problem damit.","adj":"großes","correct":"großes","choices":["großes","großer","großen"],"kase":"Akkusativ","gender":"neuter","article":"indefinite","level":"A1","jp":"私はそれについて大きな問題はありません。"},{"sentence":"Wir übernachten in einem günstigen Hotel.","adj":"günstigen","correct":"günstigen","choices":["günstigen","günstiges","günstiger"],"kase":"Dativ","gender":"neuter","article":"indefinite","level":"A2","jp":"私たちは安いホテルに泊まります。"},{"sentence":"Das Kind spielt mit einem bunten Spielzeug.","adj":"bunten","correct":"bunten","choices":["bunten","buntes","bunter"],"kase":"Dativ","gender":"neuter","article":"indefinite","level":"A2","jp":"その子供はカラフルなおもちゃで遊んでいます。"},{"sentence":"Er kommt aus einem fernen Land.","adj":"fernen","correct":"fernen","choices":["fernen","fernes","ferner"],"kase":"Dativ","gender":"neuter","article":"indefinite","level":"A2","jp":"彼は遠い国から来ました。"},{"sentence":"Der Anfang eines neuen Buches ist oft schwer.","adj":"neuen","correct":"neuen","choices":["neuen","neues","neuer"],"kase":"Genitiv","gender":"neuter","article":"indefinite","level":"B1","jp":"新しい本の冒頭はしばしば難しいです。"},{"sentence":"Die Geschichte eines langen Lebens kann faszinieren.","adj":"langen","correct":"langen","choices":["langen","langes","langer"],"kase":"Genitiv","gender":"neuter","article":"indefinite","level":"B1","jp":"ある長い人生の物語は魅力的でありえます。"},{"sentence":"Das Ergebnis eines wichtigen Experiments war positiv.","adj":"wichtigen","correct":"wichtigen","choices":["wichtigen","wichtiges","wichtiger"],"kase":"Genitiv","gender":"neuter","article":"indefinite","level":"B1","jp":"ある重要な実験の結果は良好でした。"},{"sentence":"Meine guten Freunde kommen heute Abend.","adj":"guten","correct":"guten","choices":["guten","gute","guter"],"kase":"Nominativ","gender":"plural","article":"indefinite","level":"A1","jp":"私の親しい友人たちが今晩来ます。"},{"sentence":"Keine dunklen Wolken sind am Himmel.","adj":"dunklen","correct":"dunklen","choices":["dunklen","dunkle","dunkler"],"kase":"Nominativ","gender":"plural","article":"indefinite","level":"A1","jp":"空には暗い雲が一つもありません。"},{"sentence":"Seine schönen Augen sind blau.","adj":"schönen","correct":"schönen","choices":["schönen","schöne","schöner"],"kase":"Nominativ","gender":"plural","article":"indefinite","level":"A1","jp":"彼の美しい目は青色です。"},{"sentence":"Ich habe keine offenen Fragen mehr.","adj":"offenen","correct":"offenen","choices":["offenen","offene","offener"],"kase":"Akkusativ","gender":"plural","article":"indefinite","level":"A1","jp":"私にはもう未解決の質問はありません。"},{"sentence":"Wir haben unsere warmen Jacken vergessen.","adj":"warmen","correct":"warmen","choices":["warmen","warme","warmer"],"kase":"Akkusativ","gender":"plural","article":"indefinite","level":"A1","jp":"私たちは暖かいジャケットを忘れました。"},{"sentence":"Sie verkauft ihre alten Sachen auf dem Flohmarkt.","adj":"alten","correct":"alten","choices":["alten","alte","alter"],"kase":"Akkusativ","gender":"plural","article":"indefinite","level":"A1","jp":"彼女は蚤の市で古いものを売ります。"},{"sentence":"Ich helfe meinen lieben Großeltern im Garten.","adj":"lieben","correct":"lieben","choices":["lieben","liebe","lieber"],"kase":"Dativ","gender":"plural","article":"indefinite","level":"A2","jp":"私は大好きな祖父母の庭仕事を手伝います。"},{"sentence":"Mit keinen passenden Worten kann ich das beschreiben.","adj":"passenden","correct":"passenden","choices":["passenden","passende","passender"],"kase":"Dativ","gender":"plural","article":"indefinite","level":"A2","jp":"どんな適切な言葉でもそれを表現することはできません。"},{"sentence":"Er spielt mit seinen kleinen Hunden.","adj":"kleinen","correct":"kleinen","choices":["kleinen","kleine","kleiner"],"kase":"Dativ","gender":"plural","article":"indefinite","level":"A2","jp":"彼は彼の小さな犬たちと遊んでいます。"},{"sentence":"Die Bücher meiner kleinen Kinder sind überall.","adj":"kleinen","correct":"kleinen","choices":["kleinen","kleine","kleiner"],"kase":"Genitiv","gender":"plural","article":"indefinite","level":"B1","jp":"私の小さい子供たちの本が至る所にあります。"},{"sentence":"Die Leistung seiner besten Mitarbeiter ist exzellent.","adj":"besten","correct":"besten","choices":["besten","beste","bester"],"kase":"Genitiv","gender":"plural","article":"indefinite","level":"B1","jp":"彼の最高の従業員たちの業績は素晴らしいです。"},{"sentence":"Trotz keiner klaren Beweise wurde er verurteilt.","adj":"klaren","correct":"klaren","choices":["klaren","klare","klarer"],"kase":"Genitiv","gender":"plural","article":"indefinite","level":"B1","jp":"明確な証拠がないにもかかわらず、彼は有罪判決を受けました。"},{"sentence":"Guter Wein kommt aus Italien.","adj":"Guter","correct":"Guter","choices":["Guter","Gute","Guten"],"kase":"Nominativ","gender":"masculine","article":"none","level":"A1","jp":"良いワインはイタリア産です。"},{"sentence":"Frischer Fisch riecht nicht.","adj":"Frischer","correct":"Frischer","choices":["Frischer","Frische","Frischen"],"kase":"Nominativ","gender":"masculine","article":"none","level":"A1","jp":"新鮮な魚は匂いません。"},{"sentence":"Starker Kaffee macht mich wach.","adj":"Starker","correct":"Starker","choices":["Starker","Starke","Starken"],"kase":"Nominativ","gender":"masculine","article":"none","level":"A1","jp":"濃いコーヒーは私を目覚めさせます。"},{"sentence":"Ich brauche frischen Wind.","adj":"frischen","correct":"frischen","choices":["frischen","frischer","frisches"],"kase":"Akkusativ","gender":"masculine","article":"none","level":"A1","jp":"私は新鮮な風を必要としています。"},{"sentence":"Er hat großen Hunger.","adj":"großen","correct":"großen","choices":["großen","großer","großes"],"kase":"Akkusativ","gender":"masculine","article":"none","level":"A1","jp":"彼はとてもお腹が空いています。"},{"sentence":"Wir suchen neuen Mitarbeiter.","adj":"neuen","correct":"neuen","choices":["neuen","neuer","neues"],"kase":"Akkusativ","gender":"masculine","article":"none","level":"A1","jp":"私たちは新しい従業員を探しています。"},{"sentence":"Sie spricht mit nettem Herrn.","adj":"nettem","correct":"nettem","choices":["nettem","netter","netten"],"kase":"Dativ","gender":"masculine","article":"none","level":"A2","jp":"彼女は親切な紳士と話しています。"},{"sentence":"Aus gutem Grund hat er abgesagt.","adj":"gutem","correct":"gutem","choices":["gutem","guter","guten"],"kase":"Dativ","gender":"masculine","article":"none","level":"A2","jp":"正当な理由があって彼はキャンセルしました。"},{"sentence":"Er handelt mit starkem Willen.","adj":"starkem","correct":"starkem","choices":["starkem","starker","starken"],"kase":"Dativ","gender":"masculine","article":"none","level":"A2","jp":"彼は強い意志をもって行動します。"},{"sentence":"Der Rat guten Freundes ist wertvoll.","adj":"guten","correct":"guten","choices":["guten","guter","gutem"],"kase":"Genitiv","gender":"masculine","article":"none","level":"B1","jp":"良き友人のアドバイスは貴重です。"},{"sentence":"Die Blätter alten Baumes fallen herab.","adj":"alten","correct":"alten","choices":["alten","alter","altem"],"kase":"Genitiv","gender":"masculine","article":"none","level":"B1","jp":"古い木の葉が落ちてきます。"},{"sentence":"Ich mag den Geschmack roten Weines.","adj":"roten","correct":"roten","choices":["roten","roter","rotem"],"kase":"Genitiv","gender":"masculine","article":"none","level":"B1","jp":"私は赤ワインの味を好みます。"},{"sentence":"Frische Luft tut gut.","adj":"Frische","correct":"Frische","choices":["Frische","Frischer","Frischen"],"kase":"Nominativ","gender":"feminine","article":"none","level":"A1","jp":"新鮮な空気は気持ちがいいです。"},{"sentence":"Laute Musik stört die Nachbarn.","adj":"Laute","correct":"Laute","choices":["Laute","Lauter","Lauten"],"kase":"Nominativ","gender":"feminine","article":"none","level":"A1","jp":"大きな音楽は隣人の迷惑になります。"},{"sentence":"Deutsche Schokolade schmeckt gut.","adj":"Deutsche","correct":"Deutsche","choices":["Deutsche","Deutscher","Deutschen"],"kase":"Nominativ","gender":"feminine","article":"none","level":"A1","jp":"ドイツのチョコレートは美味しいです。"},{"sentence":"Ich möchte heiße Schokolade trinken.","adj":"heiße","correct":"heiße","choices":["heiße","heißer","heißen"],"kase":"Akkusativ","gender":"feminine","article":"none","level":"A1","jp":"私はホットチョコレートが飲みたいです。"},{"sentence":"Er hat große Geduld.","adj":"große","correct":"große","choices":["große","großer","großen"],"kase":"Akkusativ","gender":"feminine","article":"none","level":"A1","jp":"彼は大変な忍耐力を持っています。"},{"sentence":"Sie braucht neue Brille.","adj":"neue","correct":"neue","choices":["neue","neuer","neuen"],"kase":"Akkusativ","gender":"feminine","article":"none","level":"A1","jp":"彼女は新しいメガネが必要です。"},{"sentence":"Mit großer Freude hat sie das Geschenk angenommen.","adj":"großer","correct":"großer","choices":["großer","große","großen"],"kase":"Dativ","gender":"feminine","article":"none","level":"A2","jp":"大喜びで彼女はそのプレゼントを受け取りました。"},{"sentence":"Das Bild hängt an weißer Wand.","adj":"weißer","correct":"weißer","choices":["weißer","weiße","weißen"],"kase":"Dativ","gender":"feminine","article":"none","level":"A2","jp":"その絵は白い壁にかかっています。"},{"sentence":"Trotz schlechter Laune lächelt sie.","adj":"schlechter","correct":"schlechter","choices":["schlechter","schlechte","schlechten"],"kase":"Dativ","gender":"feminine","article":"none","level":"A2","jp":"機嫌が悪いにもかかわらず、彼女は微笑んでいます。"},{"sentence":"Der Anfang langer Freundschaft.","adj":"langer","correct":"langer","choices":["langer","lange","langen"],"kase":"Genitiv","gender":"feminine","article":"none","level":"B1","jp":"長い友情の始まり。"},{"sentence":"Der Klang lauter Musik erfüllt den Raum.","adj":"lauter","correct":"lauter","choices":["laute","lauten"],"kase":"Genitiv","gender":"feminine","article":"none","level":"B1","jp":"大きな音楽の音が部屋を満たします。"},{"sentence":"Die Werke moderner Kunst sind teuer.","adj":"moderner","correct":"moderner","choices":["moderner","moderne","modernen"],"kase":"Genitiv","gender":"feminine","article":"none","level":"B1","jp":"現代美術の作品は高価です。"},{"sentence":"Kaltes Bier schmeckt im Sommer gut.","adj":"Kaltes","correct":"Kaltes","choices":["Kaltes","Kalter","Kalten"],"kase":"Nominativ","gender":"neuter","article":"none","level":"A1","jp":"冷たいビールは夏に美味しいです。"},{"sentence":"Schnelles Handeln ist jetzt nötig.","adj":"Schnelles","correct":"Schnelles","choices":["Schnelles","Schneller","Schnellen"],"kase":"Nominativ","gender":"neuter","article":"none","level":"A1","jp":"迅速な行動が今、必要です。"},{"sentence":"Frisches Gemüse ist gesund.","adj":"Frisches","correct":"Frisches","choices":["Frisches","Frischer","Frischen"],"kase":"Nominativ","gender":"neuter","article":"none","level":"A1","jp":"新鮮な野菜は健康的です。"},{"sentence":"Ich trinke gern kaltes Wasser.","adj":"kaltes","correct":"kaltes","choices":["kaltes","kalter","kalten"],"kase":"Akkusativ","gender":"neuter","article":"none","level":"A1","jp":"私は冷たい水を飲むのが好きです。"},{"sentence":"Er hat großes Talent.","adj":"großes","correct":"großes","choices":["großes","großer","großen"],"kase":"Akkusativ","gender":"neuter","article":"none","level":"A1","jp":"彼は素晴らしい才能を持っています。"},{"sentence":"Wir essen leckeres Eis.","adj":"leckeres","correct":"leckeres","choices":["leckeres","leckerer","leckeren"],"kase":"Akkusativ","gender":"neuter","article":"none","level":"A1","jp":"私たちは美味しいアイスクリームを食べます。"},{"sentence":"Bei schlechtem Wetter bleiben wir zu Hause.","adj":"schlechtem","correct":"schlechtem","choices":["schlechtem","schlechter","schlechtes"],"kase":"Dativ","gender":"neuter","article":"none","level":"A2","jp":"悪天候の場合は、私たちは家にいます。"},{"sentence":"Er arbeitet mit großem Interesse.","adj":"großem","correct":"großem","choices":["großem","großer","großes"],"kase":"Dativ","gender":"neuter","article":"none","level":"A2","jp":"彼は大きな関心を持って働いています。"},{"sentence":"Seit kurzem wohnt sie hier.","adj":"kurzem","correct":"kurzem","choices":["kurzem","kurzer","kurzes"],"kase":"Dativ","gender":"neuter","article":"none","level":"A2","jp":"最近、彼女はここに住んでいます。"},{"sentence":"Die Farbe roten Kleides gefällt mir.","adj":"roten","correct":"roten","choices":["roten","rotes","rotem"],"kase":"Genitiv","gender":"neuter","article":"none","level":"B1","jp":"赤いドレスの色が私は好きです。"},{"sentence":"Der Geschmack guten Essens ist unvergesslich.","adj":"guten","correct":"guten","choices":["guten","gutes","gutem"],"kase":"Genitiv","gender":"neuter","article":"none","level":"B1","jp":"美味しい食事の味は忘れられないものです。"},{"sentence":"Der Wert alten Goldes steigt.","adj":"alten","correct":"alten","choices":["alten","altes","altem"],"kase":"Genitiv","gender":"neuter","article":"none","level":"B1","jp":"古い金の価値が上がっています。"},{"sentence":"Nette Menschen wohnen nebenan.","adj":"Nette","correct":"Nette","choices":["Nette","Netten","Netter"],"kase":"Nominativ","gender":"plural","article":"none","level":"A1","jp":"親切な人々が隣に住んでいます。"},{"sentence":"Kleine Kinder machen viel Lärm.","adj":"Kleine","correct":"Kleine","choices":["Kleine","Kleinen","Kleiner"],"kase":"Nominativ","gender":"plural","article":"none","level":"A1","jp":"小さな子供たちはたくさん騒音を立てます。"},{"sentence":"Alte Bäume stehen im Park.","adj":"Alte","correct":"Alte","choices":["Alte","Alten","Alter"],"kase":"Nominativ","gender":"plural","article":"none","level":"A1","jp":"古い木々が公園に立っています。"},{"sentence":"Ich habe gute Nachrichten für dich.","adj":"gute","correct":"gute","choices":["gute","guten","guter"],"kase":"Akkusativ","gender":"plural","article":"none","level":"A1","jp":"私はあなたに良い知らせがあります。"},{"sentence":"Sie isst frische Erdbeeren.","adj":"frische","correct":"frische","choices":["frische","frischen","frischer"],"kase":"Akkusativ","gender":"plural","article":"none","level":"A1","jp":"彼女は新鮮なイチゴを食べます。"},{"sentence":"Er schreibt lustige Gedichte.","adj":"lustige","correct":"lustige","choices":["lustige","lustigen","lustiger"],"kase":"Akkusativ","gender":"plural","article":"none","level":"A1","jp":"彼は面白い詩を書きます。"},{"sentence":"Sie hilft obdachlosen Menschen.","adj":"obdachlosen","correct":"obdachlosen","choices":["obdachlosen","obdachlose","obdachloser"],"kase":"Dativ","gender":"plural","article":"none","level":"A2","jp":"彼女はホームレスの人々を助けています。"},{"sentence":"Wir spielen mit anderen Kindern.","adj":"anderen","correct":"anderen","choices":["anderen","andere","anderer"],"kase":"Dativ","gender":"plural","article":"none","level":"A2","jp":"私たちは他の子供たちと遊びます。"},{"sentence":"Von guten Freunden lernt man viel.","adj":"guten","correct":"guten","choices":["guten","gute","guter"],"kase":"Dativ","gender":"plural","article":"none","level":"A2","jp":"良い友人たちからは多くのことを学びます。"},{"sentence":"Die Meinung vieler Experten ist geteilt.","adj":"vieler","correct":"vieler","choices":["vieler","viele","vielen"],"kase":"Genitiv","gender":"plural","article":"none","level":"B1","jp":"多くの専門家の意見は分かれています。"},{"sentence":"Der Anführer mutiger Krieger ritt voran.","adj":"mutiger","correct":"mutiger","choices":["mutiger","mutige","mutigen"],"kase":"Genitiv","gender":"plural","article":"none","level":"B1","jp":"勇敢な戦士たちのリーダーが先頭で馬を走らせました。"},{"sentence":"Die Stimmen fröhlicher Kinder sind zu hören.","adj":"fröhlicher","correct":"fröhlicher","choices":["fröhlicher","fröhliche","fröhlichen"],"kase":"Genitiv","gender":"plural","article":"none","level":"B1","jp":"陽気な子供たちの声が聞こえます。"}];
 
   const DETERMINER={definite:{masculine:{Nominativ:'der',Akkusativ:'den',Dativ:'dem',Genitiv:'des'},neuter:{Nominativ:'das',Akkusativ:'das',Dativ:'dem',Genitiv:'des'},feminine:{Nominativ:'die',Akkusativ:'die',Dativ:'der',Genitiv:'der'},plural:{Nominativ:'die',Akkusativ:'die',Dativ:'den',Genitiv:'der'}},indefinite:{masculine:{Nominativ:'ein',Akkusativ:'einen',Dativ:'einem',Genitiv:'eines'},neuter:{Nominativ:'ein',Akkusativ:'ein',Dativ:'einem',Genitiv:'eines'},feminine:{Nominativ:'eine',Akkusativ:'eine',Dativ:'einer',Genitiv:'einer'},plural:{Nominativ:'meine',Akkusativ:'meine',Dativ:'meinen',Genitiv:'meiner'}},none:{masculine:{Nominativ:'',Akkusativ:'',Dativ:'',Genitiv:''},neuter:{Nominativ:'',Akkusativ:'',Dativ:'',Genitiv:''},feminine:{Nominativ:'',Akkusativ:'',Dativ:'',Genitiv:''},plural:{Nominativ:'',Akkusativ:'',Dativ:'',Genitiv:''}}};
   const EXAMPLE_NOUNS={default:{masculine:{base:'Wein',gen:'Weins'},neuter:{base:'Brot',gen:'Brotes'},feminine:{base:'Milch',gen:'Milch'},plural:{base:'Freunde',datpl:'Freunden',genpl:'Freunde'}},indefinite:{masculine:{base:'Vater',gen:'Vaters'},neuter:{base:'Kind',gen:'Kindes'},feminine:{base:'Mutter',gen:'Mutter'},plural:{base:'Freunde',datpl:'Freunden',genpl:'Freunde'}}};
@@ -427,301 +361,303 @@
   let EX_GLOBAL=null;
   let readAndApply;
   let questionAnsweredCorrectly = false;
+  let sprachmeisterUnlocked = false;
 
-  // HELPER: Syncs level buttons based on which case checkboxes are ticked
-  function updateLevelSelectionFromCases() {
-    const cases = {
-        Nominativ: document.querySelector('#caseChecks input[data-case="Nominativ"]').checked,
-        Akkusativ: document.querySelector('#caseChecks input[data-case="Akkusativ"]').checked,
-        Dativ: document.querySelector('#caseChecks input[data-case="Dativ"]').checked,
-        Genitiv: document.querySelector('#caseChecks input[data-case="Genitiv"]').checked,
-    };
-    const isAll = cases.Nominativ && cases.Akkusativ && cases.Dativ && cases.Genitiv;
-    const isA1A2 = cases.Nominativ && cases.Akkusativ && cases.Dativ && !cases.Genitiv;
-    const isB1 = !cases.Nominativ && !cases.Akkusativ && !cases.Dativ && cases.Genitiv;
-    const levelSeg = document.getElementById('levelSeg');
-    levelSeg.querySelectorAll('button').forEach(b => b.classList.remove('active'));
-    let newLevel = 'All';
-    if (isAll) {
-        levelSeg.querySelector('button[data-level="All"]').classList.add('active');
-        newLevel = 'All';
-    } else if (isA1A2) {
-        levelSeg.querySelector('button[data-level="A1+A2"]').classList.add('active');
-        newLevel = 'A1+A2';
-    } else if (isB1) {
-        levelSeg.querySelector('button[data-level="B1"]').classList.add('active');
-        newLevel = 'B1';
-    } else {
-        levelSeg.querySelector('button[data-level="All"]').classList.add('active');
-        newLevel = 'All';
-    }
-    state.level = newLevel;
-  }
-
-  // HELPER: Ticks/unticks case checkboxes based on level selection
-  function updateCheckboxesFromLevel(level) {
-      const caseCheckboxes = document.querySelectorAll('#caseChecks input[type="checkbox"]');
-      const levels = {
-          'All': ['Nominativ', 'Akkusativ', 'Dativ', 'Genitiv'],
-          'A1+A2': ['Nominativ', 'Akkusativ', 'Dativ'],
-          'B1': ['Genitiv']
-      };
-      const targetCases = levels[level] || [];
-      caseCheckboxes.forEach(chk => {
-          chk.checked = targetCases.includes(chk.dataset.case);
-      });
-  }
-
+  // --- Core Functions ---
   function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
-  function showError(txt){const qEl=document.getElementById('q');const jaEl=document.getElementById('q-ja');const chEl=document.getElementById('choices');const expEl=document.getElementById('exp');if(qEl)qEl.innerHTML='<span style="color:#b91c1c">⚠ '+txt+'</span>';if(jaEl)jaEl.textContent='';if(chEl)chEl.innerHTML='';if(expEl){expEl.hidden=true;expEl.innerHTML=''}}
-  function isLetter(ch){return /[A-Za-zÄÖÜäöüß]/.test(ch||'')}
-  const UNDER_CHAR='＿';
-  let __UNDER_CHAR_WIDTH=null;
-  function __getUnderCharWidth(){if(__UNDER_CHAR_WIDTH){return __UNDER_CHAR_WIDTH}const m=document.createElement('span');m.style.cssText='position:absolute;left:-9999px;top:-9999px;visibility:hidden;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;line-height:1';m.textContent=UNDER_CHAR;document.body.appendChild(m);__UNDER_CHAR_WIDTH=m.getBoundingClientRect().width||8;document.body.removeChild(m);return __UNDER_CHAR_WIDTH}
-  function fillAllBlanks(){const blanks=document.querySelectorAll('.blank');const cw=__getUnderCharWidth();blanks.forEach(el=>{const us=el.querySelector('.underscore');if(!us)return;const cs=getComputedStyle(el);const inner=el.clientWidth-(parseFloat(cs.paddingLeft)||0)-(parseFloat(cs.paddingRight)||0);const count=Math.max(2,Math.floor(inner/cw));us.textContent=UNDER_CHAR.repeat(count)})}
-  function formatQuestionHTMLFull(sentence,adj){
-    const s=String(sentence||'');
-    const a=String(adj||'');
-    if(!s||!a)return s;
-    if(s.startsWith(a)){
-        return `<span class="blank" style="--blank-ch:${Math.max(a.length,5)}" aria-label="空欄"><span class="underscore"></span></span>`+ s.slice(a.length);
-    }
-    let i=s.indexOf(' '+a);
-    while(i!==-1){
-        const before=i>0?s[i-1]:'';
-        const after=s[i+a.length+1]||'';
-        if(!isLetter(before)&&!isLetter(after)){
-            const ch=Math.max(a.length,5);
-            return s.slice(0,i+1)+'<span class="blank" style="--blank-ch:'+ch+'" aria-label="空欄"><span class="underscore"></span></span>'+s.slice(i+a.length+1);
-        }
-        i=s.indexOf(' '+a,i+1);
-    }
-    return s.replace(a, `<span class="blank" style="--blank-ch:${Math.max(a.length,5)}" aria-label="空欄"><span class="underscore"></span></span>`);
-  }
-  function validateItem(it){const ok=it&&typeof it.sentence==='string'&&typeof it.adj==='string'&&Array.isArray(it.choices)&&it.choices.length===3&&new Set(it.choices).size===3&&typeof it.correct==='string'&&it.choices.includes(it.correct)&&it.kase&&it.gender&&it.article;return ok?it:null}
-  function buildPool(){
-    const allowed=LEVEL_CASES[state.level]||CASE_ORDER;
-    let pool=ITEMS.map(validateItem).filter(Boolean).filter(it=>allowed.includes(it.kase));
-    pool=pool.filter(it=>state.filters.cases[it.kase]&&state.filters.articles[it.article]&&state.filters.genders[it.gender]);
-    
-    // If pool is empty after filtering, it means no questions match.
-    // In this case, we revert to a default question set internally.
-    if (pool.length === 0) {
-        // This internal state will be used to build a fallback question pool
-        const fallbackFilters = {
-            cases: { Nominativ: true, Akkusativ: false, Dativ: false, Genitiv: false },
-            articles: { definite: true, indefinite: false, none: false },
-            genders: { masculine: true, neuter: false, feminine: false, plural: false }
-        };
-        pool = ITEMS.filter(it => 
-            fallbackFilters.cases[it.kase] && 
-            fallbackFilters.articles[it.article] && 
-            fallbackFilters.genders[it.gender]
-        );
-    }
-    
-    state.pool=pool;
-    state.order=shuffle([...Array(pool.length).keys()]);
-    state.idx=0;
-    state.total=0;
-    state.correct=0;
-    /* streak is preserved by not resetting it here */
-}
+  function isLetter(c){return /[A-Za-zÄÖÜäöüß]/.test(c||'')}
+  function endClassFrom(e){const n=e.replace('-','');return['e','en','em','er','es'].includes(n)?n:'e'}
+  
+  // --- UI Update Functions ---
+  function showError(t){const q=document.getElementById('q'),j=document.getElementById('q-ja'),c=document.getElementById('choices'),e=document.getElementById('exp');if(q)q.innerHTML='<span style="color:#b91c1c">⚠ '+t+'</span>';if(j)j.textContent='';if(c)c.innerHTML='';if(e){e.hidden=true;e.innerHTML=''}}
   function updateStat(){document.getElementById('stat').textContent=`Siegesserie: ${state.streak} / Wiederholungen: ${state.retries}`}
-  function colorKeyForStreak(s){if(s>=100)return'gold';if(s>=70)return'silver';if(s>=50)return'black';if(s>=40)return'red';if(s>=30)return'orange';if(s>=20)return'yellow';if(s>=10)return'lime';if(s>=5)return'green';if(s>=4)return'sky';if(s>=3)return'indigo';if(s>=2)return'purple';return'accent'}
-  const STREAK_BADGES={
-    2: 'Gut! いいね！', 3: 'Prima! すてき！', 4: 'Toll! すごい！', 5: 'Super! 最高！', 6: 'Klasse! 素晴らしい！',
-    7: 'Spitze! 抜群だ！', 8: 'Stark! さすが！', 9: 'Bravo! ブラボー！', 10: 'Genial! 天才的だ！', 11: 'Großartig! 偉大だ！',
-    12: 'Wunderbar! 見事だ！', 13: 'Perfekt! 完璧だ！', 14: 'Sehr gut! 非常に良い！', 15: 'Brillant! 輝かしい！', 16: 'Fantastisch! 素晴らしい！',
-    17: 'Ausgezeichnet! 秀逸だ！', 18: 'Hervorragend! 優秀だ！', 19: 'Meisterhaft! 達人級だ！', 20: 'Wahnsinn! 半端ない！', 21: 'Eindrucksvoll! 印象的だ！',
-    22: 'Beeindruckend! 感銘深い！', 23: 'Erstaunlich! 驚くべき！', 24: 'Imposant! 圧倒的だ！', 25: 'Phänomenal! 驚異的だ！', 26: 'Sensationell! 感動的だ！',
-    27: 'Spektakulär! 圧巻だ！', 28: 'Unglaublich! 信じられない！', 29: 'Überwältigend! 圧倒的だ！', 30: 'Unfassbar! 理解を超える！', 31: 'Außerordentlich! 並外れている！',
-    32: 'Bemerkenswert! 注目すべき！', 33: 'Verblüffend! 驚愕的だ！', 34: 'Atemberaubend! 息を呑む！', 35: 'Umwerfend! 圧倒的だ！', 36: 'Weltklasse! 世界レベル！',
-    37: 'Außergewöhnlich! 異次元だ！', 38: 'Unvergleichlich! 比類ない！', 39: 'Überragend! 抜群だ！', 40: 'Unwiderstehlich! 圧倒的だ！', 41: 'Unschlagbar! 無敵だ！',
-    42: 'Unaufhaltsam! 誰にも止められない！', 43: 'Grenzenlos! 限界知らず！', 44: 'Unüberwindlich! 不屈だ！', 45: 'Unstoppbar! 止まらない！', 46: 'Unbesiegbar! 無敗だ！',
-    47: 'Unübertrefflich! 無比だ！', 48: 'Beispiellos! 前例がない！', 49: 'Einzigartig! 唯一無二だ！', 50: 'Legendär! 伝説的だ！', 60: 'Galaktisch! 銀河級だ！',
-    70: 'Göttlich! 神業だ！', 80: 'Kosmisch! 宇宙レベル！', 90: 'Nicht von dieser Welt! この世のものとは思えない！', 100: 'Sprachmeister! 言語の達人！'
-  };
-  function buildStreakBadge(s){
-    let lastApplicableStreak = 0;
-    for (const key in STREAK_BADGES) {
-        const streakMilestone = parseInt(key, 10);
-        if (s >= streakMilestone && streakMilestone > lastApplicableStreak) {
-            lastApplicableStreak = streakMilestone;
-        }
-    }
-    if (lastApplicableStreak === 0) return '';
 
-    let msg = STREAK_BADGES[lastApplicableStreak];
-    const CHAR_THRESHOLD = 20; // Character limit before adding a line break
-    if (msg.length > CHAR_THRESHOLD && msg.includes('! ')) {
-        msg = msg.replace('! ', '!<br>');
-    }
-    const tone = colorKeyForStreak(lastApplicableStreak);
-    return `<span class="streak-badge tone-${tone}" title="${s}連続正解">${msg}</span>`;
+  function fillAllBlanks(){
+    const UNDER_CHAR='＿';
+    let __UNDER_CHAR_WIDTH=null;
+    function __getUnderCharWidth(){if(__UNDER_CHAR_WIDTH){return __UNDER_CHAR_WIDTH}const m=document.createElement('span');m.style.cssText='position:absolute;left:-9999px;top:-9999px;visibility:hidden;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;line-height:1';m.textContent=UNDER_CHAR;document.body.appendChild(m);__UNDER_CHAR_WIDTH=m.getBoundingClientRect().width||8;document.body.removeChild(m);return __UNDER_CHAR_WIDTH}
+    document.querySelectorAll('.blank').forEach(e=>{const u=e.querySelector('.underscore');if(!u)return;const s=getComputedStyle(e),i=e.clientWidth-(parseFloat(s.paddingLeft)||0)-(parseFloat(s.paddingRight)||0),c=Math.max(2,Math.floor(i/(__getUnderCharWidth())));u.textContent=UNDER_CHAR.repeat(c)})
   }
-  function triggerPulse(streak){const card=document.getElementById('quiz');if(!card)return;card.classList.remove('pulse');void card.offsetWidth;card.classList.add('pulse');clearTimeout(card._pulseTimer);card._pulseTimer=setTimeout(()=>{card.classList.remove('pulse')},900)}
-  function buildRightCaseList(tbl){if(!tbl)return'';const rows=CASE_ORDER.map(cs=>({jp:CASE_JP_NUM[cs],end:tbl[cs]}));return `<div class="caseList">${rows.map(r=>`<div class="case"><div class="label">${r.jp}</div><div class="ending">${r.end}</div></div>`).join('')}</div>`}
-  function endClassFrom(end){const e=end.replace('-','');return['e','en','em','er','es'].includes(e)?e:'e'}
-  function buildGermanHint(it){const end=MINI_TABLE[it.article][it.gender][it.kase];return `${ARTICLE_DE[it.article]} + ${GENDER_DE[it.gender]} + ${CASE_DE[it.kase]} → Adjektivendung ${end}.`}
-  function buildFootnotes(it){const notes=[];if(it.kase==='Dativ'&&it.gender==='plural')notes.push('※ 複数与格は名詞に -n（すでに -n/-s なら不要）');if(it.kase==='Genitiv'&&(it.gender==='masculine'||it.gender==='neuter'))notes.push('※ 男性・中性の単数属格は名詞に -s/-es');return notes.length?`<div class="footnotes">${notes.join('<br>')}</div>`:''}
+  
+  function formatQuestionHTMLFull(s,a){const t=String(s||''),l=String(a||'');if(!t||!l)return t;if(t.startsWith(l)){return `<span class="blank" style="--blank-ch:${Math.max(l.length,5)}" aria-label="空欄"><span class="underscore"></span></span>`+t.slice(l.length)}let i=t.indexOf(' '+l);while(i!==-1){const b=i>0?t[i-1]:'',f=t[i+l.length+1]||'';if(!isLetter(b)&&!isLetter(f)){const c=Math.max(l.length,5);return t.slice(0,i+1)+'<span class="blank" style="--blank-ch:'+c+'" aria-label="空欄"><span class="underscore"></span></span>'+t.slice(i+l.length+1)}i=t.indexOf(' '+l,i+1)}return t.replace(l,`<span class="blank" style="--blank-ch:${Math.max(l.length,5)}" aria-label="空欄"><span class="underscore"></span></span>`)}
+
+  function fitChoiceText(){document.querySelectorAll('#choices button').forEach(b=>{let f=18;b.style.fontSize=f+'px';const l=Math.max(10,Math.min(18,Math.floor((b.clientWidth||80)/10)));let g=14;while(g-->0&&b.scrollWidth>b.clientWidth){f-=1;if(f<l)break;b.style.fontSize=f+'px'}})}
+  function scaleChoices(){const c=document.getElementById('choices');if(!c)return;c.style.transform='none';const a=c.clientWidth;let f=0;Array.from(c.children).forEach((e,i)=>{f+=e.offsetWidth;if(i>0)f+=10});const s=f>0?Math.min(1,a/f):1;c.style.transformOrigin='left center';c.style.transform=`scale(${s})`}
+
+  // --- Quiz Logic ---
+  function validateItem(i){return i&&typeof i.sentence==='string'&&typeof i.adj==='string'&&Array.isArray(i.choices)&&i.choices.length===3&&new Set(i.choices).size===3&&typeof i.correct==='string'&&i.choices.includes(i.correct)&&i.kase&&i.gender&&i.article?i:null}
+  function buildPool(){const a=LEVEL_CASES[state.level]||CASE_ORDER;let p=ITEMS.map(validateItem).filter(Boolean).filter(i=>a.includes(i.kase));p=p.filter(i=>state.filters.cases[i.kase]&&state.filters.articles[i.article]&&state.filters.genders[i.gender]);if(p.length===0){const f={cases:{Nominativ:true,Akkusativ:false,Dativ:false,Genitiv:false},articles:{definite:true,indefinite:false,none:false},genders:{masculine:true,neuter:false,feminine:false,plural:false}};p=ITEMS.filter(i=>f.cases[i.kase]&&f.articles[i.article]&&f.genders[i.gender])}state.pool=p;state.order=shuffle([...Array(p.length).keys()]);state.idx=0;state.total=0;state.correct=0}
+
   function render(){
-    questionAnsweredCorrectly = false;
-    try{if(state.idx>=state.order.length){buildPool()}if(!state.pool||!state.pool.length){showError('出題範囲に一致する問題がありません。上の「出題範囲」を確認してください。');updateStat();return}const ord=state.order[state.idx];if(typeof ord==='undefined'){showError('内部エラー：問題の読み込みに失敗しました。');return}const it=state.pool[ord];if(!it){showError('内部エラー：問題データが見つかりません。');return}const qEl=document.getElementById('q');const jaEl=document.getElementById('q-ja');const chEl=document.getElementById('choices');const expEl=document.getElementById('exp');expEl.hidden=true;expEl.innerHTML='';const shown=formatQuestionHTMLFull(it.sentence,it.adj);qEl.innerHTML=shown;fillAllBlanks();if(!qEl.textContent||qEl.textContent.trim()===''){qEl.textContent=it.sentence}if(jaEl){jaEl.textContent=it.jp||'';jaEl.hidden=!it.jp;}const preHintBtn=document.getElementById('preHintBtn');const preHint=document.getElementById('preHint');if(preHint){preHint.hidden=true;preHint.style.display='none';preHint.textContent=`${ARTICLE_DE_SHORT[it.article]}・${GENDER_DE_SHORT[it.gender]}・${CASE_ABBR[it.kase]}`}if(preHintBtn){preHintBtn.disabled=false;preHintBtn.onclick=()=>{if(preHint){preHint.hidden=false;preHint.style.display='inline-block'}preHintBtn.disabled=true}}const opts=shuffle(it.choices.map(full=>({val:full,text:full})));chEl.innerHTML='';opts.forEach(o=>{const b=document.createElement('button');b.textContent=o.text;b.dataset.val=o.val;b.addEventListener('click',()=>grade(it,o));chEl.appendChild(b)});
-    document.getElementById('next').onclick=()=>{
-        if (!questionAnsweredCorrectly) {
-            state.streak = 0; // Reset streak if moving on without a correct answer
-        }
-        state.idx++;
-        state.total++;
-        render();
-        updateStat();
-        fitChoiceText();
-        scaleChoices();
-    };
-    document.getElementById('again').onclick=()=>{state.retries++; render();fitChoiceText();scaleChoices()};updateStat();fitChoiceText();requestAnimationFrame(scaleChoices)}catch(err){console.error(err);showError('実行時エラー：'+(err&&err.message?err.message:'原因不明'))}}
-  function grade(it,picked){
+    questionAnsweredCorrectly=false;
+    try{
+      if(state.idx>=state.order.length){ buildPool() }
+      if(!state.pool||!state.pool.length){ showError('出題範囲に一致する問題がありません。上の「出題範囲」を確認してください。'); updateStat(); return }
+      const o=state.order[state.idx];
+      if(typeof o==='undefined'){ showError('内部エラー：問題の読み込みに失敗しました。'); return }
+      const item=state.pool[o];
+      if(!item){ showError('内部エラー：問題データが見つかりません。'); return }
+      
+      const qEl=document.getElementById('q'), jaEl=document.getElementById('q-ja'), choicesEl=document.getElementById('choices'), expEl=document.getElementById('exp');
+      expEl.hidden=true; expEl.innerHTML='';
+      
+      const shown=formatQuestionHTMLFull(item.sentence,item.adj);
+      qEl.innerHTML=shown;
+      fillAllBlanks();
+      if(!qEl.textContent||qEl.textContent.trim()===''){ qEl.textContent=item.sentence }
+      if(jaEl){ jaEl.textContent=item.jp||''; jaEl.hidden=!item.jp }
+      
+      const preHintBtn=document.getElementById('preHintBtn'), preHint=document.getElementById('preHint');
+      if(preHint){ preHint.hidden=true; preHint.style.display='none'; preHint.textContent=`${ARTICLE_DE_SHORT[item.article]}・${GENDER_DE_SHORT[item.gender]}・${CASE_ABBR[item.kase]}` }
+      if(preHintBtn){ preHintBtn.disabled=false; preHintBtn.onclick=()=>{if(preHint){preHint.hidden=false;preHint.style.display='inline-block'}preHintBtn.disabled=true} }
+      
+      const opts=shuffle(item.choices.map(f=>({val:f,text:f})));
+      choicesEl.innerHTML='';
+      opts.forEach(o=>{ const b=document.createElement('button'); b.textContent=o.text; b.dataset.val=o.val; b.addEventListener('click',()=>grade(item,o)); choicesEl.appendChild(b) });
+      
+      document.getElementById('next').onclick=()=>{ if(!questionAnsweredCorrectly)state.streak=0; state.idx++; state.total++; render(); updateStat(); fitChoiceText(); scaleChoices() };
+      document.getElementById('again').onclick=()=>{ state.retries++; render(); fitChoiceText(); scaleChoices() };
+      
+      updateStat(); fitChoiceText(); requestAnimationFrame(scaleChoices)
+    } catch(err){ console.error(err); showError('実行時エラー：'+(err&&err.message?err.message:'原因不明')) }
+  }
+
+  function grade(item,picked){
     const buttons=Array.from(document.getElementById('choices').children);
-    buttons.forEach(btn=>btn.disabled=true);
-    const correctFull=it.correct;
+    buttons.forEach(b=>b.disabled=true);
+    const correctFull=item.correct;
     const isCorrect=picked.val===correctFull;
     buttons.forEach(btn=>{const v=btn.dataset.val;if(v===correctFull)btn.classList.add('correct');if(v===picked.val)btn.classList.add(isCorrect?'correct':'wrong')});
     
     if(isCorrect){
-        if (!questionAnsweredCorrectly) { // Only increment streak on the first correct answer for this question
-            state.streak++;
+      if(!questionAnsweredCorrectly){
+        state.streak++;
+        const s = state.streak;
+        if (s === 20 || s === 30 || s === 40) {
+            triggerPulse(s);
+            const container = document.getElementById('fullscreen-reward');
+            if(container){
+              container.innerHTML=''; container.style.background='transparent'; container.style.pointerEvents='none';
+              container.hidden=false; void container.offsetWidth; container.classList.add('visible');
+              if (s === 20) showConfetti(['#f44336','#e91e63','#9c27b0','#673ab7','#3f51b5','#2196f3','#03a9f4','#00bcd4','#009688','#4caf50','#8bc34a','#cddc39','#ffeb3b','#ffc107','#ff9800','#ff5722']);
+              if (s === 30) showCherryBlossoms();
+              if (s === 40) showConfetti(['#ffd700','#c0c0c0','#f0e68c']);
+              setTimeout(()=>{container.classList.remove('visible');container.innerHTML='';container.hidden=true}, 5000);
+            }
+        } else if (s >= 50 && s % 10 === 0) {
+          triggerPulse(s);
+          showMilestoneAnimation(s);
+          if (s === 100) {
+            unlockSprachmeisterBadge();
+          }
+        } else {
+          triggerPulse(s);
         }
-        questionAnsweredCorrectly = true;
-        triggerPulse(state.streak);
-    } 
-    // If incorrect, the streak is NOT reset here. It is only reset if the user clicks "Weiter".
+      }
+      questionAnsweredCorrectly=true;
+    }
     updateStat();
-
-    const exp=document.getElementById('exp');const tbl=(MINI_TABLE[it.article]&&MINI_TABLE[it.article][it.gender])?MINI_TABLE[it.article][it.gender]:null;const solved=it.sentence;const streakHtml=isCorrect?buildStreakBadge(state.streak):'';const mark=isCorrect?`<span class="badge good">✔ 正解</span>${streakHtml}`:`<span class="badge bad">✘ 不正解</span>`;const isMixedPoint=it.article==='indefinite';const declKind=it.article==='definite'?'weak':(it.article==='indefinite'?'mixed':'strong');const declLabel=declKind==='weak'?'弱変化':(declKind==='mixed'?'混合変化':'強変化');const declCls=declKind;let hintJPText=`<strong>${ARTICLE_HEAD[it.article]}</strong> ＋ <strong>${GENDER_JP_SHORT[it.gender]}名詞</strong> ＋ <strong>${CASE_JP_NUM[it.kase]}</strong> の組み合わせです。`;const btnsHtml=`     <div class="de-line">       <span class="de">${buildGermanHint(it)}</span>       ${isMixedPoint?'<button class="btn tiny" id="mixBtn">混合変化とは</button>':''}       ${it.article==='definite'?'<button class="btn tiny" id="weakBtn">弱変化とは</button>':''}       ${it.article==='none'?'<button class="btn tiny" id="strongBtn">強変化とは</button>':''}     </div>`;const rightHtml=`     <aside class="right">       <h3>${ARTICLE_HEAD[it.article]}・${GENDER_JP_SHORT[it.gender]}</h3>       <div class="sub-de">${ARTICLE_DE[it.article]} ・<br>${GENDER_DE[it.gender]}</div>       ${buildRightCaseList(tbl)||'<p>（参照表なし）</p>'}     </aside>`;const mixInit=isMixedPoint?`<div id="mixBox" class="example mix-wide" hidden><h3 class="mix-title">形容詞の混合変化</h3><div class="mix-subtitle">(Gemischte Deklination)</div><p>不定冠詞（類）を伴う名詞に形容詞が加わると、形容詞は混合変化と呼ばれる語尾変化をします。</p><p><strong>混合変化と呼ばれる理由</strong><br>その名の通り、強変化と弱変化の混合形態です。不定冠詞（類）の格変化が明確な場合は形容詞の語尾変化は少なく、逆に不定冠詞（類）だけでは名詞の性や格を明らかにできない場合は（特に男性と中性の1格）、形容詞の語尾が強変化することで格変化の補完をします。</p></div>`:'';const weakInit=it.article==='definite'?`<div id="weakBox" class="example mix-wide" hidden><h3 class="mix-title">形容詞の弱変化</h3><div class="mix-subtitle">(Schwache Deklination)</div><p>定冠詞（der, die, das）やder類（dieser, jeder, welcher, solcher, mancher など）の後に続く形容詞の語尾変化ルールです。</p><p><strong>弱変化と呼ばれる理由</strong><br>先行する冠詞が格・性・数を完全に示すため、形容詞は語尾での区別を最小限にとどめます（原則 -en、単数主格と女性・中性の対格のみ -e）。そのため「弱い」変化と呼ばれます。</p></div>`:'';const strongInit=it.article==='none'?`<div id="strongBox" class="example mix-wide" hidden><h3 class="mix-title">形容詞の強変化</h3><div class="mix-subtitle">(Starke Deklination)</div><p>冠詞類を用いない名詞に形容詞が加わると、形容詞は強変化と呼ばれる語尾変化をします。</p><p><strong>強変化と呼ばれる理由</strong><br>形容詞が語尾変化をすることで冠詞類の格変化の代わりをし、語尾変化が顕著であることから強変化と呼ばれます。</p></div>`:'';exp.innerHTML=`     <div class="result-full">       <h3>正解・和訳</h3>       <p class="result-line">${mark}<span class="filler"></span></p>       <p>正しい文：<strong>${solved}</strong></p>       <p>和訳：${it.jp||''}</p>     </div>     <div class="cols">       <div class="left" style="min-width:0">         <h3>解説 <span class="decl-tag ${declCls}">${declLabel}</span></h3>         <p>${hintJPText}</p>         ${btnsHtml}       </div>       ${rightHtml}       ${weakInit}${strongInit}${mixInit}     </div>`;exp.hidden=false;const nhtml=buildFootnotes(it);if(nhtml){const tmp=document.createElement('div');tmp.innerHTML=nhtml;const node=tmp.firstElementChild;if(node)exp.appendChild(node)}const expBox=document.getElementById('exp');function ensureBox(id,html){let el=document.getElementById(id);if(!el){el=document.createElement('div');el.id=id;el.className='example mix-wide';el.hidden=true;el.innerHTML=html;const cols=expBox.querySelector('.cols');if(cols)cols.appendChild(el)}return el}const mixBtn=document.getElementById('mixBtn');if(mixBtn){mixBtn.onclick=()=>{const bx=ensureBox('mixBox','<h3 class="mix-title">形容詞の混合変化</h3><div class="mix-subtitle">(Gemischte Deklination)</div><p>不定冠詞（類）を伴う名詞に形容詞が加わると、形容詞は混合変化と呼ばれる語尾変化をします。</p><p><strong>混合変化と呼ばれる理由</strong><br>その名の通り、強変化と弱変化の混合形態です。不定冠詞（類）の格変化が明確な場合は形容詞の語尾変化は少なく、逆に不定冠詞（類）だけでは名詞の性や格を明らかにできない場合は（特に男性と中性の1格）、形容詞の語尾が強変化することで格変化の補完をします。</p>');if(bx)bx.hidden=!bx.hidden}}const weakBtn=document.getElementById('weakBtn');if(weakBtn){weakBtn.onclick=()=>{const wx=ensureBox('weakBox','<h3 class="mix-title">形容詞の弱変化</h3><div class="mix-subtitle">(Schwache Deklination)</div><p>定冠詞（der, die, das）やder類（dieser, jeder, welcher, solcher, mancher など）の後に続く形容詞の語尾変化ルールです。</p><p><strong>弱変化と呼ばれる理由</strong><br>先行する冠詞が格・性・数を完全に示すため、形容詞は語尾での区別を最小限にとどめます（原則 -en、単数主格と女性・中性の対格のみ -e）。そのため「弱い」変化と呼ばれます。</p>');if(wx)wx.hidden=!wx.hidden}}const strongBtn=document.getElementById('strongBtn');if(strongBtn){strongBtn.onclick=()=>{const sx=ensureBox('strongBox','<h3 class="mix-title">形容詞の強変化</h3><div class="mix-subtitle">(Starke Deklination)</div><p>冠詞類を用いない名詞に形容詞が加わると、形容詞は強変化と呼ばれる語尾変化をします。</p><p><strong>強変化と呼ばれる理由</strong><br>形容詞が語尾変化をすることで冠詞類の格変化の代わりをし、語尾変化が顕著であることから強変化と呼ばれます。</p>');if(sx)sx.hidden=!sx.hidden}}currentArticle=it.article;currentGender=it.gender;mountRef(currentArticle)}
-  function computeGlobalExampleLayout(){try{const measure=document.createElement('div');measure.style.cssText='position:absolute;visibility:hidden;left:-9999px;top:-9999px';document.body.appendChild(measure);const artKeys=['definite','indefinite','none'];const genders=['masculine','neuter','feminine','plural'];const cases=['Nominativ','Akkusativ','Dativ','Genitiv'];let maxDet=0,maxAdj=0,maxTable=0,maxTablePlural=0;function makeCell(article,gender,kase){const line=buildExampleLine(article,gender,kase);const wrap=document.createElement('div');wrap.className='ex-cell';wrap.innerHTML=line.text;return wrap}artKeys.forEach(a=>{genders.forEach(g=>{cases.forEach(k=>{const cell=makeCell(a,g,k);measure.appendChild(cell);const det=cell.querySelector('.ex-det');const adj=cell.querySelector('.ex-adj');const wDet=det?det.getBoundingClientRect().width:0;const wAdj=adj?adj.getBoundingClientRect().width:0;if(wDet>maxDet)maxDet=wDet;if(wAdj>maxAdj)maxAdj=wAdj;measure.removeChild(cell)})})});const abbrs=['Kasus','Nom.','Akk.','Dat.','Gen.'];let maxCaseCol=0;abbrs.forEach(txt=>{const t=document.createElement('table');t.className='ex-table';const tr=document.createElement('tr');const td1=document.createElement('td');td1.textContent=txt;tr.appendChild(td1);const td2=document.createElement('td');td2.textContent='X';tr.appendChild(td2);t.appendChild(tr);measure.appendChild(t);const w=td1.getBoundingClientRect().width;if(w>maxCaseCol)maxCaseCol=w;measure.removeChild(t)});function makeTable(article,gender){const table=document.createElement('table');table.className='ex-table';const thead=document.createElement('thead');thead.innerHTML='<tr><th>Kasus</th><th>Beispiel</th></tr>';table.appendChild(thead);const tbody=document.createElement('tbody');cases.forEach(k=>{const tr=document.createElement('tr');const td1=document.createElement('td');td1.textContent={Nominativ:'Nom.',Akkusativ:'Akk.',Dativ:'Dat.',Genitiv:'Gen.'}[k];tr.appendChild(td1);const td2=document.createElement('td');td2.className='ex-cell';const inner=makeCell(article,gender,k);td2.appendChild(inner);tr.appendChild(td2);tbody.appendChild(tr)});table.appendChild(tbody);return table}artKeys.forEach(a=>{genders.forEach(g=>{const t=makeTable(a,g);measure.appendChild(t);const w=t.getBoundingClientRect().width;if(w>maxTable)maxTable=w;if(g==='plural'&&w>maxTablePlural)maxTablePlural=w;measure.removeChild(t)})});EX_GLOBAL={det:Math.ceil(maxDet),adj:Math.ceil(maxAdj),table:Math.ceil(maxTablePlural||maxTable),caseCol:Math.ceil(maxCaseCol)};const ev=document.getElementById('exampleView');if(ev){ev.style.setProperty('--det-w',EX_GLOBAL.det+'px');ev.style.setProperty('--adj-w',EX_GLOBAL.adj+'px');ev.style.minWidth=(EX_GLOBAL.table+16)+'px';const tEl=ev.querySelector('table.ex-table');if(tEl){tEl.style.width=(EX_GLOBAL.table+16)+'px'}}document.body.removeChild(measure)}catch(_e){}}
-  function buildExampleLine(article,gender,kase){const end=MINI_TABLE[article][gender][kase];const cls=endClassFrom(end);const adj=ADJ_STEM+`<span class="end ${cls}">${end.replace('-','')}</span>`;const set=(article==='indefinite')?EXAMPLE_NOUNS.indefinite:EXAMPLE_NOUNS.default;let det='';if(article==='definite')det=DETERMINER.definite[gender][kase];else if(article==='indefinite')det=DETERMINER.indefinite[gender][kase];const n=set[gender];let noun='';if(gender==='plural'){noun=(kase==='Dativ')?n.datpl:(kase==='Genitiv'?n.genpl:n.base)}else if(gender==='masculine'||gender==='neuter'){noun=(kase==='Genitiv')?n.gen:n.base}else{noun=n.base}return{kase,text:`<div class="ex-row"><span class="ex-det">${det||''}</span><span class="ex-adj">${adj}</span><span class="ex-noun">${noun||''}</span></div>`}}
-  function alignExampleColumns(){const ev=document.getElementById('exampleView');if(!ev)return;if(EX_GLOBAL){ev.style.setProperty('--det-w',EX_GLOBAL.det+'px');ev.style.setProperty('--adj-w',EX_GLOBAL.adj+'px');ev.style.minWidth=(EX_GLOBAL.table+16)+'px'}}
-  function showExamples(article,gender){const ev=document.getElementById('exampleView');const head=`${LABEL_JP.gender[gender]}（${LABEL_JP.article[article]}＋形容詞＋名詞）`;const rows=CASE_ORDER.map(cs=>{const line=buildExampleLine(article,gender,cs);const left=CASE_ABBR[line.kase];const right=line.text;return `<tr><td>${left}</td><td class="ex-cell">${right}</td></tr>`}).join('');const caseWidth=(EX_GLOBAL&&EX_GLOBAL.caseCol)?EX_GLOBAL.caseCol:72;ev.innerHTML=`<h4>${head}</h4><table class="ex-table"><colgroup><col style="width:${caseWidth}px"><col></colgroup><thead><tr><th>Kasus</th><th>Beispiel</th></tr></thead><tbody>${rows}</tbody></table>`;const tEl=ev.querySelector('table.ex-table');if(tEl){tEl.style.width=(EX_GLOBAL&&EX_GLOBAL.table?(EX_GLOBAL.table+16):(ev.offsetWidth||320))+'px'}ev.hidden=false;requestAnimationFrame(()=>{computeGlobalExampleLayout();alignExampleColumns()})}
-  function buildReferenceTable(articleKey){const t=MINI_TABLE[articleKey];const table=document.createElement('table');table.className='ref-table';const thead=document.createElement('thead');const trh=document.createElement('tr');trh.innerHTML=`<th></th>${GENDER_ORDER.map(g=>`<th>${GENDER_JP_SHORT[g]}</th>`).join('')}`;thead.appendChild(trh);table.appendChild(thead);const tbody=document.createElement('tbody');CASE_ORDER.forEach(cs=>{const tr=document.createElement('tr');const tds=GENDER_ORDER.map(g=>{const val=t[g][cs];const cls=(val==='-en'&&(articleKey==='definite'||articleKey==='indefinite'))?' class="en-bg"':'';return `<td${cls}>${val}</td>`}).join('');tr.innerHTML=`<td><strong>${CASE_JP_NUM[cs]}</strong></td>`+tds;tbody.appendChild(tr)});table.appendChild(tbody);return table}
-  
-  function applyGenderHighlight(){
-    const wrap=document.getElementById('refTableWrap');
-    const tbl=wrap&&wrap.querySelector('table.ref-table');
-    if(!tbl)return;
-    // MODIFIED: Force animation restart by removing and re-adding the class
-    tbl.classList.remove('hl-masculine','hl-neuter','hl-feminine','hl-plural');
-    void tbl.offsetWidth; // Trigger reflow
-    tbl.classList.add('hl-'+currentGender);
     
-    const headRow=tbl.querySelector('thead tr');
-    if(!headRow)return;
-    const ths=headRow.querySelectorAll('th');
-    ths.forEach(th=>th.classList.remove('flash'));
-    const idxMap={masculine:1,neuter:2,feminine:3,plural:4};
-    const targetTh=ths[idxMap[currentGender]];
-    if(targetTh){
-        void targetTh.offsetWidth;
-        targetTh.classList.add('flash')
+    const expEl=document.getElementById('exp');
+    const tableData=(MINI_TABLE[item.article]&&MINI_TABLE[item.article][item.gender])?MINI_TABLE[item.article][item.gender]:null;
+    const streakHtml=isCorrect?buildStreakBadge(state.streak):'';
+    const mark=isCorrect?`<span class="badge good">✔ 正解</span>${streakHtml}`:`<span class="badge bad">✘ 不正解</span>`;
+    const declKind=item.article==='definite'?'weak':item.article==='indefinite'?'mixed':'strong';
+    const declLabel=declKind==='weak'?'弱変化':declKind==='mixed'?'混合変化':'強変化';
+    
+    const hintJPText=`<strong>${ARTICLE_HEAD[item.article]}</strong> ＋ <strong>${GENDER_JP_SHORT[item.gender]}名詞</strong> ＋ <strong>${CASE_JP_NUM[item.kase]}</strong> の組み合わせです。`;
+    const btnsHtml=`<div class="de-line"><span class="de">${buildGermanHint(item)}</span></div>`;
+    const rightHtml=`<aside class="right"><h3>${ARTICLE_HEAD[item.article]}・${GENDER_JP_SHORT[item.gender]}</h3><div class="sub-de">${ARTICLE_DE[item.article]} ・<br>${GENDER_DE[item.gender]}</div>${buildRightCaseList(tableData)||'<p>（参照表なし）</p>'}</aside>`;
+
+    expEl.innerHTML=`
+      <div class="result-full">
+        <h3>正解・和訳</h3>
+        <p class="result-line">${mark}<span class="filler"></span></p>
+        <p>正しい文：<strong>${item.sentence}</strong></p>
+        <p>和訳：${item.jp||''}</p>
+      </div>
+      <div class="cols">
+        <div class="left" style="min-width:0">
+          <h3>解説 <span class="decl-tag ${declKind}">${declLabel}</span></h3>
+          <p>${hintJPText}</p>
+          ${btnsHtml}
+        </div>
+        ${rightHtml}
+      </div>`;
+    expEl.hidden=false;
+    const footnotesHTML=buildFootnotes(item);
+    if(footnotesHTML){const tmp=document.createElement('div');tmp.innerHTML=footnotesHTML;const node=tmp.firstElementChild;if(node)expEl.appendChild(node)}
+    
+    currentArticle=item.article;
+    currentGender=item.gender;
+    mountRef(currentArticle);
+  }
+  
+  // --- Reference Table & Examples ---
+  function buildGermanHint(i){const e=MINI_TABLE[i.article][i.gender][i.kase];return`${ARTICLE_DE[i.article]} + ${GENDER_DE[i.gender]} + ${CASE_DE[i.kase]} → Adjektivendung ${e}.`}
+  function buildFootnotes(i){const n=[];if(i.kase==='Dativ'&&i.gender==='plural')n.push('※ 複数与格は名詞に -n（すでに -n/-s なら不要）');if(i.kase==='Genitiv'&&(i.gender==='masculine'||i.gender==='neuter'))n.push('※ 男性・中性の単数属格は名詞に -s/-es');return n.length?`<div class="footnotes">${n.join('<br>')}</div>`:''}
+  function buildRightCaseList(t){if(!t)return'';const r=CASE_ORDER.map(c=>({jp:CASE_JP_NUM[c],end:t[c]}));return`<div class="caseList">${r.map(c=>`<div class="case"><div class="label">${c.jp}</div><div class="ending">${c.end}</div></div>`).join('')}</div>`}
+  function buildExampleLine(article,gender,kase){const end=MINI_TABLE[article][gender][kase];const cls=endClassFrom(end);const adj=ADJ_STEM+`<span class="end ${cls}">${end.replace('-','')}</span>`;const set=(article==='indefinite')?EXAMPLE_NOUNS.indefinite:EXAMPLE_NOUNS.default;let det='';if(article==='definite')det=DETERMINER.definite[gender][kase];else if(article==='indefinite')det=DETERMINER.indefinite[gender][kase];const n=set[gender];let noun='';if(gender==='plural'){noun=(kase==='Dativ')?n.datpl:(kase==='Genitiv'?n.genpl:n.base)}else if(gender==='masculine'||gender==='neuter'){noun=(kase==='Genitiv')?n.gen:n.base}else{noun=n.base}return{kase,text:`<div class="ex-row"><span class="ex-det">${det||''}</span><span class="ex-adj">${adj}</span><span class="ex-noun">${noun||''}</span></div>`}}
+  function computeGlobalExampleLayout(){try{const m=document.createElement('div');m.style.cssText='position:absolute;visibility:hidden;left:-9999px;top:-9999px';document.body.appendChild(m);const a=['definite','indefinite','none'],g=['masculine','neuter','feminine','plural'],c=['Nominativ','Akkusativ','Dativ','Genitiv'];let maxD=0,maxA=0,maxT=0,maxTP=0;const f=(A,G,K)=>{const l=buildExampleLine(A,G,K),w=document.createElement('div');w.className='ex-cell';w.innerHTML=l.text;return w};a.forEach(A=>{g.forEach(G=>{c.forEach(K=>{const C=f(A,G,K);m.appendChild(C);const d=C.querySelector('.ex-det'),j=C.querySelector('.ex-adj');const wD=d?d.getBoundingClientRect().width:0;const wA=j?j.getBoundingClientRect().width:0;if(wD>maxD)maxD=wD;if(wA>maxA)maxA=wA;m.removeChild(C)})})});const b=['Kasus','Nom.','Akk.','Dat.','Gen.'];let maxCC=0;b.forEach(t=>{const T=document.createElement('table');T.className='ex-table';const r=document.createElement('tr');const d1=document.createElement('td');d1.textContent=t;r.appendChild(d1);const d2=document.createElement('td');d2.textContent='X';r.appendChild(d2);T.appendChild(r);m.appendChild(T);const w=d1.getBoundingClientRect().width;if(w>maxCC)maxCC=w;m.removeChild(T)});const h=(A,G)=>{const t=document.createElement('table');t.className='ex-table';const d=document.createElement('thead');d.innerHTML='<tr><th>Kasus</th><th>Beispiel</th></tr>';t.appendChild(d);const y=document.createElement('tbody');c.forEach(K=>{const r=document.createElement('tr');const d1=document.createElement('td');d1.textContent={Nominativ:'Nom.',Akkusativ:'Akk.',Dativ:'Dat.',Genitiv:'Gen.'}[K];r.appendChild(d1);const d2=document.createElement('td');d2.className='ex-cell';const i=f(A,G,K);d2.appendChild(i);r.appendChild(d2);y.appendChild(r)});t.appendChild(y);return t};a.forEach(A=>{g.forEach(G=>{const t=h(A,G);m.appendChild(t);const w=t.getBoundingClientRect().width;if(w>maxT)maxT=w;if(G==='plural'&&w>maxTP)maxTP=w;m.removeChild(t)})});EX_GLOBAL={det:Math.ceil(maxD),adj:Math.ceil(maxA),table:Math.ceil(maxTP||maxT),caseCol:Math.ceil(maxCC)};const e=document.getElementById('exampleView');if(e){e.style.setProperty('--det-w',EX_GLOBAL.det+'px');e.style.setProperty('--adj-w',EX_GLOBAL.adj+'px');e.style.minWidth=(EX_GLOBAL.table+16)+'px';const t=e.querySelector('table.ex-table');if(t){t.style.width=(EX_GLOBAL.table+16)+'px'}}document.body.removeChild(m)}catch(_e){}}
+  function alignExampleColumns(){const ev=document.getElementById('exampleView');if(!ev||!EX_GLOBAL)return;ev.style.setProperty('--det-w',EX_GLOBAL.det+'px');ev.style.setProperty('--adj-w',EX_GLOBAL.adj+'px');ev.style.minWidth=(EX_GLOBAL.table+16)+'px'}
+  function showExamples(a,g){const e=document.getElementById('exampleView'),h=`${LABEL_JP.gender[g]}（${LABEL_JP.article[a]}＋形容詞＋名詞）`,r=CASE_ORDER.map(c=>{const l=buildExampleLine(a,g,c),L=CASE_ABBR[l.kase],R=l.text;return`<tr><td>${L}</td><td class="ex-cell">${R}</td></tr>`}).join(''),w=EX_GLOBAL&&EX_GLOBAL.caseCol?EX_GLOBAL.caseCol:72;e.innerHTML=`<h4>${h}</h4><table class="ex-table"><colgroup><col style="width:${w}px"><col></colgroup><thead><tr><th>Kasus</th><th>Beispiel</th></tr></thead><tbody>${r}</tbody></table>`;const t=e.querySelector('table.ex-table');if(t)t.style.width=EX_GLOBAL&&EX_GLOBAL.table?EX_GLOBAL.table+16:e.offsetWidth||320+'px';e.hidden=false;requestAnimationFrame(()=>{computeGlobalExampleLayout();alignExampleColumns()})}
+  function buildReferenceTable(a){const t=MINI_TABLE[a],e=document.createElement('table');e.className='ref-table';const d=document.createElement('thead'),h=document.createElement('tr');h.innerHTML=`<th></th>${GENDER_ORDER.map(g=>`<th>${GENDER_JP_SHORT[g]}</th>`).join('')}`;d.appendChild(h);e.appendChild(d);const y=document.createElement('tbody');CASE_ORDER.forEach(c=>{const r=document.createElement('tr'),s=GENDER_ORDER.map(g=>{const v=t[g][c],l=v==='-en'&&(a==='definite'||a==='indefinite')?' class="en-bg"':'';return`<td${l}>${v}</td>`}).join('');r.innerHTML=`<td><strong>${CASE_JP_NUM[c]}</strong></td>`+s;y.appendChild(r)});e.appendChild(y);return e}
+  function applyGenderHighlight(){const w=document.getElementById('refTableWrap'),t=w&&w.querySelector('table.ref-table');if(!t)return;t.classList.remove('hl-masculine','hl-neuter','hl-feminine','hl-plural');void t.offsetWidth;t.classList.add('hl-'+currentGender);const h=t.querySelector('thead tr');if(!h)return;const s=h.querySelectorAll('th');s.forEach(e=>e.classList.remove('flash'));const i={masculine:1,neuter:2,feminine:3,plural:4},T=s[i[currentGender]];if(T){void T.offsetWidth;T.classList.add('flash')}}
+  function mountRef(a='definite'){currentArticle=a;const t=document.querySelectorAll('.ref-tabs button');t.forEach(b=>b.classList.toggle('active',b.dataset.article===a));const w=document.getElementById('refTableWrap');w.innerHTML='';const c=document.getElementById('refControls');c.innerHTML='';const g=[{key:'masculine',label:'男性名詞'},{key:'neuter',label:'中性名詞'},{key:'feminine',label:'女性名詞'},{key:'plural',label:'複数形'}];g.forEach(e=>{const b=document.createElement('button');b.textContent=e.label;b.dataset.gender=e.key;if(e.key===currentGender)b.classList.add('active');b.onclick=()=>{currentGender=e.key;c.querySelectorAll('button').forEach(x=>x.classList.remove('active'));b.classList.add('active');showExamples(a,e.key);applyGenderHighlight();checkEasterEgg()};c.appendChild(b)});showExamples(a,currentGender);w.appendChild(buildReferenceTable(a));applyGenderHighlight()}
+  
+  // --- Rewards & Animations ---
+  const STREAK_BADGES = {
+    2: 'Gut! いいね！', 3: 'Prima! すてき！', 4: 'Toll! すごい！', 5: 'Super! 最高！', 6: 'Klasse! 素晴らしい！', 7: 'Spitze! 抜群だ！', 8: 'Stark! さすが！', 9: 'Bravo! ブラボー！',
+    10: 'Genial! 天才的だ！', 11: 'Großartig! 偉大だ！', 12: 'Wunderbar! 見事だ！', 13: 'Perfekt! 完璧だ！', 14: 'Sehr gut! 非常に良い！', 15: 'Brillant! 輝かしい！', 16: 'Fantastisch! 素晴らしい！', 17: 'Ausgezeichnet! 秀逸だ！', 18: 'Hervorragend! 優秀だ！', 19: 'Meisterhaft! 達人級だ！',
+    20: 'Wahnsinn! 半端ない！', 21: 'Eindrucksvoll! 印象的だ！', 22: 'Beeindruckend! 感銘深い！', 23: 'Erstaunlich! 驚くべき！', 24: 'Imposant! 圧倒的だ！', 25: 'Phänomenal! 驚異的だ！', 26: 'Sensationell! 感動的だ！', 27: 'Spektakulär! 圧巻だ！', 28: 'Unglaublich! 信じられない！', 29: 'Überwältigend! 圧倒的だ！',
+    30: 'Unfassbar! 理解を超える！', 31: 'Außerordentlich! 並外れている！', 32: 'Bemerkenswert! 注目すべき！', 33: 'Verblüffend! 驚愕的だ！', 34: 'Atemberaubend! 息を呑む！', 35: 'Umwerfend! 圧倒的だ！', 36: 'Weltklasse! 世界レベル！', 37: 'Außergewöhnlich! 異次元だ！', 38: 'Unvergleichlich! 比類ない！', 39: 'Überragend! 抜群だ！',
+    40: 'Unwiderstehlich! 圧倒的だ！', 41: 'Unschlagbar! 無敵だ！', 42: 'Unaufhaltsam! 誰にも止められない！', 43: 'Grenzenlos! 限界知らず！', 44: 'Unüberwindlich! 不屈だ！', 45: 'Unstoppbar! 止まらない！', 46: 'Unbesiegbar! 無敗だ！', 47: 'Unübertrefflich! 無比だ！', 48: 'Beispiellos! 前例がない！', 49: 'Einzigartig! 唯一無二だ！',
+    50: 'Legendär! 伝説的だ！', 60: 'Galaktisch! 銀河級だ！', 70: 'Göttlich! 神業だ！', 80: 'Kosmisch! 宇宙レベル！', 90: 'Historisch! 歴史的快挙', 100: 'Sprachmeister! 言語の達人！'
+  };
+
+  function colorKeyForStreak(s) {
+    if (s >= 100) return 'gold';
+    if (s >= 90) return 'silver';
+    if (s >= 80) return 'pink';
+    if (s >= 70) return 'red';
+    if (s >= 60) return 'orange';
+    if (s >= 50) return 'yellow';
+    if (s >= 40) return 'lime';
+    if (s >= 30) return 'green';
+    if (s >= 20) return 'sky';
+    if (s >= 10) return 'indigo';
+    if (s >= 2) return 'purple';
+    return 'accent';
+  }
+
+  function buildStreakBadge(s){
+    let msg = '';
+    if (STREAK_BADGES[s]) {
+      msg = STREAK_BADGES[s];
+    } else {
+      let lastApplicableStreak = 0;
+      for (const key in STREAK_BADGES) {
+          const streakMilestone = parseInt(key, 10);
+          if (s >= streakMilestone && streakMilestone > lastApplicableStreak) {
+              lastApplicableStreak = streakMilestone;
+          }
+      }
+      if (lastApplicableStreak > 0) {
+        msg = STREAK_BADGES[lastApplicableStreak];
+      }
+    }
+    if (!msg) return '';
+    const t = colorKeyForStreak(s);
+    return `<span class="streak-badge tone-${t}" title="${s}連続正解">${msg}</span>`;
+  }
+  
+  function triggerPulse(s){const c=document.getElementById('quiz');if(!c)return;c.classList.remove('pulse');void c.offsetWidth;c.classList.add('pulse');clearTimeout(c._pulseTimer);c._pulseTimer=setTimeout(()=>{c.classList.remove('pulse')},900)}
+  
+  function showConfetti(colors){const c=document.getElementById('fullscreen-reward');if(!c)return;const o=colors;const cC=100;for(let i=0;i<cC;i++){const f=document.createElement('div');f.className='particle confetti';f.style.left=Math.random()*100+'vw';const d=2+Math.random()*2,a=Math.random()*5;f.style.animationDuration=`${d}s`;f.style.animationDelay=`${a}s`;f.style.backgroundColor=o[Math.floor(Math.random()*o.length)];f.style.setProperty('--rx',`${Math.random()*720}deg`);f.style.setProperty('--ry',`${Math.random()*720}deg`);c.appendChild(f)}}
+  function showGoldenPetals(){const c=document.getElementById('fullscreen-reward');if(!c)return;const o=['#ffd700', '#f0e68c', '#fffacd', '#fafad2'];const pC=70;for(let i=0;i<pC;i++){const p=document.createElement('div');p.className='particle petal';p.style.left=Math.random()*100+'vw';const d=5+Math.random()*4,a=Math.random()*5;p.style.animationDuration=`${d}s`;p.style.animationDelay=`${a}s`;p.style.backgroundColor=o[Math.floor(Math.random()*o.length)];p.style.setProperty('--sway',`${Math.random()*50-25}px`);p.style.setProperty('--r-start',`${Math.random()*360}deg`);c.appendChild(p)}}
+  function showCherryBlossoms(){const c=document.getElementById('fullscreen-reward');if(!c)return;const o=['#ffb7c5','#ffc0cb','#ffe4e1','#fff0f5'];const pC=70;for(let i=0;i<pC;i++){const p=document.createElement('div');p.className='particle petal';p.style.left=Math.random()*100+'vw';const d=5+Math.random()*4,a=Math.random()*5;p.style.animationDuration=`${d}s`;p.style.animationDelay=`${a}s`;p.style.backgroundColor=o[Math.floor(Math.random()*o.length)];p.style.setProperty('--sway',`${Math.random()*50-25}px`);p.style.setProperty('--r-start',`${Math.random()*360}deg`);c.appendChild(p)}}
+
+  function showMilestoneAnimation(streak) {
+      const container = document.getElementById('fullscreen-reward');
+      if (!container) return;
+
+      const MILESTONE_CONFIG = {
+          100: { text: STREAK_BADGES[100].split('! ')[0] + '!', glowClass: 'gold', particleFunc: showGoldenPetals, bg: 'rgba(0, 0, 0, 0.7)' },
+          90:  { text: STREAK_BADGES[90].split('! ')[0] + '!', glowClass: 'silver', particleFunc: () => showConfetti(['#c0c0c0','#e0e0e0','#f5f5f5']), bg: 'rgba(10, 10, 30, 0.7)' },
+          80:  { text: STREAK_BADGES[80].split('! ')[0] + '!', glowClass: 'mythic', particleFunc: () => showConfetti(['#bae6fd','#7dd3fc','#a5f3fc']), bg: 'rgba(10, 20, 40, 0.7)' },
+          70:  { text: STREAK_BADGES[70].split('! ')[0] + '!', glowClass: 'legendary', particleFunc: () => showConfetti(['#fbcfe8','#f472b6','#f9a8d4']), bg: 'rgba(40, 10, 20, 0.7)' },
+          60:  { text: STREAK_BADGES[60].split('! ')[0] + '!', glowClass: 'epic', particleFunc: () => showConfetti(['#e9d5ff','#c084fc','#d8b4fe']), bg: 'rgba(20, 10, 40, 0.7)' },
+          50:  { text: STREAK_BADGES[50].split('! ')[0] + '!', glowClass: 'black', particleFunc: () => showConfetti(['#c0c0c0','#e0e0e0','#f5f5f5']), bg: 'rgba(20, 20, 20, 0.7)' },
+      };
+
+      const config = MILESTONE_CONFIG[streak];
+      if (!config) return;
+
+      container.innerHTML = `<div id="fullscreen-reward-content"><h1 class="${config.glowClass}">${config.text}</h1></div>`;
+      container.style.background = config.bg;
+      container.style.pointerEvents = 'auto';
+      container.hidden = false;
+      void container.offsetWidth;
+      container.classList.add('visible');
+      
+      if (config.particleFunc) {
+          config.particleFunc();
+      }
+      
+      const duration = streak === 100 ? 10000 : 5000;
+
+      setTimeout(() => {
+          container.classList.remove('visible');
+          container.innerHTML = '';
+          container.hidden = true;
+      }, duration);
+  }
+
+  function unlockSprachmeisterBadge(){if(sprachmeisterUnlocked)return;const a=document.getElementById('achievements'),t=document.getElementById('trophy-case');if(!a||!t)return;const c=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5m14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1Z"/></svg>`;const n=`<div class="trophy-badge" title="100連続正解おめでとうございます！">${c}<span>Sprachmeister!</span></div>`;t.innerHTML+=n;a.hidden=false;sprachmeisterUnlocked=true}
+
+  // --- Initializers & Binders ---
+  function checkEasterEgg() {
+    try {
+        const allFiltersCleared = Array.from(document.querySelectorAll('#filterPanel input[type="checkbox"]')).every(chk => !chk.checked);
+        const isNoneArticle = document.querySelector('.ref-tabs button[data-article="none"]')?.classList.contains('active');
+        const isPluralGender = document.querySelector('#refControls button[data-gender="plural"]')?.classList.contains('active');
+        const testControls = document.getElementById('test-controls');
+
+        if (testControls) {
+            testControls.hidden = !(allFiltersCleared && isNoneArticle && isPluralGender);
+        }
+    } catch (e) {
+        // Fail silently if elements don't exist yet
     }
   }
 
-  function mountRef(articleKey='definite'){currentArticle=articleKey;const tabs=document.querySelectorAll('.ref-tabs button');tabs.forEach(b=>b.classList.toggle('active',b.dataset.article===articleKey));const wrap=document.getElementById('refTableWrap');wrap.innerHTML='';const controls=document.getElementById('refControls');controls.innerHTML='';const genders=[{key:'masculine',label:'男性名詞'},{key:'neuter',label:'中性名詞'},{key:'feminine',label:'女性名詞'},{key:'plural',label:'複数形'}];genders.forEach(g=>{const b=document.createElement('button');b.textContent=g.label;b.dataset.gender=g.key;if(g.key===currentGender)b.classList.add('active');b.onclick=()=>{currentGender=g.key;controls.querySelectorAll('button').forEach(x=>x.classList.remove('active'));b.classList.add('active');showExamples(articleKey,currentGender);applyGenderHighlight()};controls.appendChild(b)});showExamples(articleKey,currentGender);wrap.appendChild(buildReferenceTable(articleKey));applyGenderHighlight()}
-  function bindRefTabs(){const tabs=document.querySelectorAll('.ref-tabs button');tabs.forEach(btn=>btn.addEventListener('click',()=>{tabs.forEach(b=>b.classList.remove('active'));btn.classList.add('active');mountRef(btn.dataset.article)}))}
-  function fitChoiceText(){const btns=document.querySelectorAll('#choices button');btns.forEach(b=>{let fs=18;b.style.fontSize=fs+'px';const limit=Math.max(10,Math.min(18,Math.floor((b.clientWidth||80)/10)));let guard=14;while(guard-->0&&b.scrollWidth>b.clientWidth){fs-=1;if(fs<limit)break;b.style.fontSize=fs+'px'}})}
-  function scaleChoices(){const ch=document.getElementById('choices');if(!ch)return;ch.style.transform='none';const avail=ch.clientWidth;let full=0;Array.from(ch.children).forEach((el,i)=>{full+=el.offsetWidth;if(i>0)full+=10});const scale=full>0?Math.min(1,avail/full):1;ch.style.transformOrigin='left center';ch.style.transform=`scale(${scale})`}
-  function bindSeg(id, key) {
-    const seg = document.getElementById(id);
-    seg.querySelectorAll('button').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const level = btn.dataset[key];
-            if (key === 'level') {
-                // If any article or gender filters are unchecked, check them all.
-                const needsReset = 
-                    Array.from(document.querySelectorAll('#articleChecks input')).some(c => !c.checked) ||
-                    Array.from(document.querySelectorAll('#genderChecks input')).some(c => !c.checked);
-
-                if (needsReset) {
-                    document.querySelectorAll('#articleChecks input, #genderChecks input').forEach(c => c.checked = true);
-                }
-
-                // Set the case checkboxes according to the selected level.
-                updateCheckboxesFromLevel(level);
-                
-                // Read the final state of all checkboxes and refresh the quiz.
-                readAndApply();
-            }
-        });
-    });
+  function setupTestButtons(){
+    const runAnimation=(f, bg='transparent')=>{const c=document.getElementById('fullscreen-reward');if(c){c.innerHTML='';c.style.background=bg;c.style.pointerEvents='none';c.hidden=false;void c.offsetWidth;c.classList.add('visible');f();setTimeout(()=>{c.classList.remove('visible');c.innerHTML='';c.hidden=true},5000)}};
+    document.getElementById('test-streak-20')?.addEventListener('click',()=>runAnimation(()=>showConfetti(['#f44336','#e91e63','#9c27b0','#673ab7','#3f51b5','#2196f3','#03a9f4','#00bcd4','#009688','#4caf50','#8bc34a','#cddc39','#ffeb3b','#ffc107','#ff9800','#ff5722'])));
+    document.getElementById('test-streak-30')?.addEventListener('click',()=>runAnimation(showCherryBlossoms));
+    document.getElementById('test-streak-40')?.addEventListener('click',()=>runAnimation(()=>showConfetti(['#ffd700','#c0c0c0','#f0e68c'])));
+    document.getElementById('test-streak-50')?.addEventListener('click',()=>showMilestoneAnimation(50));
+    document.getElementById('test-streak-60')?.addEventListener('click',()=>showMilestoneAnimation(60));
+    document.getElementById('test-streak-70')?.addEventListener('click',()=>showMilestoneAnimation(70));
+    document.getElementById('test-streak-80')?.addEventListener('click',()=>showMilestoneAnimation(80));
+    document.getElementById('test-streak-90')?.addEventListener('click',()=>showMilestoneAnimation(90));
+    document.getElementById('test-streak-100')?.addEventListener('click',()=>{showMilestoneAnimation(100);unlockSprachmeisterBadge()});
   }
-  function initFilterPills() {
-    const caseBox = document.getElementById('caseChecks');
-    const artBox = document.getElementById('articleChecks');
-    const genBox = document.getElementById('genderChecks');
-    
-    readAndApply = function() {
-        // Read filter states from UI
-        caseBox.querySelectorAll('input[type="checkbox"]').forEach(inp => { state.filters.cases[inp.dataset.case] = inp.checked; });
-        artBox.querySelectorAll('input[type="checkbox"]').forEach(inp => { state.filters.articles[inp.dataset.article] = inp.checked; });
-        genBox.querySelectorAll('input[type="checkbox"]').forEach(inp => { state.filters.genders[inp.dataset.gender] = inp.checked; });
-        
-        // Sync level buttons from case checkboxes
-        updateLevelSelectionFromCases();
-        
-        // Check if the resulting pool will be empty
-        const allowed = LEVEL_CASES[state.level] || CASE_ORDER;
-        let testPool = ITEMS.filter(it => allowed.includes(it.kase));
-        testPool = testPool.filter(it => state.filters.cases[it.kase] && state.filters.articles[it.article] && state.filters.genders[it.gender]);
-        
-        if (testPool.length === 0) {
-            // This is the "Clear All" case or an impossible filter combination.
-            // The UI checkboxes remain as they are (e.g., all unchecked).
-            // We override the internal state to a default fallback question set.
-            state.filters.cases = { Nominativ: true, Akkusativ: false, Dativ: false, Genitiv: false };
-            state.filters.articles = { definite: true, indefinite: false, none: false };
-            state.filters.genders = { masculine: true, neuter: false, feminine: false, plural: false };
-            
-            // Manually set the level button to "ALL" as the internal state doesn't match a specific level.
-            const levelSeg = document.getElementById('levelSeg');
-            levelSeg.querySelectorAll('button').forEach(b => b.classList.remove('active'));
-            levelSeg.querySelector('button[data-level="All"]').classList.add('active');
-            state.level = 'All';
-        }
-        
-        buildPool();
-        render();
-    };
-    
-    // Add event listeners for all checkboxes
-    [caseBox, artBox, genBox].forEach(box => {
-        box.querySelectorAll('input[type="checkbox"]').forEach(inp => inp.addEventListener('change', readAndApply));
-    });
 
-    // Add event listeners for new Select/Clear buttons
-    document.getElementById('selectAllFilters').addEventListener('click', () => {
-        document.querySelectorAll('#filterPanel input[type="checkbox"]').forEach(chk => chk.checked = true);
-        readAndApply();
-    });
-    document.getElementById('clearAllFilters').addEventListener('click', () => {
-        document.querySelectorAll('#filterPanel input[type="checkbox"]').forEach(chk => chk.checked = false);
-        readAndApply();
-    });
+  function initFilterControls(){
+    const c=document.getElementById('caseChecks'),a=document.getElementById('articleChecks'),g=document.getElementById('genderChecks');
+    readAndApply=()=>{c.querySelectorAll('input[type="checkbox"]').forEach(i=>{state.filters.cases[i.dataset.case]=i.checked});a.querySelectorAll('input[type="checkbox"]').forEach(i=>{state.filters.articles[i.dataset.article]=i.checked});g.querySelectorAll('input[type="checkbox"]').forEach(i=>{state.filters.genders[i.dataset.gender]=i.checked});updateLevelSelectionFromCases();const l=LEVEL_CASES[state.level]||CASE_ORDER;let t=ITEMS.filter(i=>l.includes(i.kase));t=t.filter(i=>state.filters.cases[i.kase]&&state.filters.articles[i.article]&&state.filters.genders[i.gender]);if(t.length===0){state.filters.cases={Nominativ:true,Akkusativ:false,Dativ:false,Genitiv:false};state.filters.articles={definite:true,indefinite:false,none:false};state.filters.genders={masculine:true,neuter:false,feminine:false,plural:false};const s=document.getElementById('levelSeg');s.querySelectorAll('button').forEach(b=>b.classList.remove('active'));s.querySelector('button[data-level="All"]').classList.add('active');state.level='All'}buildPool();render(); checkEasterEgg();};
+    [c,a,g].forEach(b=>{b.querySelectorAll('input[type="checkbox"]').forEach(i=>i.addEventListener('change',readAndApply))});
+    document.getElementById('selectAllFilters').addEventListener('click',()=>{document.querySelectorAll('#filterPanel input[type="checkbox"]').forEach(c=>c.checked=true);readAndApply()});
+    document.getElementById('clearAllFilters').addEventListener('click',()=>{document.querySelectorAll('#filterPanel input[type="checkbox"]').forEach(c=>c.checked=false);readAndApply()});
   }
+
+  function updateLevelSelectionFromCases(){const c={Nominativ:document.querySelector('#caseChecks input[data-case="Nominativ"]').checked,Akkusativ:document.querySelector('#caseChecks input[data-case="Akkusativ"]').checked,Dativ:document.querySelector('#caseChecks input[data-case="Dativ"]').checked,Genitiv:document.querySelector('#caseChecks input[data-case="Genitiv"]').checked};const i=c.Nominativ&&c.Akkusativ&&c.Dativ&&c.Genitiv;const a=c.Nominativ&&c.Akkusativ&&c.Dativ&&!c.Genitiv;const s=!c.Nominativ&&!c.Akkusativ&&!c.Dativ&&c.Genitiv;const l=document.getElementById('levelSeg');l.querySelectorAll('button').forEach(b=>b.classList.remove('active'));let n='All';if(i){l.querySelector('button[data-level="All"]').classList.add('active');n='All'}else if(a){l.querySelector('button[data-level="A1+A2"]').classList.add('active');n='A1+A2'}else if(s){l.querySelector('button[data-level="B1"]').classList.add('active');n='B1'}else{l.querySelector('button[data-level="All"]').classList.add('active');n='All'}state.level=n}
+  function updateCheckboxesFromLevel(l){const c=document.querySelectorAll('#caseChecks input[type="checkbox"]');const s={'All':['Nominativ','Akkusativ','Dativ','Genitiv'],'A1+A2':['Akkusativ','Dativ'],'B1':['Genitiv']};const t=s[l]||[];c.forEach(h=>{h.checked=t.includes(h.dataset.case)})}
+  function bindLevelSeg(){document.getElementById('levelSeg').querySelectorAll('button').forEach(b=>{b.addEventListener('click',()=>{const l=b.dataset.level;const n=Array.from(document.querySelectorAll('#articleChecks input')).some(c=>!c.checked)||Array.from(document.querySelectorAll('#genderChecks input')).some(c=>!c.checked);if(n)document.querySelectorAll('#articleChecks input, #genderChecks input').forEach(c=>c.checked=true);updateCheckboxesFromLevel(l);readAndApply()})}) }
+  function bindRefTabs(){document.querySelectorAll('.ref-tabs button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.ref-tabs button').forEach(t=>t.classList.remove('active'));b.classList.add('active');mountRef(b.dataset.article);checkEasterEgg()}))}
+
   function start(){
     try{
-        initFilterPills();
-        bindSeg('levelSeg','level');
-        buildPool();
-        render();
-        bindRefTabs();
-        mountRef('definite');
-        if(document.fonts&&document.fonts.ready){document.fonts.ready.then(()=>{computeGlobalExampleLayout();mountRef(currentArticle||'definite');alignExampleColumns();fillAllBlanks()})}
-        window.addEventListener('resize',()=>{fitChoiceText();scaleChoices();computeGlobalExampleLayout();alignExampleColumns();fillAllBlanks()});
-        setTimeout(()=>{const q=document.getElementById('q');if(q&&(!q.textContent||q.textContent.includes('読み込み中'))){render()}},200)
-    } catch(e) {
-        showError('初期化エラー：'+(e&&e.message?e.message:e))
+      initFilterControls();
+      bindLevelSeg();
+      buildPool();
+      render();
+      bindRefTabs();
+      mountRef('definite');
+      setupTestButtons(); 
+      if(document.fonts&&document.fonts.ready){
+        document.fonts.ready.then(()=>{computeGlobalExampleLayout();mountRef(currentArticle||'definite');alignExampleColumns();fillAllBlanks()})
+      }
+      window.addEventListener('resize',()=>{fitChoiceText();scaleChoices();computeGlobalExampleLayout();alignExampleColumns();fillAllBlanks()});
+      setTimeout(()=>{const q=document.getElementById('q');if(q&&(!q.textContent||q.textContent.includes('読み込み中')))render()},200)
+    } catch(e){
+      showError('初期化エラー：'+(e&&e.message?e.message:e))
     }
   }
-  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',start,{once:true})}else{start()}
+  
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});
+  else start();
 </script>
 </body>
 </html>
